@@ -1,42 +1,47 @@
+*,
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  margin: 0;
+  padding: 0;
 }
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+body {
+  overflow-x: hidden;
 }
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+nav {
+  border-radius: 10px 10px 0 0;
+  backdrop-filter: blur(22px);
 }
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+nav a {
+  color: rgb(0, 0, 117);
+  border: 1px solid transparent;
+  transition: all ease-in 0.1s;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+nav a:hover,
+.active {
+  transition: all ease-in 0.1s;
+  border: 1px solid rgb(255, 253, 243);
+  transform: translateY(-14%);
+  background-color: rgb(0, 18, 25);
+  border-radius: 10px;
+  color: aliceblue;
 }
-
-.card {
-  padding: 2em;
+.active {
+  box-shadow: 0 20px 20px 5px rgb(185, 185, 245);
 }
-
-.read-the-docs {
-  color: #888;
+h2 {
+  color: black;
+}
+p {
+  color: gray;
+}
+.home img {
+  transition: all ease-in 0.2s;
+  mix-blend-mode: color-burn;
+}
+.home img:hover {
+  transition: all ease-in 0.2s;
+  transform: scale(1.08) translateY(-14%);
+  filter: saturate(1.1) brightness(1.1);
 }
