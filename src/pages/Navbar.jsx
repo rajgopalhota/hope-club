@@ -27,11 +27,6 @@ const Navbar = () => {
 
       <NavLink to="/programs" className="flex flex-col items-center w-full">
         <AiOutlineFileImage className="text-2xl mb-1" />
-        <p className="hidden lg:inline-block">Programs</p>
-      </NavLink>
-
-      <NavLink to="/photo-gallery" className="flex flex-col items-center w-full">
-        <AiOutlineInfoCircle className="text-2xl mb-1" />
         <p className="hidden lg:inline-block">Photo Gallery</p>
       </NavLink>
 

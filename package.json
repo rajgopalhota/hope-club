@@ -7,13 +7,18 @@
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview",
-    "postcss": "postcss src/styles/index.css -o public/build/tailwind.css"
+    "postcss": "npx postcss src/styles/index.css -o public/build/tailwind.css"
   },
   "dependencies": {
+    "postcss-cli": "^11.0.0",
+    "postcss-import": "^16.0.0",
+    "postcss-preset-env": "^9.3.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^5.0.1",
-    "react-router-dom": "^6.21.3"
+    "react-router-dom": "^6.21.3",
+    "react-slick": "^0.30.1",
+    "slick-carousel": "^1.8.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.43",
