@@ -5,18 +5,20 @@ import Navbar from "./pages/Navbar";
 import RegistrationForm from "./pages/RegistrationForm";
 import About from "./pages/About";
 import PhotoGallery from "./pages/PhotoGallery";
+import Contact from "./pages/Contact";
 
 function App() {
   return (
     <div>
       {/* Your main content goes here */}
-      <section className="pb-16">
+      <section className="mainContent pb-16">
         <Routes>
           <Route path="/" element={<Home/>} />
           <Route path="/activities" element={<Activities/>} />
           <Route path="/activities/:id" element={<RegistrationForm/>} />
           <Route path="/about" element={<About/>} />
           <Route path="/programs" element={<PhotoGallery/>} />
+          <Route path="/contact" element={<Contact/>} />
         </Routes>
       </section>
       {/* Include the Navbar component at the bottom of the page */}

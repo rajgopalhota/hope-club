@@ -10,6 +10,7 @@
     "postcss": "npx postcss src/styles/index.css -o public/build/tailwind.css"
   },
   "dependencies": {
+    "framer-motion": "^11.0.3",
     "postcss-cli": "^11.0.0",
     "postcss-import": "^16.0.0",
     "postcss-preset-env": "^9.3.0",

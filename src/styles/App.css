@@ -42,7 +42,7 @@ nav a:hover,
 .active {
   box-shadow: 0 20px 20px 5px rgb(185, 185, 245);
 }
-.active svg{
+.active svg {
   color: rgb(255, 139, 89);
   transform: scale(1.15);
 }
@@ -61,7 +61,35 @@ p {
   transform: scale(1.08) translateY(-14%);
   filter: saturate(1.1) brightness(1.1);
 }
-.slick-prev:before, .slick-next:before {
+.slick-prev:before,
+.slick-next:before {
   color: rgb(0, 0, 66);
   font-size: 22px;
+}
+.caraousel img {
+  aspect-ratio: 16/9;
+  object-fit: cover;
+}
+.glow-border {
+  box-shadow: 0 0 10px lavenderblush;
+  animation: changeColors 3s linear infinite alternate;
+}
+
+
+@keyframes changeColors {
+  0% {
+    box-shadow: 0 0 10px #3a003a;
+  }
+  25% {
+    box-shadow: 0 0 10px #005300;
+  }
+  50% {
+    box-shadow: 0 0 10px #0000ff;
+  }
+  75% {
+    box-shadow: 0 0 10px #974700;
+  }
+  100% {
+    box-shadow: 0 0 10px #810081;
+  }
 }
