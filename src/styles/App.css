@@ -34,16 +34,19 @@ nav a {
 nav a:hover,
 .active {
   transition: all ease-in 0.1s;
-  border: 1px solid rgb(255, 253, 243);
+  /* border: 1px solid rgb(255, 253, 243); */
   border-right: 1px solid rgba(54, 28, 0, 0.3);
   border-left: 1px solid rgba(54, 28, 0, 0.3);
-  transform: translateY(-14%);
+  /* transform: translateY(-14%); */
   background-color: rgba(0, 33, 48, 0.8);
-  border-radius: 10px;
+  /* border-radius: 10px; */
   color: lavender;
 }
 .active {
-  box-shadow: 0 20px 20px 5px rgb(185, 185, 245);
+  box-shadow: 0 20px 20px 5px rgba(185, 185, 245, 0.8);
+}
+nav a:hover p, .active p{
+  color: white !important;
 }
 .active svg {
   color: rgb(255, 213, 195);

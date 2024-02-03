@@ -29,6 +29,11 @@ const messagesRoute = require('./controller/messageController');
 app.use('/api/users', userController); // Use this controller for handling user-related routes
 app.use('/api/messages', messagesRoute);
 
+const adminUserRoute = require('./router/userRouter');
+const adminMessageRoute = require('./router/messageRouter');
+app.use('/users', adminUserRoute); // Use this controller for handling user-related routes
+app.use('/admin/messages/um', adminMessageRoute);
+
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
