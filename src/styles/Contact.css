@@ -6,7 +6,7 @@ contactUs{
   margin-right: 4rem;
 }
 
-.contactUs #envelope {
+#envelope {
   animation: float 2s ease-in-out infinite;
 }
 

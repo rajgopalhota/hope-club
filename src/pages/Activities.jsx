@@ -1,6 +1,7 @@
 // src/components/Activities.jsx
 import React from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "../AuthContext";
 
 const Activities = () => {
   // Load registered activities data
@@ -52,14 +53,16 @@ const Activities = () => {
     },
     // Add more activities as needed
   ];
-
+  const auth = useAuth();
   return (
     <div className="container mx-auto p-8">
       <h2 className="text-3xl font-bold mb-4">Our Activities</h2>
 
       {/* Registered Activities Section */}
       <div className="mb-8">
-        <h3 className="text-2xl font-bold mb-2 text-purple-500">Registered Activities</h3>
+        <h3 className="text-2xl font-bold mb-2 text-purple-500">
+          {auth.user && <>Registered Activities of {auth.user.name}</>}
+        </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {registeredActivitiesData.map((activity) => (
             <div
@@ -75,7 +78,8 @@ const Activities = () => {
                 />
                 <div className="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center text-white text-center">
                   <h3 className="text-xl font-bold">
-                    <span className="text-pink-500">Registered</span> {activity.name}
+                    <span className="text-pink-500">Registered</span>{" "}
+                    {activity.name}
                   </h3>
                 </div>
               </div>
@@ -101,7 +105,9 @@ const Activities = () => {
 
       {/* More Activities Section */}
       <div>
-        <h3 className="text-2xl font-bold mb-2 text-teal-500">More Activities</h3>
+        <h3 className="text-2xl font-bold mb-2 text-teal-500">
+          More Activities
+        </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {moreActivitiesData.map((activity) => (
             <div

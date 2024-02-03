@@ -1,10 +1,53 @@
-import React from "react";
+import React, { useState } from "react";
+import { useAuth } from "./../AuthContext";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 export default function Contact() {
+  const auth = useAuth();
+  const [formData, setFormData] = useState({
+    name: auth.user ? auth.user.name : "",
+    email: auth.user ? auth.user.email : "",
+    message: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      // Send a POST request to submit the message
+      await axios.post("http://localhost:5000/api/messages/submit", formData);
+
+      // Clear the form after successful submission
+      toast.success("Message Sent")
+      setFormData({
+        name: auth.user ? auth.user.name : "",
+        email: auth.user ? auth.user.email : "",
+        message: "",
+      });
+
+      // Optionally, you can show a success message or redirect the user
+      console.log("Message submitted successfully");
+    } catch (error) {
+      // Handle error, e.g., show an error message
+      toast.error("Server error")
+      console.error("Error submitting message:", error.message);
+    }
+  };
+
   return (
     <div className="contactUs">
-      <div class="flex justify-center items-center">
+      <div className="flex justify-center items-center ">
         <svg
+          className="hidden lg:inline-block"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 790 563"
           fill="none"
@@ -761,45 +804,51 @@ export default function Contact() {
             </g>
           </g>
         </svg>
-
-        <form class="w-full max-w-lg">
-          <h1 class="text-center text-3xl mb-4 title">Talk to Us</h1>
-
-          <div class="mb-4 relative">
-            <label for="formName" class="block">
-              <i class="icon" data-feather="user"></i>
+        <form className="w-full max-w-lg" onSubmit={handleSubmit}>
+          <h1 className="text-center text-3xl mb-4 title">Talk to Us</h1>
+          <div className="mb-4 relative">
+            <label htmlFor="formName" className="block">
+              <i className="icon" data-feather="user"></i>
             </label>
             <input
               type="text"
               id="formName"
-              class="w-full p-4 border rounded-lg"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              className="w-full p-4 border rounded-lg"
               placeholder="Name"
+              readOnly={auth.user !== null}
             />
           </div>
-
-          <div class="mb-4 relative">
-            <label for="formEmail" class="block">
-              <i class="icon" data-feather="mail"></i>
+          <div className="mb-4 relative">
+            <label htmlFor="formEmail" className="block">
+              <i className="icon" data-feather="mail"></i>
             </label>
             <input
               type="email"
               id="formEmail"
-              class="w-full p-4 border rounded-lg"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              className="w-full p-4 border rounded-lg"
               placeholder="E-mail"
+              readOnly={auth.user !== null}
             />
           </div>
-
-          <div class="mb-4">
+          <div className="mb-4">
             <textarea
               id="formMessage"
-              class="w-full h-50 p-4 border rounded-lg resize-none"
+              name="message"
+              value={formData.message}
+              onChange={handleChange}
+              className="w-full h-50 p-4 border rounded-lg resize-none"
               rows="9"
               placeholder="Message"
             ></textarea>
           </div>
-
-          <div class="text-center">
-            <button type="submit" class="btn btn-primary" tabIndex="-1">
+          <div className="text-center">
+            <button type="submit" className="btn btn-primary" tabIndex="-1">
               Send message
             </button>
           </div>
