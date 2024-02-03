@@ -1,18 +1,19 @@
+import React from "react";
+import { FaSignInAlt, FaSignOutAlt } from "react-icons/fa";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useAuth } from "./AuthContext";
 import About from "./pages/About";
 import Activities from "./pages/Activities";
 import Contact from "./pages/Contact";
+import { Feature } from "./pages/Feature";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Navbar from "./pages/Navbar";
+import PayForActivity from "./pages/PayForActivity";
 import PhotoGallery from "./pages/PhotoGallery";
-import RegistrationForm from "./pages/RegistrationForm";
-import { FaSignInAlt, FaSignOutAlt } from "react-icons/fa";
-import { useAuth } from "./AuthContext";
 import Register from "./pages/Register";
-import { Feature } from "./pages/Feature";
 
 function App() {
   const auth = useAuth();
@@ -32,13 +33,13 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/activities" element={<Activities />} />
-          <Route path="/activities/:id" element={<RegistrationForm />} />
           <Route path="/about" element={<About />} />
           <Route path="/programs" element={<PhotoGallery />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/login" element={<Login />} />
           <Route path="/reg" element={<Register />} />
           <Route path="/mission-vision" element={<Feature />} />
+          <Route path="/pay-for-activities" element={<PayForActivity />} />
         </Routes>
       </section>
       {/* Include the Navbar component at the bottom of the page */}

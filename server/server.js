@@ -26,13 +26,11 @@ db.once('open', () => {
 // Sample controller (inside controllers folder)
 const userController = require('./controller/userController');
 const messagesRoute = require('./controller/messageController');
+const activityRoutes = require('./controller/activityontroller');
 app.use('/api/users', userController); // Use this controller for handling user-related routes
 app.use('/api/messages', messagesRoute);
+app.use('/hope', activityRoutes);
 
-const adminUserRoute = require('./router/userRouter');
-const adminMessageRoute = require('./router/messageRouter');
-app.use('/users', adminUserRoute); // Use this controller for handling user-related routes
-app.use('/admin/messages/um', adminMessageRoute);
 
 // Start the server
 app.listen(PORT, () => {

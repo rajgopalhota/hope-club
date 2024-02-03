@@ -1,5 +1,5 @@
 // src/components/PhotoGallery.jsx
-import React from "react";
+import React, {useEffect} from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -9,6 +9,10 @@ import img3 from "./../assets/galley/3.jpg";
 import img4 from "./../assets/galley/4.jpg";
 
 const PhotoGallery = () => {
+  useEffect(() => {
+    // Scroll to the top when the component mounts
+    window.scrollTo(0, 0);
+  }, []);
   // Sample data for the image slider
   const sliderImages = [img1, img2, img3, img4];
 

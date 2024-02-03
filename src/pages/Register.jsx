@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   AiOutlineMail,
   AiOutlineLock,
@@ -10,6 +10,10 @@ import { toast } from "react-toastify";
 import axios from "./../axiosInstance";
 
 export default function Register() {
+  useEffect(() => {
+    // Scroll to the top when the component mounts
+    window.scrollTo(0, 0);
+  }, []);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",

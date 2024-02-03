@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { FaUsers, FaBook, FaHeart, FaDumbbell } from "react-icons/fa";
 import { GiHealthNormal } from "react-icons/gi";
 import { BiRun } from "react-icons/bi";
@@ -44,6 +44,10 @@ const keyPoints = [
 ];
 
 const Home = () => {
+  useEffect(() => {
+    // Scroll to the top when the component mounts
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div className="home flex flex-col lg:flex-row h-screen w-screen overflow-hidden">
       {/* First section with logo and quotes */}
@@ -62,12 +66,12 @@ const Home = () => {
         {keyPoints.map((point, index) => (
           <div
             key={index}
-            className="flex items-center cursor-pointer hover:bg-gray-300 p-4 rounded-md transition-transform scale-105"
+            className="flex items-center cursor-pointer hover:bg-gray-300 p-4 rounded-md transition-transform scale-100 gap-10"
           >
             {point.icon}
             <div>
-              <h3 className="text-xl font-bold mb-2">{point.title}</h3>
-              <p>{point.description}</p>
+              <h3 className="w-full text-xl text-left font-bold mb-2">{point.title}</h3>
+              <p className="w-full text-center">{point.description}</p>
             </div>
           </div>
         ))}

@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useAuth } from "./../AuthContext";
 import axios from "axios";
 import { toast } from "react-toastify";
 
 export default function Contact() {
+  useEffect(() => {
+    // Scroll to the top when the component mounts
+    window.scrollTo(0, 0);
+  }, []);
   const auth = useAuth();
   const [formData, setFormData] = useState({
     name: auth.user ? auth.user.name : "",

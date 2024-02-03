@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useAuth } from "../AuthContext";
 import { toast } from "react-toastify";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "./../axiosInstance";
 
 const Login = () => {
+  useEffect(() => {
+    // Scroll to the top when the component mounts
+    window.scrollTo(0, 0);
+  }, []);
   const auth = useAuth();
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
