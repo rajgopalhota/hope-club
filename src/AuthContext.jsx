@@ -14,7 +14,6 @@ export const AuthProvider = ({ children }) => {
       console.log(token);
       try {
         const response = await axios.get('/api/users/user');
-        console.log("auth", response);
         if (response.data.user) {
           setUser(response.data.user);
         }

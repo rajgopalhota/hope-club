@@ -4,6 +4,7 @@ import { FaTrashAlt } from "react-icons/fa";
 import axiosInstance from "../axiosInstance";
 import AddActivity from "../pages/AddActivity";
 import { toast } from "react-toastify";
+import { useAuth } from "../AuthContext";
 
 const Activity = () => {
   const columns = [
@@ -14,7 +15,6 @@ const Activity = () => {
     { Header: "Date", accessor: "date", Cell: DateCell },
     { Header: "Created By", accessor: "createdBy" },
     { Header: "Created At", accessor: "createdAt", Cell: DateCell },
-    { Header: "Actions", Cell: DeleteButton },
   ];
 
   const fetchData = async () => {
@@ -28,15 +28,18 @@ const Activity = () => {
 
   const [data, setData] = React.useState([]);
 
+  const auth = useAuth();
+  if (auth.user && auth.user.role === "Admin") {
+    columns.push({
+      Header: "Actions",
+      Cell: DeleteButton,
+    });
+  }
+
   const memoizedColumns = useMemo(() => columns, []);
 
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    rows,
-    prepareRow,
-  } = useTable({ columns: memoizedColumns, data }, useSortBy);
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
+    useTable({ columns: memoizedColumns, data }, useSortBy);
 
   function ImageCell({ value }) {
     return (
@@ -61,7 +64,7 @@ const Activity = () => {
       if (shouldDelete) {
         try {
           await axiosInstance.delete(`/hope/activities/${row.original._id}`);
-          toast.info("Activity Deleted")
+          toast.info("Activity Deleted");
           fetchData();
         } catch (error) {
           console.error("Error deleting activity:", error.message);
@@ -96,15 +99,11 @@ const Activity = () => {
                     className="p-4 text-left border-b"
                   >
                     {column.render("Header")}
-                    {column.isSorted ? (
-                      column.isSortedDesc ? (
-                        " 🔽"
-                      ) : (
-                        " 🔼"
-                      )
-                    ) : (
-                      ""
-                    )}
+                    {column.isSorted
+                      ? column.isSortedDesc
+                        ? " 🔽"
+                        : " 🔼"
+                      : ""}
                   </th>
                 ))}
               </tr>
@@ -116,7 +115,9 @@ const Activity = () => {
               return (
                 <tr
                   {...row.getRowProps()}
-                  className={`${rowIndex % 2 === 0 ? "bg-gray-200" : "bg-gray-100"} border-b`}
+                  className={`${
+                    rowIndex % 2 === 0 ? "bg-gray-200" : "bg-gray-100"
+                  } border-b`}
                 >
                   {row.cells.map((cell) => (
                     <td {...cell.getCellProps()} className="p-4">

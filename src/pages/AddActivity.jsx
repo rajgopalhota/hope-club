@@ -69,10 +69,10 @@ const AddActivityForm = () => {
 
   return (
     <>
-      {auth.user && auth.user.role == "Admin" && (
+      {auth.user && (auth.user.role == "Admin" || auth.user.role == "Manager") && (
         <div className="w-full mx-auto mt-8 mb-10 neumorphic-container">
           <h2 className="text-2xl font-bold mb-4">
-            Admin Control - Add Activity
+            {auth.user.name} Space - Add Activity
           </h2>
           <form onSubmit={onSubmit}>
             <div className="mb-4 relative">

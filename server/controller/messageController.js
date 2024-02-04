@@ -1,6 +1,6 @@
 const express = require("express");
 const MessageModel = require("./../models/message");
-const authMiddleware = require("../middleware/authMiddleware")
+const authMiddleware = require("../middleware/authMiddleware");
 
 const router = express.Router();
 
@@ -24,12 +24,11 @@ router.post("/submit", async (req, res) => {
 router.get("/all", authMiddleware, async (req, res) => {
   try {
     // Check if the user's role is Admin
-    if (req.user.role !== "Admin") {
-      return res.status(403).json({ message: "Permission denied" });
+    if (req.user.role == "Admin" || req.user.role == "Manager") {
+      const allMessages = await MessageModel.find();
+      return res.json(allMessages);
     }
-
-    const allMessages = await MessageModel.find();
-    res.json(allMessages);
+    return res.status(403).json({ message: "Permission denied" });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -39,25 +38,25 @@ router.get("/all", authMiddleware, async (req, res) => {
 router.delete("/:id", authMiddleware, async (req, res) => {
   try {
     // Check if the user's role is Admin
-    if (req.user.role !== "Admin") {
-      return res.status(403).json({ message: "Permission denied" });
+    if (req.user.role == "Admin" || req.user.role == "Manager") {
+      const messageId = req.params.id;
+
+      // Validate if the message ID is valid
+      if (!messageId.match(/^[0-9a-fA-F]{24}$/)) {
+        return res.status(400).json({ message: "Invalid message ID" });
+      }
+
+      // Find and delete the message
+      const deletedMessage = await MessageModel.findByIdAndDelete(messageId);
+
+      if (!deletedMessage) {
+        return res.status(404).json({ message: "Message not found" });
+      }
+
+      return res.json({ message: "Message deleted successfully" });
     }
 
-    const messageId = req.params.id;
-
-    // Validate if the message ID is valid
-    if (!messageId.match(/^[0-9a-fA-F]{24}$/)) {
-      return res.status(400).json({ message: "Invalid message ID" });
-    }
-
-    // Find and delete the message
-    const deletedMessage = await MessageModel.findByIdAndDelete(messageId);
-
-    if (!deletedMessage) {
-      return res.status(404).json({ message: "Message not found" });
-    }
-
-    res.json({ message: "Message deleted successfully" });
+    return res.status(403).json({ message: "Permission denied" });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

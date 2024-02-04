@@ -11,7 +11,7 @@ router.post("/activities", authMiddleware, async (req, res) => {
     const user = req.user;
 
     // Check if the user's role is Admin or Manager
-    if (user.role !== "Admin" && user.role !== "Manager") {
+    if (user.role != "Admin" && user.role != "Manager") {
       return res.status(403).json({ message: "Permission denied" });
     }
 
@@ -130,12 +130,11 @@ router.get("/get-all", async (req, res) => {
 router.get("/activities/all", authMiddleware, async (req, res) => {
   try {
     // Check if the user's role is Admin
-    if (req.user.role !== "Admin") {
-      return res.status(403).json({ message: "Permission denied" });
+    if (req.user.role == "Admin" || req.user.role == "Manager") {
+      const allActivities = await Activity.find();
+      return res.json(allActivities);
     }
-
-    const allActivities = await Activity.find();
-    res.json(allActivities);
+    return res.status(403).json({ message: "Permission denied" });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -145,7 +144,7 @@ router.get("/activities/all", authMiddleware, async (req, res) => {
 router.delete("/activities/:id", authMiddleware, async (req, res) => {
   try {
     // Check if the user's role is Admin
-    if (req.user.role !== "Admin") {
+    if (req.user.role != "Admin") {
       return res.status(403).json({ message: "Permission denied" });
     }
 
@@ -169,31 +168,32 @@ router.delete("/activities/:id", authMiddleware, async (req, res) => {
   }
 });
 
-// Route to get all users with registered activities (accessible by Admin)
+// Route to get all users with registered activities (accessible by Admin/Managers)
 router.get("/users-activities", authMiddleware, async (req, res) => {
   try {
     // Check if the user's role is Admin
-    if (req.user.role !== "Admin") {
-      return res.status(403).json({ message: "Permission denied" });
+    if (req.user.role == "Admin" || req.user.role == "Manager") {
+      // Fetch all users and populate details from the 'registeredActivities' field
+      const usersWithActivities = await User.find().populate(
+        "registeredActivities"
+      );
+
+      // Format the data to include user details along with registered activities
+      const formattedData = usersWithActivities.map((user) => {
+        return {
+          _id: user._id,
+          name: user.name,
+          email: user.email,
+          phoneNumber: user.phoneNumber,
+          department: user.department,
+          role: user.role,
+          registeredActivities: user.registeredActivities,
+        };
+      });
+
+      return res.json(formattedData);
     }
-
-    // Fetch all users and populate details from the 'registeredActivities' field
-    const usersWithActivities = await User.find().populate("registeredActivities");
-
-    // Format the data to include user details along with registered activities
-    const formattedData = usersWithActivities.map((user) => {
-      return {
-        _id: user._id,
-        name: user.name,
-        email: user.email,
-        phoneNumber: user.phoneNumber,
-        department: user.department,
-        role: user.role,
-        registeredActivities: user.registeredActivities,
-      };
-    });
-
-    res.json(formattedData);
+    return res.status(403).json({ message: "Permission denied" });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

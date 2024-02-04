@@ -57,22 +57,23 @@ function App() {
             <FaSignInAlt className="text-xl ml-2" />
           )}
         </div>
-        {auth.user && auth.user.role == "Admin" && (
-          <Link
-            title={auth.user && auth.user.role == "Admin" ? "Admin" : ""}
-            to="/admin"
-            className={`bg-white flex border border-purple-500 text-pruple-500 rounded-full p-3 shadow-md hover:shadow-lg focus:outline-none cursor-pointer`}
-            style={{
-              textDecoration: "none", // Remove default link underline
-              transition: "color 0.3s, background-color 0.3s", // Smooth transition on hover
-            }}
-          >
-            <span className="text-purple-500 text-sm font-semibold ml-2">
-              Admin
-            </span>
-            <FaUserShield className="text-xl ml-2 text-purple-500" />
-          </Link>
-        )}
+        {auth.user &&
+          (auth.user.role == "Admin" || auth.user.role == "Manager") && (
+            <Link
+              title={auth.user.role}
+              to="/admin"
+              className={`bg-white flex border border-purple-500 text-pruple-500 rounded-full p-3 shadow-md hover:shadow-lg focus:outline-none cursor-pointer`}
+              style={{
+                textDecoration: "none", // Remove default link underline
+                transition: "color 0.3s, background-color 0.3s", // Smooth transition on hover
+              }}
+            >
+              <span className="text-purple-500 text-sm font-semibold ml-2">
+                {auth.user.role}
+              </span>
+              <FaUserShield className="text-xl ml-2 text-purple-500" />
+            </Link>
+          )}
       </div>
       {/* Your main content goes here */}
       <section className="mainContent pb-16">

@@ -3,9 +3,11 @@ import { useTable, useSortBy } from "react-table";
 import { FaTrashAlt } from "react-icons/fa";
 import axiosInstance from "../axiosInstance";
 import { toast } from "react-toastify";
+import { useAuth } from "../AuthContext";
 
 const Users = () => {
   // Define columns for the table
+  const auth = useAuth();
   const columns = [
     { Header: "Name", accessor: "name" },
     { Header: "Email", accessor: "email" },
@@ -13,7 +15,6 @@ const Users = () => {
     { Header: "Department", accessor: "department" },
     { Header: "Role", accessor: "role" },
     { Header: "Created At", accessor: "createdAt", Cell: DateCell },
-    { Header: "Actions", Cell: DeleteButton },
   ];
 
   // Fetch data from the API
@@ -29,17 +30,19 @@ const Users = () => {
   // Initial data state
   const [data, setData] = React.useState([]);
 
+  if (auth.user && auth.user.role === "Admin") {
+    columns.push({
+      Header: "Actions",
+      Cell: DeleteButton,
+    });
+  }
+
   // Use memoization for performance optimization
   const memoizedColumns = useMemo(() => columns, []);
 
   // Use react-table hooks to create the table instance
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    rows,
-    prepareRow,
-  } = useTable({ columns: memoizedColumns, data }, useSortBy);
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
+    useTable({ columns: memoizedColumns, data }, useSortBy);
 
   // Delete button cell renderer
   function DeleteButton({ row }) {
@@ -61,9 +64,11 @@ const Users = () => {
     };
 
     return (
-      <button onClick={handleDelete} className="text-red-500">
-        <FaTrashAlt />
-      </button>
+      auth.user.role == "Admin" && (
+        <button onClick={handleDelete} className="text-red-500">
+          <FaTrashAlt />
+        </button>
+      )
     );
   }
 
@@ -90,18 +95,10 @@ const Users = () => {
               {headerGroup.headers.map((column) => (
                 <th
                   {...column.getHeaderProps(column.getSortByToggleProps())}
-                  className={'p-4 text-left border-b'}
+                  className={"p-4 text-left border-b"}
                 >
                   {column.render("Header")}
-                  {column.isSorted ? (
-                    column.isSortedDesc ? (
-                      " 🔽"
-                    ) : (
-                      " 🔼"
-                    )
-                  ) : (
-                    ""
-                  )}
+                  {column.isSorted ? (column.isSortedDesc ? " 🔽" : " 🔼") : ""}
                 </th>
               ))}
             </tr>
@@ -113,7 +110,9 @@ const Users = () => {
             return (
               <tr
                 {...row.getRowProps()}
-                className={`${rowIndex % 2 === 0 ? "bg-gray-200" : "bg-gray-100"} border-b`}
+                className={`${
+                  rowIndex % 2 === 0 ? "bg-gray-200" : "bg-gray-100"
+                } border-b`}
               >
                 {row.cells.map((cell) => (
                   <td {...cell.getCellProps()} className="p-4">

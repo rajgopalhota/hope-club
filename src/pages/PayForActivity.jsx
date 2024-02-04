@@ -8,10 +8,10 @@ import { toast } from "react-toastify";
 import empty from "./../assets/empty.gif";
 
 const PayForActivity = () => {
-    useEffect(() => {
-        // Scroll to the top when the component mounts
-        window.scrollTo(0, 0);
-      }, []);
+  useEffect(() => {
+    // Scroll to the top when the component mounts
+    window.scrollTo(0, 0);
+  }, []);
   const auth = useAuth();
   const [userActivities, setUserActivities] = useState([]);
 
@@ -35,6 +35,27 @@ const PayForActivity = () => {
       toast.success(response.data.message);
     } catch (error) {
       console.error("Error fetching activities:", error);
+    }
+  };
+
+  const handlePayment = async () => {
+    try {
+      // Send a request to the backend to store payment data
+      const response = await axios.post("/pay/create", {
+        activities: userActivities.map((activity) => activity._id),
+      });
+
+      // Display success message
+      toast.success(response.data.message);
+
+      // Clear userActivities after successful payment
+      setUserActivities([]);
+
+      // Redirect to activities page or any other desired route
+      // Example: history.push("/activities");
+    } catch (error) {
+      console.error("Error making payment:", error);
+      toast.error("Error making payment. Please try again.");
     }
   };
 
@@ -108,8 +129,8 @@ const PayForActivity = () => {
               </Link>
 
               {/* Continue to Pay Button */}
-              <Link
-                to="/pay-for-activities"
+              <button
+                onClick={handlePayment}
                 className="flex items-center bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none"
               >
                 <FaCreditCard className="mr-2" />
@@ -118,7 +139,7 @@ const PayForActivity = () => {
                   (total, activity) => total + activity.price,
                   0
                 )}
-              </Link>
+              </button>
             </div>
           </div>
         </>

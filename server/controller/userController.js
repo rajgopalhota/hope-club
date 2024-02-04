@@ -87,17 +87,15 @@ router.get("/user", authMiddleware, async (req, res) => {
   }
 });
 
-// Fetch all users (admin only)
+// Fetch all users (admin/manager only)
 router.get("/all", authMiddleware, async (req, res) => {
   try {
     // Check if the user's role is Admin
-    if (req.user.role !== "Admin") {
-      return res.status(403).json({ message: "Permission denied" });
+    if (req.user.role == "Admin" || req.user.role == "Manager") {
+      const users = await UserModel.find().select("-password");
+      return res.json(users);
     }
-
-    // Fetch all users (excluding password field)
-    const users = await UserModel.find().select("-password");
-    res.json(users);
+    return res.status(403).json({ message: "Permission denied" });
   } catch (error) {
     console.error("Error:", error.message);
     res.status(500).json({ error: error.message });
@@ -107,8 +105,8 @@ router.get("/all", authMiddleware, async (req, res) => {
 // Delete a user by ID (admin only)
 router.delete("/del/:id", authMiddleware, async (req, res) => {
   try {
-    // Check if the user's role is Admin
-    if (req.user.role !== "Admin") {
+    
+    if (req.user.role != "Admin") {
       return res.status(403).json({ message: "Permission denied" });
     }
 

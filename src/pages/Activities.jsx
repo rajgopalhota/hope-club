@@ -12,6 +12,7 @@ const Activities = () => {
 
   const [userActivities, setUserActivities] = useState([]);
   const [otherActivities, setOtherActivities] = useState([]);
+  const [paymentHistory, setPaymentHistory] = useState([]);
 
   const fetchActivitiesNonLogin = async () => {
     try {
@@ -27,6 +28,15 @@ const Activities = () => {
       const response = await axios.get("/hope/activities");
       setUserActivities(response.data.userActivities);
       setOtherActivities(response.data.otherActivities);
+    } catch (error) {
+      console.error("Error fetching activities:", error);
+    }
+  };
+  const fetchPayments = async () => {
+    try {
+      const response = await axios.get("/pay/history");
+      console.log(response.data);
+      setPaymentHistory(response.data);
     } catch (error) {
       console.error("Error fetching activities:", error);
     }
@@ -50,19 +60,126 @@ const Activities = () => {
     }
   };
 
-  
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   useEffect(() => {
-    auth.user ? fetchActivities() : fetchActivitiesNonLogin();
+    fetchActivitiesNonLogin();
+    fetchActivities();
+    fetchPayments();
   }, [auth.user]);
 
   return (
     <div className="activity container mx-auto p-8">
       <h2 className="text-3xl font-bold mb-4">Our Activities</h2>
       <AddActivityForm />
+      {paymentHistory.length !== 0 && (
+        <>
+        <div className="mb-8">
+          <h3 className="text-2xl font-bold mb-2 text-blue-500">
+            Payment History
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {paymentHistory.map((payment) => (
+              <div
+                key={payment._id}
+                className={`max-w-[1/2] neumorphic-container bg-gradient-to-br from-blue-100 via-cyan-10 to-teal-100 p-4 rounded-md shadow-md transform hover:scale-105 transition-transform border-2`}
+              >
+                {/* Verification Icon */}
+                {payment.paymentVerified ? (
+                  <div className="mb-2 text-green-500">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      className="h-6 w-6 inline-block mr-2"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M5 13l4 4L19 7"
+                      />
+                    </svg>
+                    Verified
+                  </div>
+                ) : (
+                  <div className="mb-2 text-red-500">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      className="h-6 w-6 inline-block mr-2"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    </svg>
+                    Unverified
+                  </div>
+                )}
+      
+                {/* Payment Details */}
+                <div className="mb-4">
+                  <p className="text-blue-900">
+                    <span className="font-bold">Activities:</span>{" "}
+                    {payment.activities
+                      .map((activity) => activity.name)
+                      .join(", ")}
+                  </p>
+                </div>
+                <div className="mb-4">
+                  <p className="text-red-900">
+                    <span className="font-bold">Prices:</span>{" "}
+                    {payment.activities
+                      .map((activity) => `₹${activity.price}`)
+                      .join(", ")}
+                  </p>
+                </div>
+                <div className="mb-4">
+                  <p className="text-red-900">
+                    <span className="font-bold">Verified By:</span>{" "}
+                    {payment.paymentVerifiedBy
+                      ? payment.paymentVerifiedBy.name
+                      : "Not Verified"}
+                  </p>
+                </div>
+                <div className="mb-4">
+                  <p className="text-zinc-900">
+                    <span className="font-bold">Timestamp:</span>{" "}
+                    {new Date(payment.timestamp).toLocaleString()}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      
+        {/* Total Price */}
+        <div className="text-xl font-bold mb-4">
+          Total Price: &#8377;{" "}
+          {paymentHistory.reduce(
+            (total, payment) =>
+              total +
+              payment.activities.reduce(
+                (acc, activity) => acc + activity.price,
+                0
+              ),
+            0
+          )}
+        </div>
+      
+        {/* Stylish HR */}
+        <hr className="border-t-2 border-blue-500 my-8" />
+      </>
+      
+      )}
       {/* Registered Activities Section */}
       {userActivities.length !== 0 && (
         <>

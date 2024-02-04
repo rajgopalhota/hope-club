@@ -27,7 +27,7 @@ const Admin = () => {
 
   const sidebarIcon = isSidebarOpen ? <FaTimes /> : <FaBars />;
 
-  if (auth.user && auth.user.role === "Admin") {
+  if (auth.user && (auth.user.role === "Admin" || auth.user.role === "Manager")) {
     return (
       <div className="relative flex h-screen">
         {/* Toggle Button for Small Screens */}
@@ -56,7 +56,7 @@ const Admin = () => {
             isSidebarOpen ? "translate-x-0" : "-translate-x-full"
           } transition-transform lg:translate-x-0`}
         >
-          <div className="text-2xl font-bold mb-6 text-center">Admin Panel</div>
+          <div className="text-2xl font-bold mb-6 text-center">{auth.user.role} Panel</div>
           <ul className="flex flex-col items-stretch space-y-2">
             <li>
               <Link
