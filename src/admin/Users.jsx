@@ -2,6 +2,7 @@ import React, { useEffect, useMemo } from "react";
 import { useTable, useSortBy } from "react-table";
 import { FaTrashAlt } from "react-icons/fa";
 import axiosInstance from "../axiosInstance";
+import { toast } from "react-toastify";
 
 const Users = () => {
   // Define columns for the table
@@ -50,6 +51,7 @@ const Users = () => {
         try {
           // Make API call to delete user
           await axiosInstance.delete(`api/users/del/${row.original._id}`);
+          toast.info("User deleted");
           // Refetch data after deletion
           fetchData();
         } catch (error) {

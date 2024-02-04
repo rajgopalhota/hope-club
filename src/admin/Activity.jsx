@@ -3,6 +3,7 @@ import { useTable, useSortBy } from "react-table";
 import { FaTrashAlt } from "react-icons/fa";
 import axiosInstance from "../axiosInstance";
 import AddActivity from "../pages/AddActivity";
+import { toast } from "react-toastify";
 
 const Activity = () => {
   const columns = [
@@ -60,6 +61,7 @@ const Activity = () => {
       if (shouldDelete) {
         try {
           await axiosInstance.delete(`/hope/activities/${row.original._id}`);
+          toast.info("Activity Deleted")
           fetchData();
         } catch (error) {
           console.error("Error deleting activity:", error.message);

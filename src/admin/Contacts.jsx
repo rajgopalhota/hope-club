@@ -2,6 +2,7 @@ import React, { useEffect, useMemo } from "react";
 import { useTable, useSortBy } from "react-table";
 import { FaTrashAlt } from "react-icons/fa";
 import axiosInstance from "../axiosInstance";
+import { toast } from "react-toastify";
 
 const Contacts = () => {
   // Define columns for the table
@@ -45,6 +46,7 @@ const Contacts = () => {
           await axiosInstance.delete(`/api/messages/${row.original._id}`);
           // Refetch data after deletion
           fetchData();
+          toast.info("Message Deleted");
         } catch (error) {
           console.error("Error deleting message:", error.message);
         }

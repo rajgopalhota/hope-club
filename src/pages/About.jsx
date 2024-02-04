@@ -38,6 +38,54 @@ const About = () => {
       instagram: "manager1_instagram",
       image: "https://placekitten.com/150/154",
     },
+    {
+      name: "Manager 1",
+      designation: "Manager",
+      instagram: "manager1_instagram",
+      image: "https://placekitten.com/150/154",
+    },
+    {
+      name: "Manager 1",
+      designation: "Manager",
+      instagram: "manager1_instagram",
+      image: "https://placekitten.com/150/154",
+    },
+    {
+      name: "Manager 1",
+      designation: "Manager",
+      instagram: "manager1_instagram",
+      image: "https://placekitten.com/150/154",
+    },
+    {
+      name: "Manager 1",
+      designation: "Manager",
+      instagram: "manager1_instagram",
+      image: "https://placekitten.com/150/154",
+    },
+    {
+      name: "Manager 1",
+      designation: "Manager",
+      instagram: "manager1_instagram",
+      image: "https://placekitten.com/150/154",
+    },
+    {
+      name: "Manager 1",
+      designation: "Manager",
+      instagram: "manager1_instagram",
+      image: "https://placekitten.com/150/154",
+    },
+    {
+      name: "Manager 1",
+      designation: "Manager",
+      instagram: "manager1_instagram",
+      image: "https://placekitten.com/150/154",
+    },
+    {
+      name: "Manager 1",
+      designation: "Manager",
+      instagram: "manager1_instagram",
+      image: "https://placekitten.com/150/154",
+    },
   ];
 
   return (
