@@ -44,19 +44,24 @@ const About = () => {
     <div className="w-full container mx-auto p-8">
       <h2 className="text-3xl font-bold mb-4">Core of the HOPE Club</h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="aboutContainer flex flex-wrap justify-center items-center gap-8">
         {teamData.map((member, index) => (
           <motion.div
             key={index}
-            className={`bg-white p-6 rounded-lg shadow-lg overflow-hidden transition-transform mb-4 ${
+            className={`flex gap-2 aboutCards justify-center items-center p-6 rounded-lg shadow-lg overflow-hidden transition-transform mb-4 mx-4 ${
               index < 2 ? "glassmorphic" : "neumorphic"
             }`}
+            whileHover={{ scale: 1.05 }}
           >
-            <img
-              src={member.image}
-              alt={member.name}
-              className="aspect-1 object-cover rounded-full mx-auto mb-4"
-            />
+            <div
+              className={'about-img-cont rounded-full mx-auto mb-4 aspect-1 object-cover'}
+            >
+              <img
+                src={member.image}
+                alt={member.name}
+                className="rounded-full w-full h-full object-cover"
+              />
+            </div>
             <div className="text-center relative">
               {index < 2 && <div className="glassmorphic-overlay"></div>}
               <h3 className="text-lg font-bold">

@@ -1,8 +1,15 @@
-// src/components/AddActivityForm.jsx
 import React, { useState } from "react";
-import axios from "../axiosInstance"; // Import axios library
+import axios from "../axiosInstance";
 import { useAuth } from "../AuthContext";
 import { toast } from "react-toastify";
+import { IoMdAddCircle } from "react-icons/io"; // Example icon import
+import {
+  FaUser,
+  FaInfo,
+  FaImage,
+  FaDollarSign,
+  FaCalendarAlt,
+} from "react-icons/fa"; // Replace with your desired icons
 
 const AddActivityForm = () => {
   const auth = useAuth();
@@ -63,113 +70,125 @@ const AddActivityForm = () => {
   return (
     <>
       {auth.user && auth.user.role == "Admin" && (
-        <form onSubmit={onSubmit} className="max-w-md mx-auto mt-8 mb-10">
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="name"
-            >
-              Activity Name
-            </label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              value={activityData.name}
-              onChange={handleInputChange}
-              className="w-full p-2 border rounded-md"
-            />
-            {errors.name && (
-              <p className="text-red-500 text-sm">{errors.name}</p>
-            )}
-          </div>
+        <div className="max-w-xl sm:w-ful mx-auto mt-8 mb-10 neumorphic-container">
+          <h2 className="text-2xl font-bold mb-4">
+            Admin Control - Add Activity
+          </h2>
+          <form onSubmit={onSubmit}>
+            <div className="mb-4 relative">
+              <label
+                htmlFor="name"
+                className="block text-gray-700 text-sm font-bold mb-2"
+              >
+                <FaUser className="inline-block mr-2" />
+                Activity Name
+              </label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                value={activityData.name}
+                onChange={handleInputChange}
+                className="w-full p-2 pl-4 border rounded-md"
+              />
+              {errors.name && (
+                <p className="text-red-500 text-sm">{errors.name}</p>
+              )}
+            </div>
 
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="description"
-            >
-              Description
-            </label>
-            <textarea
-              id="description"
-              name="description"
-              value={activityData.description}
-              onChange={handleInputChange}
-              className="w-full p-2 border rounded-md"
-            />
-            {errors.description && (
-              <p className="text-red-500 text-sm">{errors.description}</p>
-            )}
-          </div>
+            <div className="mb-4 relative">
+              <label
+                htmlFor="description"
+                className="block text-gray-700 text-sm font-bold mb-2"
+              >
+                <FaInfo className="inline-block mr-2" />
+                Description
+              </label>
+              <textarea
+                id="description"
+                name="description"
+                value={activityData.description}
+                onChange={handleInputChange}
+                rows="7"
+                className="w-full p-2 pl-4 border rounded-md"
+              />
+              {errors.description && (
+                <p className="text-red-500 text-sm">{errors.description}</p>
+              )}
+            </div>
 
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="image"
-            >
-              Image URL
-            </label>
-            <input
-              type="text"
-              id="image"
-              name="image"
-              value={activityData.image}
-              onChange={handleInputChange}
-              className="w-full p-2 border rounded-md"
-            />
-            {errors.image && (
-              <p className="text-red-500 text-sm">{errors.image}</p>
-            )}
-          </div>
+            <div className="mb-4 relative">
+              <label
+                htmlFor="image"
+                className="block text-gray-700 text-sm font-bold mb-2"
+              >
+                <FaImage className="inline-block mr-2" />
+                Image URL
+              </label>
+              <input
+                type="text"
+                id="image"
+                name="image"
+                value={activityData.image}
+                onChange={handleInputChange}
+                className="w-full p-2 pl-4 border rounded-md"
+              />
+              {errors.image && (
+                <p className="text-red-500 text-sm">{errors.image}</p>
+              )}
+            </div>
 
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="price"
-            >
-              Price
-            </label>
-            <input
-              type="number"
-              id="price"
-              name="price"
-              value={activityData.price}
-              onChange={handleInputChange}
-              className="w-full p-2 border rounded-md"
-            />
-            {errors.price && (
-              <p className="text-red-500 text-sm">{errors.price}</p>
-            )}
-          </div>
+            <div className="mb-4 relative">
+              <label
+                htmlFor="price"
+                className="block text-gray-700 text-sm font-bold mb-2"
+              >
+                <FaDollarSign className="inline-block mr-2" />
+                Price
+              </label>
+              <input
+                type="number"
+                id="price"
+                name="price"
+                value={activityData.price}
+                onChange={handleInputChange}
+                className="w-full p-2 pl-4 border rounded-md"
+              />
+              {errors.price && (
+                <p className="text-red-500 text-sm">{errors.price}</p>
+              )}
+            </div>
 
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="date"
-            >
-              Date
-            </label>
-            <input
-              type="date"
-              id="date"
-              name="date"
-              value={activityData.date}
-              onChange={handleInputChange}
-              className="w-full p-2 border rounded-md"
-            />
-            {errors.date && (
-              <p className="text-red-500 text-sm">{errors.date}</p>
-            )}
-          </div>
+            <div className="mb-4 relative">
+              <label
+                htmlFor="date"
+                className="block text-gray-700 text-sm font-bold mb-2"
+              >
+                <FaCalendarAlt className="inline-block mr-2" />
+                Date
+              </label>
+              <input
+                type="date"
+                id="date"
+                name="date"
+                value={activityData.date}
+                onChange={handleInputChange}
+                className="w-full p-2 pl-4 border rounded-md"
+              />
+              {errors.date && (
+                <p className="text-red-500 text-sm">{errors.date}</p>
+              )}
+            </div>
 
-          <button
-            type="submit"
-            className="bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 focus:outline-none"
-          >
-            Add Activity
-          </button>
-        </form>
+            <button
+              type="submit"
+              className="neumorphic-button bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 focus:outline-none flex items-center justify-center"
+            >
+              <IoMdAddCircle className="mr-2" />
+              Add Activity
+            </button>
+          </form>
+        </div>
       )}
     </>
   );

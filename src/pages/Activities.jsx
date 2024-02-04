@@ -56,7 +56,7 @@ const Activities = () => {
 
   useEffect(() => {
     auth.user ? fetchActivities() : fetchActivitiesNonLogin();
-  }, [auth]);
+  }, [auth.user]);
 
   return (
     <div className="activity container mx-auto p-8">

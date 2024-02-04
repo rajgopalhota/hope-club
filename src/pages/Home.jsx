@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import { FaUsers, FaBook, FaHeart, FaDumbbell } from "react-icons/fa";
 import { GiHealthNormal } from "react-icons/gi";
 import { BiRun } from "react-icons/bi";
@@ -70,7 +70,9 @@ const Home = () => {
           >
             {point.icon}
             <div>
-              <h3 className="w-full text-xl text-left font-bold mb-2">{point.title}</h3>
+              <h3 className="w-full text-xl text-left font-bold mb-2">
+                {point.title}
+              </h3>
               <p className="w-full text-center">{point.description}</p>
             </div>
           </div>
