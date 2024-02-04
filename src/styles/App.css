@@ -166,12 +166,12 @@ p {
     rgba(249, 176, 200, 0.4)
   );
 }
-.aboutContainer{
+.aboutContainer {
   margin-top: 40px;
 }
-.aboutCards{
+.aboutCards {
   box-shadow: 10px 10px 30px rgba(152, 152, 244, 0.8),
-  -10px -10px 20px rgba(27, 0, 27, 0.2) !important;
+    -10px -10px 20px rgba(27, 0, 27, 0.2) !important;
   border: 1px solid rgb(99, 99, 99);
 }
 .about-img-cont {
@@ -179,9 +179,16 @@ p {
   max-width: 100px;
   padding: 4px;
 }
-.about-img-cont img{
+.about-img-cont img {
   transition: all ease-in-out 0.2s;
 }
-.aboutCards:hover img{
+.aboutCards:hover img {
   transform: scale(1.2);
+}
+.admin-heading {
+  font-weight: 900;
+  font-size: 2rem;
+}
+.mainContent{
+  z-index: 2 !important;
 }

@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const Activity = require("./../models/activitySchema");
-const User = require("./../models/user");
-const authMiddleware = require("./../middleware/authMiddleware");
+const Activity = require("../models/activitySchema");
+const User = require("../models/user");
+const authMiddleware = require("../middleware/authMiddleware");
 
 // Create Activity
 router.post("/activities", authMiddleware, async (req, res) => {
@@ -124,5 +124,79 @@ router.get("/get-all", async (req, res) => {
 });
 
 // Add other routes for updating and deleting activities if needed
+
+// Admin
+
+router.get("/activities/all", authMiddleware, async (req, res) => {
+  try {
+    // Check if the user's role is Admin
+    if (req.user.role !== "Admin") {
+      return res.status(403).json({ message: "Permission denied" });
+    }
+
+    const allActivities = await Activity.find();
+    res.json(allActivities);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// Delete an Activity by ID (with authentication middleware and role check)
+router.delete("/activities/:id", authMiddleware, async (req, res) => {
+  try {
+    // Check if the user's role is Admin
+    if (req.user.role !== "Admin") {
+      return res.status(403).json({ message: "Permission denied" });
+    }
+
+    const activityId = req.params.id;
+
+    // Validate if the activity ID is valid
+    if (!activityId.match(/^[0-9a-fA-F]{24}$/)) {
+      return res.status(400).json({ message: "Invalid activity ID" });
+    }
+
+    // Find and delete the activity
+    const deletedActivity = await Activity.findByIdAndDelete(activityId);
+
+    if (!deletedActivity) {
+      return res.status(404).json({ message: "Activity not found" });
+    }
+
+    res.json({ message: "Activity deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// Route to get all users with registered activities (accessible by Admin)
+router.get("/users-activities", authMiddleware, async (req, res) => {
+  try {
+    // Check if the user's role is Admin
+    if (req.user.role !== "Admin") {
+      return res.status(403).json({ message: "Permission denied" });
+    }
+
+    // Fetch all users and populate details from the 'registeredActivities' field
+    const usersWithActivities = await User.find().populate("registeredActivities");
+
+    // Format the data to include user details along with registered activities
+    const formattedData = usersWithActivities.map((user) => {
+      return {
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        phoneNumber: user.phoneNumber,
+        department: user.department,
+        role: user.role,
+        registeredActivities: user.registeredActivities,
+      };
+    });
+
+    res.json(formattedData);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
 
 module.exports = router;

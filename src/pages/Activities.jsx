@@ -8,10 +8,6 @@ import { FiShoppingCart } from "react-icons/fi";
 import { Link } from "react-router-dom";
 
 const Activities = () => {
-  useEffect(() => {
-    // Scroll to the top when the component mounts
-    window.scrollTo(0, 0);
-  }, []);
   const auth = useAuth();
 
   const [userActivities, setUserActivities] = useState([]);
@@ -53,6 +49,11 @@ const Activities = () => {
       console.error("Error fetching activities:", error);
     }
   };
+
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     auth.user ? fetchActivities() : fetchActivitiesNonLogin();

@@ -67,7 +67,9 @@ router.post("/login", async (req, res) => {
 
     const logedinuser = await UserModel.findById(user._id).select("-password");
     // Send the token to the client
-    res.status(200).json({ user: logedinuser, token, message: "Login successful" });
+    res
+      .status(200)
+      .json({ user: logedinuser, token, message: "Login successful" });
   } catch (error) {
     console.error("Error:", error.message);
     res.status(500).json({ error: error.message });
@@ -79,6 +81,52 @@ router.get("/user", authMiddleware, async (req, res) => {
     // Access the authenticated user through req.user
     const user = req.user;
     res.status(200).json({ user });
+  } catch (error) {
+    console.error("Error:", error.message);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Fetch all users (admin only)
+router.get("/all", authMiddleware, async (req, res) => {
+  try {
+    // Check if the user's role is Admin
+    if (req.user.role !== "Admin") {
+      return res.status(403).json({ message: "Permission denied" });
+    }
+
+    // Fetch all users (excluding password field)
+    const users = await UserModel.find().select("-password");
+    res.json(users);
+  } catch (error) {
+    console.error("Error:", error.message);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Delete a user by ID (admin only)
+router.delete("/del/:id", authMiddleware, async (req, res) => {
+  try {
+    // Check if the user's role is Admin
+    if (req.user.role !== "Admin") {
+      return res.status(403).json({ message: "Permission denied" });
+    }
+
+    const userId = req.params.id;
+
+    // Validate if the user ID is valid
+    if (!userId.match(/^[0-9a-fA-F]{24}$/)) {
+      return res.status(400).json({ message: "Invalid user ID" });
+    }
+
+    // Find and delete the user
+    const deletedUser = await UserModel.findByIdAndDelete(userId);
+
+    if (!deletedUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.json({ message: "User deleted successfully" });
   } catch (error) {
     console.error("Error:", error.message);
     res.status(500).json({ error: error.message });

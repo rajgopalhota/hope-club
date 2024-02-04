@@ -70,7 +70,7 @@ const AddActivityForm = () => {
   return (
     <>
       {auth.user && auth.user.role == "Admin" && (
-        <div className="max-w-xl sm:w-ful mx-auto mt-8 mb-10 neumorphic-container">
+        <div className="w-full mx-auto mt-8 mb-10 neumorphic-container">
           <h2 className="text-2xl font-bold mb-4">
             Admin Control - Add Activity
           </h2>

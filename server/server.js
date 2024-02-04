@@ -26,7 +26,7 @@ db.once('open', () => {
 // Sample controller (inside controllers folder)
 const userController = require('./controller/userController');
 const messagesRoute = require('./controller/messageController');
-const activityRoutes = require('./controller/activityontroller');
+const activityRoutes = require('./controller/activityController');
 app.use('/api/users', userController); // Use this controller for handling user-related routes
 app.use('/api/messages', messagesRoute);
 app.use('/hope', activityRoutes);

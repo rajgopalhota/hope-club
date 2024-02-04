@@ -15,6 +15,7 @@ import PayForActivity from "./pages/PayForActivity";
 import PhotoGallery from "./pages/PhotoGallery";
 import Register from "./pages/Register";
 import { Link } from "react-router-dom";
+import Admin from "./admin/Admin";
 
 function App() {
   const auth = useAuth();
@@ -28,25 +29,8 @@ function App() {
   };
   return (
     <div>
-      {/* Your main content goes here */}
-      <section className="mainContent pb-16">
-        <ToastContainer />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/activities" element={<Activities />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/programs" element={<PhotoGallery />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/reg" element={<Register />} />
-          <Route path="/mission-vision" element={<Feature />} />
-          <Route path="/pay-for-activities" element={<PayForActivity />} />
-        </Routes>
-      </section>
-      {/* Include the Navbar component at the bottom of the page */}
-      <Navbar />
       {/* Login/Logout Button */}
-      <div className="activityButtons fixed top-4 right-4 flex flex-col gap-1 items-center justify-center">
+      <div className="activityButtons z-10 fixed top-4 right-4 flex flex-col gap-1 items-center justify-center">
         <div
           onClick={handleClick}
           title={auth.user ? "Logout" : "Login"}
@@ -90,6 +74,24 @@ function App() {
           </Link>
         )}
       </div>
+      {/* Your main content goes here */}
+      <section className="mainContent pb-16">
+        <ToastContainer />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/activities" element={<Activities />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/programs" element={<PhotoGallery />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/reg" element={<Register />} />
+          <Route path="/mission-vision" element={<Feature />} />
+          <Route path="/pay-for-activities" element={<PayForActivity />} />
+          <Route path="/admin/*" element={<Admin />} />
+        </Routes>
+      </section>
+      {/* Include the Navbar component at the bottom of the page */}
+      <Navbar />
     </div>
   );
 }
