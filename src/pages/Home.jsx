@@ -41,6 +41,12 @@ const keyPoints = [
     title: "Have Questions?",
     description: "Feel free to reach out. We're here to help!",
   },
+  {
+    icon: <GiHealthNormal className="w-8 h-8 mr-4" />,
+    title: "Health Wellness Training",
+    description:
+      "Offering training programs for a healthy and balanced lifestyle.",
+  },
 ];
 
 const Home = () => {
@@ -49,7 +55,7 @@ const Home = () => {
     window.scrollTo(0, 0);
   }, []);
   return (
-    <div className="home flex flex-col lg:flex-row h-screen w-screen overflow-hidden">
+    <div className="home flex flex-col lg:flex-row h-full w-screen overflow-hidden">
       {/* First section with logo and quotes */}
       <div className="lg:w-1/2 text-white flex items-center justify-center">
         <div className="text-center flex flex-col items-center justify-center">
@@ -62,7 +68,7 @@ const Home = () => {
       </div>
 
       {/* Second section with key points, hover effects, and scrolling */}
-      <div className="text-center lg:w-1/2 bg-gray-200 p-8 overflow-y-auto flex flex-col justify-center">
+      <div className="text-center h-full lg:w-1/2 bg-gray-200 p-8 overflow-y-auto flex flex-col justify-center">
         {keyPoints.map((point, index) => (
           <div
             key={index}

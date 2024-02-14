@@ -2,6 +2,7 @@
 const express = require("express");
 const router = express.Router();
 const PaymentTransaction = require("../models/paymentVerification");
+const User = require("../models/user");
 const authMiddleware = require("../middleware/authMiddleware");
 
 // Create Payment Transaction
@@ -18,6 +19,10 @@ router.post("/create", authMiddleware, async (req, res) => {
 
     await newPaymentTransaction.save();
 
+    const user = await User.findById(userId);
+    user.registeredActivities = [];
+    await user.save();
+
     res
       .status(201)
       .json({ message: "Payment transaction created successfully" });
@@ -26,7 +31,7 @@ router.post("/create", authMiddleware, async (req, res) => {
   }
 });
 
-// Verify Payment Transaction
+// Verify or Unverify Payment Transaction
 router.put("/verify/:transactionId", authMiddleware, async (req, res) => {
   try {
     const { transactionId } = req.params;
@@ -39,20 +44,19 @@ router.put("/verify/:transactionId", authMiddleware, async (req, res) => {
       return res.status(404).json({ message: "Payment transaction not found" });
     }
 
-    // Check if the user has permission to verify the payment
-    if (paymentTransaction.paymentVerified) {
-      return res
-        .status(400)
-        .json({ message: "Payment transaction already verified" });
-    }
-
-    // Update payment verification details
-    paymentTransaction.paymentVerified = true;
-    paymentTransaction.paymentVerifiedBy = verifierId;
+    // Toggle payment verification status
+    paymentTransaction.paymentVerified = !paymentTransaction.paymentVerified;
+    paymentTransaction.paymentVerifiedBy = paymentTransaction.paymentVerified
+      ? verifierId
+      : null;
 
     await paymentTransaction.save();
 
-    res.json({ message: "Payment transaction verified successfully" });
+    res.json({
+      message: `Payment transaction ${
+        paymentTransaction.paymentVerified ? "verified" : "unverified"
+      } successfully`,
+    });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

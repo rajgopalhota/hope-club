@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "../axiosInstance";
 import { useTable, useSortBy } from "react-table";
 import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
+import Chart from "chart.js/auto";
 
 const fetchPayments = async () => {
   try {
@@ -21,17 +22,87 @@ const fetchPayments = async () => {
 
 const PaymentStatus = () => {
   const [payments, setPayments] = useState([]);
+  const [searchInput, setSearchInput] = useState("");
+  const [filteredPayments, setFilteredPayments] = useState([]);
+  const [totalCollected, setTotalCollected] = useState(0);
+  const [totalRemaining, setTotalRemaining] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
       const paymentsData = await fetchPayments();
       setPayments(paymentsData);
+      setFilteredPayments(paymentsData);
+
+      // Calculate total collected and remaining amounts
+      const collected = paymentsData
+        .filter((payment) => payment.paymentVerified)
+        .reduce((acc, payment) => acc + payment.totalPrice, 0);
+      const remaining = paymentsData
+        .filter((payment) => !payment.paymentVerified)
+        .reduce((acc, payment) => acc + payment.totalPrice, 0);
+      setTotalCollected(collected);
+      setTotalRemaining(remaining);
+
+      // Render pie chart
+      renderPieChart(collected, remaining);
+
+      // Render activity pie chart
+      renderActivityPieChart(paymentsData);
     };
 
     fetchData();
   }, []); // Run only on mount
 
-  // Columns for the table
+  const renderPieChart = (collected, remaining) => {
+    const ctx = document.getElementById("pie-chart");
+    new Chart(ctx, {
+      type: "pie",
+      data: {
+        labels: ["Collected Amount", "Remaining Amount"],
+        datasets: [
+          {
+            data: [collected, remaining],
+            backgroundColor: ["#36A2EB", "#FFCE56"],
+            hoverOffset: 4,
+          },
+        ],
+      },
+    });
+  };
+
+  const renderActivityPieChart = (paymentsData) => {
+    const activities = paymentsData.flatMap((payment) =>
+      payment.activities.map((activity) => activity.name)
+    );
+    const activityCounts = activities.reduce((acc, activity) => {
+      acc[activity] = (acc[activity] || 0) + 1;
+      return acc;
+    }, {});
+
+    const activityChartCanvas = document.getElementById("activity-pie-chart");
+    new Chart(activityChartCanvas, {
+      type: "pie",
+      data: {
+        labels: Object.keys(activityCounts),
+        datasets: [
+          {
+            data: Object.values(activityCounts),
+            backgroundColor: [
+              "#FF6384",
+              "#36A2EB",
+              "#FFCE56",
+              "#4BC0C0",
+              "#9966FF",
+              "#FF9F40",
+              "#50B432",
+            ],
+            hoverOffset: 4,
+          },
+        ],
+      },
+    });
+  };
+
   const columns = React.useMemo(
     () => [
       {
@@ -85,7 +156,11 @@ const PaymentStatus = () => {
         Cell: ({ row }) => (
           <button
             onClick={() => handleVerify(row.original)}
-            className="bg-blue-500 text-white py-1 px-2 rounded-md"
+            className={`py-1 px-2 rounded-md ${
+              row.original.paymentVerified
+                ? "bg-black text-white"
+                : "bg-blue-500 text-white"
+            }`}
           >
             {row.original.paymentVerified ? "Unverify" : "Verify"}
           </button>
@@ -95,38 +170,92 @@ const PaymentStatus = () => {
     []
   );
 
+  // Filter data based on search input
+  const handleSearch = (e) => {
+    const inputValue = e.target.value.toLowerCase();
+    setSearchInput(inputValue);
+    const filteredResults = payments.filter((payment) =>
+      payment.user.name.toLowerCase().includes(inputValue)
+    );
+    setFilteredPayments(filteredResults);
+  };
+
   const handleVerify = async (payment) => {
     const shouldVerify = window.confirm(
       `Are you sure you want to ${
         payment.paymentVerified ? "unverify" : "verify"
       } this payment?`
     );
-
+  
     if (shouldVerify) {
       try {
         // Make API call to verify/unverify payment
         await axios.put(`/pay/verify/${payment._id}`, {
           paymentVerified: !payment.paymentVerified,
         });
-
+  
         // Refetch data after verification
         const updatedPayments = await fetchPayments();
         setPayments(updatedPayments);
+        setFilteredPayments(updatedPayments);
+  
+        // Recalculate total collected and remaining amounts
+        const collected = updatedPayments
+          .filter((payment) => payment.paymentVerified)
+          .reduce((acc, payment) => acc + payment.totalPrice, 0);
+        const remaining = updatedPayments
+          .filter((payment) => !payment.paymentVerified)
+          .reduce((acc, payment) => acc + payment.totalPrice, 0);
+        setTotalCollected(collected);
+        setTotalRemaining(remaining);
+  
+        // Update pie chart datasets with new values
+        const pieChart = document.getElementById("pie-chart").getContext("2d");
+        pieChart.data.datasets[0].data = [collected, remaining];
+        pieChart.update();
+  
+        // Update activity pie chart with new data
+        renderActivityPieChart(updatedPayments);
       } catch (error) {
         console.error("Error verifying/unverifying payment:", error.message);
       }
     }
   };
+  
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    useTable({ columns, data: payments }, useSortBy);
+    useTable({ columns, data: filteredPayments }, useSortBy);
 
   return (
     <div className="container mx-auto">
       <h2 className="text-2xl font-bold mb-4 text-blue-500">
         Payment Status Component
       </h2>
+
+      {/* Search Bar */}
+      <input
+        type="text"
+        placeholder="Search by name"
+        value={searchInput}
+        onChange={handleSearch}
+        className="p-2 mb-4 border rounded-md"
+      />
+
+      {/* Pie Charts */}
+      <div className="flex justify-around mb-8">
+        <div>
+          <h3 className="text-lg font-semibold">Total Collection</h3>
+          <canvas id="pie-chart" width="300" height="300"></canvas>
+        </div>
+        <div>
+          <h3 className="text-lg font-semibold">Activity Distribution</h3>
+          <canvas id="activity-pie-chart" width="300" height="300"></canvas>
+        </div>
+      </div>
+
+      {/* Table */}
       <table {...getTableProps()} className="min-w-full table-auto border">
+        {/* Table Header */}
         <thead className="bg-blue-900 text-white">
           {headerGroups.map((headerGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()}>
@@ -142,6 +271,7 @@ const PaymentStatus = () => {
             </tr>
           ))}
         </thead>
+        {/* Table Body */}
         <tbody {...getTableBodyProps()}>
           {rows.map((row, rowIndex) => {
             prepareRow(row);

@@ -105,7 +105,6 @@ router.get("/all", authMiddleware, async (req, res) => {
 // Delete a user by ID (admin only)
 router.delete("/del/:id", authMiddleware, async (req, res) => {
   try {
-    
     if (req.user.role != "Admin") {
       return res.status(403).json({ message: "Permission denied" });
     }
@@ -125,6 +124,38 @@ router.delete("/del/:id", authMiddleware, async (req, res) => {
     }
 
     res.json({ message: "User deleted successfully" });
+  } catch (error) {
+    console.error("Error:", error.message);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Route for updating user role (admin only)
+router.put("/update-role/:id", authMiddleware, async (req, res) => {
+  try {
+    // Check if the user is an admin
+    if (req.user.role != "Admin") {
+      return res.status(403).json({ message: "Permission denied" });
+    }
+
+    // Validate if the user ID is valid
+    const userId = req.params.id;
+    if (!userId.match(/^[0-9a-fA-F]{24}$/)) {
+      return res.status(400).json({ message: "Invalid user ID" });
+    }
+
+    // Find the user by ID
+    const user = await UserModel.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Update user role
+    user.role = req.body.role;
+    await user.save();
+
+    res.json({ message: "User role updated successfully" });
+    
   } catch (error) {
     console.error("Error:", error.message);
     res.status(500).json({ error: error.message });

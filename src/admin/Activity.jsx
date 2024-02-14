@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useTable, useSortBy } from "react-table";
 import { FaTrashAlt } from "react-icons/fa";
 import axiosInstance from "../axiosInstance";
@@ -7,6 +7,27 @@ import { toast } from "react-toastify";
 import { useAuth } from "../AuthContext";
 
 const Activity = () => {
+  const [data, setData] = useState([]);
+  const [searchInput, setSearchInput] = useState("");
+  const [filteredData, setFilteredData] = useState([]);
+  const [showAddActivity, setShowAddActivity] = useState(false);
+
+  const auth = useAuth();
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const response = await axiosInstance.get("/hope/activities/all");
+      setData(response.data);
+      setFilteredData(response.data);
+    } catch (error) {
+      console.error("Error fetching data:", error.message);
+    }
+  };
+
   const columns = [
     { Header: "Name", accessor: "name" },
     { Header: "Description", accessor: "description" },
@@ -17,18 +38,6 @@ const Activity = () => {
     { Header: "Created At", accessor: "createdAt", Cell: DateCell },
   ];
 
-  const fetchData = async () => {
-    try {
-      const response = await axiosInstance.get("/hope/activities/all");
-      setData(response.data);
-    } catch (error) {
-      console.error("Error fetching data:", error.message);
-    }
-  };
-
-  const [data, setData] = React.useState([]);
-
-  const auth = useAuth();
   if (auth.user && auth.user.role === "Admin") {
     columns.push({
       Header: "Actions",
@@ -39,7 +48,7 @@ const Activity = () => {
   const memoizedColumns = useMemo(() => columns, []);
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    useTable({ columns: memoizedColumns, data }, useSortBy);
+    useTable({ columns: memoizedColumns, data: filteredData }, useSortBy);
 
   function ImageCell({ value }) {
     return (
@@ -79,14 +88,52 @@ const Activity = () => {
     );
   }
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  // Filter data based on search input
+  const handleSearch = (e) => {
+    const inputValue = e.target.value.toLowerCase();
+    setSearchInput(inputValue);
+    const filteredResults = data.filter(
+      (activity) => activity.name.toLowerCase().includes(inputValue)
+    );
+    setFilteredData(filteredResults);
+  };
 
   return (
     <div className="container mx-auto">
       <h2 className="text-2xl font-bold mb-4 text-dark">Activity Component</h2>
-      <AddActivity />
+
+      {/* Button to toggle AddActivity component */}
+      <button
+        onClick={() => setShowAddActivity(!showAddActivity)}
+        className="bg-blue-500 text-white py-2 px-4 rounded-md mb-4"
+      >
+        {showAddActivity ? "Hide Activity" : "Add Activity"}
+      </button>
+
+      {/* AddActivity component with sliding in animation */}
+      <div
+        className={`${
+          showAddActivity ? "translate-x-0" : "translate-x-full"
+        } z-10 px-4 fixed right-0 top-0 bottom-0 bg-white w-100 shadow-lg transition-transform duration-300 ease-in-out overflow-y-auto`}
+      >
+        {/* Close button for small screens */}
+        <button
+          onClick={() => setShowAddActivity(false)}
+          className="block md:hidden absolute top-2 right-2 text-gray-500"
+        >
+          Close
+        </button>
+        <AddActivity />
+      </div>
+
+      {/* Search Bar */}
+      <input
+        type="text"
+        placeholder="Search by name"
+        value={searchInput}
+        onChange={handleSearch}
+        className="ml-5 p-2 mb-4 border rounded-md"
+      />
 
       <div className="overflow-x-auto">
         <table {...getTableProps()} className="min-w-full table-auto border">
@@ -97,6 +144,7 @@ const Activity = () => {
                   <th
                     {...column.getHeaderProps(column.getSortByToggleProps())}
                     className="p-4 text-left border-b"
+                    key={index}
                   >
                     {column.render("Header")}
                     {column.isSorted
@@ -118,9 +166,14 @@ const Activity = () => {
                   className={`${
                     rowIndex % 2 === 0 ? "bg-gray-200" : "bg-gray-100"
                   } border-b`}
+                  key={rowIndex}
                 >
-                  {row.cells.map((cell) => (
-                    <td {...cell.getCellProps()} className="p-4">
+                  {row.cells.map((cell, cellIndex) => (
+                    <td
+                      {...cell.getCellProps()}
+                      className="p-4"
+                      key={cellIndex}
+                    >
                       {cell.render("Cell")}
                     </td>
                   ))}

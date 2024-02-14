@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useAuth } from "../AuthContext";
 import empty from "./../assets/empty.gif";
-import { Link, Route, Routes } from "react-router-dom";
+import { NavLink, Route, Routes } from "react-router-dom";
 import {
   FaBars,
   FaTimes,
@@ -52,56 +52,56 @@ const Admin = () => {
 
         {/* Sidebar */}
         <div
-          className={`bg-gray-800 text-white w-64 py-6 fixed z-999 h-full ${
+          className={`bg-gray-800 text-white w-64 py-6 fixed z-999 h-full overflow-hidden ${
             isSidebarOpen ? "translate-x-0" : "-translate-x-full"
           } transition-transform lg:translate-x-0`}
         >
           <div className="text-2xl font-bold mb-6 text-center">{auth.user.role} Panel</div>
-          <ul className="flex flex-col items-stretch space-y-2">
+          <ul className="adminroute flex flex-col items-stretch space-y-2">
             <li>
-              <Link
+              <NavLink
                 to="/admin/activity"
                 className="flex items-center py-2 px-4 hover:bg-gray-700 w-full"
               >
                 <FaChartLine className="mr-2" />
                 Activity
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link
+              <NavLink
                 to="/admin/engagement"
                 className="flex items-center py-2 px-4 hover:bg-gray-700 w-full"
               >
                 <FaUserFriends className="mr-2" />
                 Engagement
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link
+              <NavLink
                 to="/admin/contacts"
                 className="flex items-center py-2 px-4 hover:bg-gray-700 w-full"
               >
                 <FaAddressBook className="mr-2" />
                 Contacts
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link
+              <NavLink
                 to="/admin/payment-status"
                 className="flex items-center py-2 px-4 hover:bg-gray-700 w-full"
               >
                 <FaMoneyCheckAlt className="mr-2" />
                 Payment Status
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link
+              <NavLink
                 to="/admin/users"
                 className="flex items-center py-2 px-4 hover:bg-gray-700 w-full"
               >
                 <FaUsers className="mr-2" />
                 Users
-              </Link>
+              </NavLink>
             </li>
           </ul>
         </div>

@@ -10,7 +10,7 @@ app.use(cors());
 app.use(express.json());
 
 // MongoDB connection
-mongoose.connect("mongodb://localhost:27017/hope-club", {
+mongoose.connect("mongodb+srv://raja:2003@cluster0.a5zryul.mongodb.net/hope-club", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });

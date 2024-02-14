@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useTable, useSortBy } from "react-table";
 import { FaTrashAlt } from "react-icons/fa";
 import axiosInstance from "../axiosInstance";
@@ -6,8 +6,11 @@ import { toast } from "react-toastify";
 import { useAuth } from "../AuthContext";
 
 const Users = () => {
-  // Define columns for the table
   const auth = useAuth();
+  const [searchInput, setSearchInput] = useState("");
+  const [filteredData, setFilteredData] = useState([]);
+  
+  // Define columns for the table
   const columns = [
     { Header: "Name", accessor: "name" },
     { Header: "Email", accessor: "email" },
@@ -21,14 +24,16 @@ const Users = () => {
   const fetchData = async () => {
     try {
       const response = await axiosInstance.get("api/users/all");
-      setData(response.data.filter((user) => user.role !== "Admin"));
+      const filteredUsers = response.data.filter(user => user.role !== "Admin");
+      setData(filteredUsers);
+      setFilteredData(filteredUsers);
     } catch (error) {
       console.error("Error fetching data:", error.message);
     }
   };
 
   // Initial data state
-  const [data, setData] = React.useState([]);
+  const [data, setData] = useState([]);
 
   if (auth.user && auth.user.role === "Admin") {
     columns.push({
@@ -42,7 +47,7 @@ const Users = () => {
 
   // Use react-table hooks to create the table instance
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    useTable({ columns: memoizedColumns, data }, useSortBy);
+    useTable({ columns: memoizedColumns, data: filteredData }, useSortBy);
 
   // Delete button cell renderer
   function DeleteButton({ row }) {
@@ -52,10 +57,8 @@ const Users = () => {
       );
       if (shouldDelete) {
         try {
-          // Make API call to delete user
           await axiosInstance.delete(`api/users/del/${row.original._id}`);
           toast.info("User deleted");
-          // Refetch data after deletion
           fetchData();
         } catch (error) {
           console.error("Error deleting user:", error.message);
@@ -64,7 +67,7 @@ const Users = () => {
     };
 
     return (
-      auth.user.role == "Admin" && (
+      auth.user.role === "Admin" && (
         <button onClick={handleDelete} className="text-red-500">
           <FaTrashAlt />
         </button>
@@ -74,18 +77,36 @@ const Users = () => {
 
   // Date cell renderer
   function DateCell({ value }) {
-    // Display date in a readable format
     return <span>{new Date(value).toLocaleDateString()}</span>;
   }
+
+  // Filter data based on search input
+  const handleSearch = (e) => {
+    const inputValue = e.target.value.toLowerCase();
+    setSearchInput(inputValue);
+    const filteredResults = data.filter(
+      (user) => user.name.toLowerCase().includes(inputValue)
+    );
+    setFilteredData(filteredResults);
+  };
 
   // Fetch data on component mount
   useEffect(() => {
     fetchData();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []); 
 
   return (
     <div className="container mx-auto">
       <h2 className="text-2xl font-bold mb-4 text-dark">Users Component</h2>
+
+      {/* Search Bar */}
+      <input
+        type="text"
+        placeholder="Search by name"
+        value={searchInput}
+        onChange={handleSearch}
+        className="p-2 mb-4 border rounded-md"
+      />
 
       {/* Table */}
       <table {...getTableProps()} className="min-w-full table-auto border">

@@ -16,9 +16,11 @@ import PhotoGallery from "./pages/PhotoGallery";
 import Register from "./pages/Register";
 import { Link } from "react-router-dom";
 import Admin from "./admin/Admin";
+import LoadingBar from "react-top-loading-bar";
 
 function App() {
   const auth = useAuth();
+  const loadingBarRef = React.useRef(null);
   const navigate = useNavigate();
   const handleClick = () => {
     if (auth.user) {
@@ -29,6 +31,7 @@ function App() {
   };
   return (
     <div>
+      <LoadingBar ref={loadingBarRef} color="#3498db" />
       {/* Login/Logout Button */}
       <div className="activityButtons z-10 fixed top-4 right-4 flex flex-col gap-1 items-center justify-center">
         <div
