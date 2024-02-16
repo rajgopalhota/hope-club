@@ -4,7 +4,7 @@ import Cookies from "universal-cookie";
 const cookies = new Cookies();
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:5000", // Replace with your actual API base URL
+  baseURL: "", // Replace with your actual API base URL
   headers: {
     "Content-Type": "application/json",
     Accept: "application/json",
