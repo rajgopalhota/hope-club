@@ -25,6 +25,7 @@ const Activities = () => {
       setOtherActivities(response.data.otherActivities);
       setLoading(false);
     } catch (error) {
+      setLoading(false);
       console.error("Error fetching activities:", error);
     }
   };
@@ -36,6 +37,7 @@ const Activities = () => {
       setOtherActivities(response.data.otherActivities);
       setLoading(false);
     } catch (error) {
+      setLoading(false);
       console.error("Error fetching activities:", error);
     }
   };
@@ -46,6 +48,7 @@ const Activities = () => {
       setPaymentHistory(response.data.reverse());
       setLoading(false);
     } catch (error) {
+      setLoading(false);
       console.error("Error fetching activities:", error);
     }
   };
@@ -57,6 +60,7 @@ const Activities = () => {
       setLoading(false);
       toast.success(response.data.message);
     } catch (error) {
+      setLoading(false);
       console.error("Error fetching activities:", error);
     }
   };
@@ -68,6 +72,7 @@ const Activities = () => {
       setLoading(false);
       toast.success(response.data.message);
     } catch (error) {
+      setLoading(false);
       console.error("Error fetching activities:", error);
     }
   };

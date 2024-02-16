@@ -205,6 +205,7 @@ const PaymentStatus = () => {
 
         setLoading(false);
       } catch (error) {
+        setLoading(false);
         console.error("Error verifying/unverifying payment:", error.message);
       }
     }

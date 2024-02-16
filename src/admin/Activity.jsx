@@ -28,6 +28,7 @@ const Activity = () => {
       setFilteredData(response.data);
       setLoading(false);
     } catch (error) {
+      setLoading(false);
       console.error("Error fetching data:", error.message);
     }
   };
@@ -82,6 +83,7 @@ const Activity = () => {
           fetchData();
           setLoading(false);
         } catch (error) {
+          setLoading(false);
           console.error("Error deleting activity:", error.message);
         }
       }

@@ -24,6 +24,7 @@ const Contacts = () => {
       setMessages(response.data);
       setLoading(false)
     } catch (error) {
+      setLoading(false);
       console.error("Error fetching data:", error.message);
     }
   };
@@ -54,6 +55,7 @@ const Contacts = () => {
           setLoading(false);
           toast.info("Message Deleted");
         } catch (error) {
+          setLoading(false);
           console.error("Error deleting message:", error.message);
         }
       }

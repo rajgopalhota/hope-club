@@ -32,6 +32,7 @@ const Users = () => {
       setFilteredData(filteredUsers);
       setLoading(false);
     } catch (error) {
+      setLoading(false);
       console.error("Error fetching data:", error.message);
     }
   };
@@ -67,6 +68,7 @@ const Users = () => {
           fetchData();
           setLoading(false);
         } catch (error) {
+          setLoading(false);
           console.error("Error deleting user:", error.message);
         }
       }

@@ -33,6 +33,7 @@ const Engagement = () => {
       setData(userData);
       setLoading(false);
     } catch (error) {
+      setLoading(false);
       console.error("Error fetching data:", error.message);
     }
   };

@@ -45,9 +45,9 @@ export default function Contact() {
       console.log("Message submitted successfully");
     } catch (error) {
       // Handle error, e.g., show an error message
+      setLoading(false);
       toast.error("Server error")
       console.error("Error submitting message:", error.message);
-      setLoading(false);
     }
   };
 
