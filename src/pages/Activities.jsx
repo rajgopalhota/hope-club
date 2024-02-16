@@ -1,11 +1,12 @@
-// src/components/Activities.jsx
 import React, { useState, useEffect } from "react";
 import { useAuth } from "../AuthContext";
 import axios from "../axiosInstance";
 import AddActivityForm from "./AddActivity";
 import { toast } from "react-toastify";
-import { FiShoppingCart } from "react-icons/fi";
 import { Link } from "react-router-dom";
+import Loading from "./Loading";
+import { BiPurchaseTag, BiBasket } from "react-icons/bi";
+import { BsCheckCircle, BsXCircle } from "react-icons/bs";
 
 const Activities = () => {
   const auth = useAuth();
@@ -14,37 +15,46 @@ const Activities = () => {
   const [otherActivities, setOtherActivities] = useState([]);
   const [paymentHistory, setPaymentHistory] = useState([]);
 
+  const [loading, setLoading] = useState(false);
+
   const fetchActivitiesNonLogin = async () => {
     try {
+      setLoading(true);
       const response = await axios.get("/hope/get-all");
       setUserActivities(response.data.userActivities);
       setOtherActivities(response.data.otherActivities);
+      setLoading(false);
     } catch (error) {
       console.error("Error fetching activities:", error);
     }
   };
   const fetchActivities = async () => {
     try {
+      setLoading(true);
       const response = await axios.get("/hope/activities");
       setUserActivities(response.data.userActivities);
       setOtherActivities(response.data.otherActivities);
+      setLoading(false);
     } catch (error) {
       console.error("Error fetching activities:", error);
     }
   };
   const fetchPayments = async () => {
     try {
+      setLoading(true);
       const response = await axios.get("/pay/history");
-      console.log(response.data);
-      setPaymentHistory(response.data);
+      setPaymentHistory(response.data.reverse());
+      setLoading(false);
     } catch (error) {
       console.error("Error fetching activities:", error);
     }
   };
   const handleAddition = async (aid) => {
     try {
+      setLoading(true);
       const response = await axios.post(`/hope/activities/register/${aid}`);
       fetchActivities();
+      setLoading(false);
       toast.success(response.data.message);
     } catch (error) {
       console.error("Error fetching activities:", error);
@@ -52,8 +62,10 @@ const Activities = () => {
   };
   const handleDeletion = async (aid) => {
     try {
+      setLoading(true);
       const response = await axios.post(`/hope/activities/unregister/${aid}`);
       fetchActivities();
+      setLoading(false);
       toast.success(response.data.message);
     } catch (error) {
       console.error("Error fetching activities:", error);
@@ -72,126 +84,109 @@ const Activities = () => {
 
   return (
     <div className="activity container mx-auto p-8">
-      <h2 className="text-3xl font-bold mb-4">Our Activities</h2>
-      <AddActivityForm />
+      {loading && <Loading />}
+      <h2 className="text-3xl font-bold mb-4 flex items-center">
+        <BiPurchaseTag className="mr-2 text-purple-600" />
+        Club Activities
+      </h2>
+      <AddActivityForm fetchActivities={fetchActivities} />
       {paymentHistory.length !== 0 && (
         <>
-        <div className="mb-8">
-          <h3 className="text-2xl font-bold mb-2 text-blue-500">
-            Payment History
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {paymentHistory.map((payment) => (
-              <div
-                key={payment._id}
-                className={`max-w-[1/2] neumorphic-container bg-gradient-to-br from-blue-100 via-cyan-10 to-teal-100 p-4 rounded-md shadow-md transform hover:scale-105 transition-transform border-2`}
-              >
-                {/* Verification Icon */}
-                {payment.paymentVerified ? (
-                  <div className="mb-2 text-green-500">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      className="h-6 w-6 inline-block mr-2"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M5 13l4 4L19 7"
-                      />
-                    </svg>
-                    Verified
+          <div className="mb-8">
+            <h3 className="text-2xl font-bold mb-2 flex items-center text-blue-500">
+              <BsCheckCircle className="mr-2 text-green-600" />
+              Payment History
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {paymentHistory.map((payment) => (
+                <div
+                  key={payment._id}
+                  className={`max-w-[1/2] neumorphic-container bg-gradient-to-br from-blue-100 via-cyan-10 to-teal-100 p-4 rounded-md shadow-md transform hover:scale-105 transition-transform border-2`}
+                >
+                  {/* Verification Icon */}
+                  {payment.paymentVerified ? (
+                    <div className="mb-2 text-green-500">
+                      <BsCheckCircle className="h-6 w-6 inline-block mr-2" />
+                      Verified
+                    </div>
+                  ) : (
+                    <div className="mb-2 text-red-500">
+                      <BsXCircle className="h-6 w-6 inline-block mr-2" />
+                      Unverified
+                    </div>
+                  )}
+
+                  {/* Payment Details */}
+                  <div className="mb-4">
+                    <p className="text-blue-900">
+                      <span className="font-bold">Activities:</span>{" "}
+                      {payment.activities
+                        .map((activity) => activity.name)
+                        .join(", ")}
+                    </p>
                   </div>
-                ) : (
-                  <div className="mb-2 text-red-500">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      className="h-6 w-6 inline-block mr-2"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M6 18L18 6M6 6l12 12"
-                      />
-                    </svg>
-                    Unverified
+                  <div className="mb-4">
+                    <p className="text-red-900">
+                      <span className="font-bold">Prices:</span>{" "}
+                      {payment.activities
+                        .map((activity) => `₹${activity.price}`)
+                        .join(", ")}
+                    </p>
                   </div>
-                )}
-      
-                {/* Payment Details */}
-                <div className="mb-4">
-                  <p className="text-blue-900">
-                    <span className="font-bold">Activities:</span>{" "}
-                    {payment.activities
-                      .map((activity) => activity.name)
-                      .join(", ")}
-                  </p>
+                  <div className="mb-4">
+                    <p className="text-red-900">
+                      <span className="font-bold">Verified By:</span>{" "}
+                      {payment.paymentVerifiedBy
+                        ? payment.paymentVerifiedBy.name
+                        : "Not Verified"}
+                    </p>
+                  </div>
+                  <div className="mb-4">
+                    <p className="text-zinc-900">
+                      <span className="font-bold">Timestamp:</span>{" "}
+                      {new Date(payment.timestamp).toLocaleString()}
+                    </p>
+                  </div>
                 </div>
-                <div className="mb-4">
-                  <p className="text-red-900">
-                    <span className="font-bold">Prices:</span>{" "}
-                    {payment.activities
-                      .map((activity) => `₹${activity.price}`)
-                      .join(", ")}
-                  </p>
-                </div>
-                <div className="mb-4">
-                  <p className="text-red-900">
-                    <span className="font-bold">Verified By:</span>{" "}
-                    {payment.paymentVerifiedBy
-                      ? payment.paymentVerifiedBy.name
-                      : "Not Verified"}
-                  </p>
-                </div>
-                <div className="mb-4">
-                  <p className="text-zinc-900">
-                    <span className="font-bold">Timestamp:</span>{" "}
-                    {new Date(payment.timestamp).toLocaleString()}
-                  </p>
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
-      
-        {/* Total Price */}
-        <div className="text-xl font-bold mb-4">
-          Total Price: &#8377;{" "}
-          {paymentHistory.reduce(
-            (total, payment) =>
-              total +
-              payment.activities.reduce(
-                (acc, activity) => acc + activity.price,
-                0
-              ),
-            0
-          )}
-        </div>
-      
-        {/* Stylish HR */}
-        <hr className="border-t-2 border-blue-500 my-8" />
-      </>
-      
+
+          {/* Total Price */}
+          <div className="text-xl font-bold mb-4">
+            Total Price: &#8377;{" "}
+            {paymentHistory.reduce(
+              (total, payment) =>
+                total +
+                payment.activities.reduce(
+                  (acc, activity) => acc + activity.price,
+                  0
+                ),
+              0
+            )}
+          </div>
+
+          {/* Stylish HR */}
+          <hr className="border-t-2 border-blue-500 my-8" />
+        </>
       )}
       {/* Registered Activities Section */}
       {userActivities.length !== 0 && (
         <>
           <div className="mb-8">
-            <h3 className="text-2xl font-bold mb-2 text-purple-500">
-              {auth.user && <>Registered Activities of {auth.user.name}</>}
+            <h3 className="text-2xl font-bold mb-2 flex items-center text-purple-500">
+              {auth.user && (
+                <>
+                  <BsCheckCircle className="mr-2 text-green-600" />
+                  Registered Activities of {auth.user.name}
+                </>
+              )}
             </h3>
             <Link
               to="/pay-for-activities"
               className="glow-border lg:w-1/4 flex items-center bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none mb-6 mt-4 mx-auto"
             >
-              <FiShoppingCart className="mr-2" />
+              <BiBasket className="mr-2" />
               <span className="text-center mx-auto">Checkout Items</span>
             </Link>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -248,7 +243,8 @@ const Activities = () => {
 
       {/* More Activities Section */}
       <div>
-        <h3 className="text-2xl font-bold mb-2 text-teal-500">
+        <h3 className="text-2xl font-bold mb-2 flex items-center text-teal-500">
+          <BiBasket className="mr-2 text-blue-600" />
           More Activities
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -266,7 +262,8 @@ const Activities = () => {
                 />
                 <div className="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center text-white text-center">
                   <h3 className="act-name text-xl font-bold">
-                    <span className="text-cyan-500">More</span> {activity.name}
+                    <span className="text-cyan-500">More</span>{" "}
+                    {activity.name}
                   </h3>
                 </div>
               </div>

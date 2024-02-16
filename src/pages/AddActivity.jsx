@@ -10,8 +10,9 @@ import {
   FaDollarSign,
   FaCalendarAlt,
 } from "react-icons/fa";
+import Loading from "./Loading";
 
-const AddActivityForm = () => {
+const AddActivityForm = (props) => {
   const auth = useAuth();
   const [activityData, setActivityData] = useState({
     name: "",
@@ -71,6 +72,7 @@ const AddActivityForm = () => {
       console.error("Error adding activity:", error);
       toast.error(error.response?.data?.message || "An error occurred");
     } finally {
+      props.fetchActivities();
       setIsLoading(false);
       if (loadingBarRef.current) {
         loadingBarRef.current.complete();
@@ -80,6 +82,7 @@ const AddActivityForm = () => {
 
   return (
     <>
+      {isLoading && <Loading />}
       {auth.user &&
         (auth.user.role == "Admin" || auth.user.role == "Manager") && (
           <div className="w-full mx-auto mt-8 mb-10 neumorphic-container">

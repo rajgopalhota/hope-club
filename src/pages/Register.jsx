@@ -8,12 +8,14 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "./../axiosInstance";
+import Loading from "./Loading";
 
 export default function Register() {
   useEffect(() => {
     // Scroll to the top when the component mounts
     window.scrollTo(0, 0);
   }, []);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
@@ -36,25 +38,27 @@ export default function Register() {
     e.preventDefault();
 
     try {
-      const response = await axios.post(
-        "/api/users/register",
-        formData
-      );
+      setLoading(true);
+      const response = await axios.post("/api/users/register", formData);
+      setLoading(false);
       toast(response.data.message);
-      navigate("/login")
+      navigate("/login");
+      
     } catch (error) {
       toast.error(error.response.data.message);
+      setLoading(false);
     }
   };
 
   return (
     <div>
+      {loading && <Loading />}
       <section className="registration">
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
           <div className="lg:w-1/2 bg-white bg-opacity-65 rounded-lg shadow dark:border md:mt-0 xl:p-0 dark:border-gray-700">
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                Create an account
+                Hope Club - On Boarding
               </h1>
               <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -73,7 +77,7 @@ export default function Register() {
                       value={formData.name}
                       onChange={handleChange}
                       className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                      placeholder="RAJ GOPAL"
+                      placeholder="Enter your name"
                       required
                     />
                   </div>
@@ -130,7 +134,7 @@ export default function Register() {
                     id="password"
                     value={formData.password}
                     onChange={handleChange}
-                    placeholder="••••••••"
+                    placeholder="Enter password"
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     required
                   />
@@ -149,7 +153,7 @@ export default function Register() {
                     id="confirmPassword"
                     value={formData.confirmPassword}
                     onChange={handleChange}
-                    placeholder="••••••••"
+                    placeholder="Confirm password"
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     required
                   />

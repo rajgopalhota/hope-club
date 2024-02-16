@@ -1,10 +1,13 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useTable, useSortBy } from "react-table";
 import { FaCheckCircle } from "react-icons/fa";
 import axiosInstance from "../axiosInstance";
+import Loading from "../pages/Loading";
 
 const Engagement = () => {
   // Define columns for the table
+  const [loading, setLoading] = useState(true);
+
   const columns = [
     { Header: "Name", accessor: "name" },
     { Header: "Email", accessor: "email" },
@@ -21,12 +24,14 @@ const Engagement = () => {
   // Fetch data from the API
   const fetchData = async () => {
     try {
+      setLoading(true);
       const response = await axiosInstance.get("/hope/users-activities");
       const userData = response.data.map((user) => ({
         ...user,
         totalPrice: calculateTotalPrice(user.registeredActivities),
       }));
       setData(userData);
+      setLoading(false);
     } catch (error) {
       console.error("Error fetching data:", error.message);
     }
@@ -44,13 +49,8 @@ const Engagement = () => {
   const memoizedColumns = useMemo(() => columns, []);
 
   // Use react-table hooks to create the table instance
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    rows,
-    prepareRow,
-  } = useTable({ columns: memoizedColumns, data }, useSortBy);
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
+    useTable({ columns: memoizedColumns, data }, useSortBy);
 
   // Custom cell renderer for displaying registered activities
   function RegisteredActivitiesCell({ value }) {
@@ -68,7 +68,7 @@ const Engagement = () => {
 
   // Custom cell renderer for displaying total price
   function TotalPriceCell({ value }) {
-    return <span>&#8377;{" "}{value}</span>;
+    return <span>&#8377; {value}</span>;
   }
 
   // Fetch data on component mount
@@ -78,7 +78,11 @@ const Engagement = () => {
 
   return (
     <div className="container mx-auto">
-      <h2 className="text-2xl font-bold mb-4 text-dark">Engagement Component</h2>
+      {loading && <Loading />}
+
+      <h2 className="text-2xl font-bold mb-4 text-dark">
+        Engagement Component
+      </h2>
 
       {/* Table */}
       <table {...getTableProps()} className="min-w-full table-auto border">
@@ -91,15 +95,7 @@ const Engagement = () => {
                   className={"p-4 text-left border-b"}
                 >
                   {column.render("Header")}
-                  {column.isSorted ? (
-                    column.isSortedDesc ? (
-                      " 🔽"
-                    ) : (
-                      " 🔼"
-                    )
-                  ) : (
-                    ""
-                  )}
+                  {column.isSorted ? (column.isSortedDesc ? " 🔽" : " 🔼") : ""}
                 </th>
               ))}
             </tr>
@@ -111,7 +107,9 @@ const Engagement = () => {
             return (
               <tr
                 {...row.getRowProps()}
-                className={`${rowIndex % 2 === 0 ? "bg-gray-200" : "bg-gray-100"} border-b`}
+                className={`${
+                  rowIndex % 2 === 0 ? "bg-gray-200" : "bg-gray-100"
+                } border-b`}
               >
                 {row.cells.map((cell) => (
                   <td {...cell.getCellProps()} className="p-4">

@@ -3,8 +3,12 @@ import Cookies from "universal-cookie";
 
 const cookies = new Cookies();
 
+// Get the current base URL dynamically
+// const baseURL = "https://hope-server-tau.vercel.app/";
+const baseURL = window.location.origin;
+
 const axiosInstance = axios.create({
-  baseURL: "", // Replace with your actual API base URL
+  baseURL: baseURL, // Replace with your actual API base URL
   headers: {
     "Content-Type": "application/json",
     Accept: "application/json",

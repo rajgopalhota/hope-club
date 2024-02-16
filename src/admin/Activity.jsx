@@ -5,8 +5,10 @@ import axiosInstance from "../axiosInstance";
 import AddActivity from "../pages/AddActivity";
 import { toast } from "react-toastify";
 import { useAuth } from "../AuthContext";
+import Loading from "../pages/Loading";
 
 const Activity = () => {
+  const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const [searchInput, setSearchInput] = useState("");
   const [filteredData, setFilteredData] = useState([]);
@@ -20,9 +22,11 @@ const Activity = () => {
 
   const fetchData = async () => {
     try {
+      setLoading(true);
       const response = await axiosInstance.get("/hope/activities/all");
       setData(response.data);
       setFilteredData(response.data);
+      setLoading(false);
     } catch (error) {
       console.error("Error fetching data:", error.message);
     }
@@ -72,9 +76,11 @@ const Activity = () => {
       );
       if (shouldDelete) {
         try {
+          setLoading(true);
           await axiosInstance.delete(`/hope/activities/${row.original._id}`);
           toast.info("Activity Deleted");
           fetchData();
+          setLoading(false);
         } catch (error) {
           console.error("Error deleting activity:", error.message);
         }
@@ -100,6 +106,7 @@ const Activity = () => {
 
   return (
     <div className="container mx-auto">
+      {loading && <Loading/>}
       <h2 className="text-2xl font-bold mb-4 text-dark">Activity Component</h2>
 
       {/* Button to toggle AddActivity component */}
@@ -123,7 +130,7 @@ const Activity = () => {
         >
           Close
         </button>
-        <AddActivity />
+        <AddActivity fetchActivities = {fetchData} />
       </div>
 
       {/* Search Bar */}

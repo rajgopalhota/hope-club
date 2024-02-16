@@ -1,5 +1,5 @@
 import React from "react";
-import { FaSignOutAlt, FaSignInAlt, FaUserShield } from "react-icons/fa";
+import { FaSignOutAlt, FaUserShield,FaLock } from "react-icons/fa";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -24,7 +24,8 @@ function App() {
   const navigate = useNavigate();
   const handleClick = () => {
     if (auth.user) {
-      auth.logout();
+      window.confirm("Are you sure you want to logout?") && auth.logout().then(window.location.reload());
+      ;
     } else {
       navigate("/login");
     }
@@ -47,17 +48,10 @@ function App() {
             transition: "color 0.3s, background-color 0.3s", // Smooth transition on hover
           }}
         >
-          <span
-            className={`${
-              auth.user ? "text-red-500" : "text-blue-500"
-            } text-sm font-semibold ml-2`}
-          >
-            {auth.user ? "Logout" : "Login"}
-          </span>
           {auth.user ? (
-            <FaSignOutAlt className="text-xl ml-2" />
+            <FaSignOutAlt className="text-xl" />
           ) : (
-            <FaSignInAlt className="text-xl ml-2" />
+            <FaLock className="text-xl" />
           )}
         </div>
         {auth.user &&
@@ -71,15 +65,12 @@ function App() {
                 transition: "color 0.3s, background-color 0.3s", // Smooth transition on hover
               }}
             >
-              <span className="text-purple-500 text-sm font-semibold ml-2">
-                {auth.user.role}
-              </span>
-              <FaUserShield className="text-xl ml-2 text-purple-500" />
+              <FaUserShield className="text-xl text-purple-500" />
             </Link>
           )}
       </div>
       {/* Your main content goes here */}
-      <section className="mainContent pb-16">
+      <section className="mainContent pb-10">
         <ToastContainer />
         <Routes>
           <Route path="/" element={<Home />} />

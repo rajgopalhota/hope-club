@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useAuth } from "../AuthContext";
 import axios from "../axiosInstance";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineMinusCircle } from "react-icons/ai";
 import { FaArrowLeft, FaCreditCard } from "react-icons/fa";
 import { toast } from "react-toastify";
 import empty from "./../assets/empty.gif";
+import Loading from "./Loading";
 
 const PayForActivity = () => {
   useEffect(() => {
@@ -14,12 +15,17 @@ const PayForActivity = () => {
   }, []);
   const auth = useAuth();
   const [userActivities, setUserActivities] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const fetchActivities = async () => {
     try {
+      setLoading(true);
       const response = await axios.get("/hope/activities");
       setUserActivities(response.data.userActivities);
+      setLoading(false);
     } catch (error) {
+      setLoading(false);
       console.error("Error fetching activities:", error);
     }
   };
@@ -30,16 +36,26 @@ const PayForActivity = () => {
 
   const deleteItem = async (aid) => {
     try {
+      setLoading(true);
       const response = await axios.post(`/hope/activities/unregister/${aid}`);
       fetchActivities();
       toast.success(response.data.message);
     } catch (error) {
+      setLoading(false);
       console.error("Error fetching activities:", error);
     }
   };
 
   const handlePayment = async () => {
+    const confirm = window.confirm(
+      `Are you sure you want to pay amount of Rs. ${userActivities.reduce(
+        (total, activity) => total + activity.price,
+        0
+      )}`
+    );
+    if (!confirm) return;
     try {
+      setLoading(true);
       // Send a request to the backend to store payment data
       const response = await axios.post("/pay/create", {
         activities: userActivities.map((activity) => activity._id),
@@ -48,20 +64,20 @@ const PayForActivity = () => {
       // Display success message
       toast.success(response.data.message);
 
-      // Clear userActivities after successful payment
+      navigate("/activities");
       setUserActivities([]);
-
-      // Redirect to activities page or any other desired route
-      // Example: history.push("/activities");
     } catch (error) {
       console.error("Error making payment:", error);
       toast.error("Error making payment. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <>
-      {userActivities.length === 0 && (
+      {loading && <Loading />}
+      {userActivities.length === 0 && !loading && (
         <div className="empty flex w-screen justify-center mt-10">
           <img src={empty} alt="empty" />
         </div>

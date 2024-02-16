@@ -1,10 +1,12 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useTable, useSortBy } from "react-table";
 import { FaTrashAlt } from "react-icons/fa";
 import axiosInstance from "../axiosInstance";
 import { toast } from "react-toastify";
+import Loading from "../pages/Loading";
 
 const Contacts = () => {
+  const [loading, setLoading] = useState(true);
   // Define columns for the table
   const columns = [
     { Header: "Name", accessor: "name" },
@@ -17,8 +19,10 @@ const Contacts = () => {
   // Fetch data from the API
   const fetchData = async () => {
     try {
+      setLoading(true)
       const response = await axiosInstance.get("/api/messages/all");
       setMessages(response.data);
+      setLoading(false)
     } catch (error) {
       console.error("Error fetching data:", error.message);
     }
@@ -43,9 +47,11 @@ const Contacts = () => {
       if (shouldDelete) {
         try {
           // Make API call to delete message
+          setLoading(true);
           await axiosInstance.delete(`/api/messages/${row.original._id}`);
           // Refetch data after deletion
           fetchData();
+          setLoading(false);
           toast.info("Message Deleted");
         } catch (error) {
           console.error("Error deleting message:", error.message);
@@ -73,6 +79,7 @@ const Contacts = () => {
 
   return (
     <div className="container mx-auto">
+      {loading && <Loading/>}
       <h2 className="text-2xl font-bold mb-4 text-dark">Messages Component</h2>
 
       {/* Table */}

@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useAuth } from "./../AuthContext";
-import axios from "axios";
+import axios from "./../axiosInstance";
 import { toast } from "react-toastify";
+import Loading from "./Loading";
 
 export default function Contact() {
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     // Scroll to the top when the component mounts
     window.scrollTo(0, 0);
@@ -27,8 +29,9 @@ export default function Contact() {
     e.preventDefault();
 
     try {
+      setLoading(true);
       // Send a POST request to submit the message
-      await axios.post("http://localhost:5000/api/messages/submit", formData);
+      await axios.post("/api/messages/submit", formData);
 
       // Clear the form after successful submission
       toast.success("Message Sent")
@@ -37,18 +40,20 @@ export default function Contact() {
         email: auth.user ? auth.user.email : "",
         message: "",
       });
-
+      setLoading(false);
       // Optionally, you can show a success message or redirect the user
       console.log("Message submitted successfully");
     } catch (error) {
       // Handle error, e.g., show an error message
       toast.error("Server error")
       console.error("Error submitting message:", error.message);
+      setLoading(false);
     }
   };
 
   return (
     <div className="contactUs">
+      {loading && <Loading/>}
       <div className="flex justify-center items-center ">
         <svg
           className="hidden lg:inline-block"

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@600&display=swap");
 
 ::-webkit-scrollbar {
   display: none;
@@ -14,7 +14,7 @@
   padding: 0;
 }
 :root {
-  font-family: 'Noto Sans', sans-serif;
+  font-family: "Noto Sans", sans-serif;
 }
 body {
   overflow-x: hidden;
@@ -50,11 +50,11 @@ nav a:hover,
 .active {
   box-shadow: 0 5px 30px rgba(185, 185, 245, 0.8);
 }
-.adminroute .active svg{
+.adminroute .active svg {
   transition: all ease-in-out 0.2s;
-  margin-left: 20px ;
+  margin-left: 20px;
 }
-.adminroute .active{
+.adminroute .active {
   transition: all ease-in-out 0.2s;
   outline: 2px solid rgb(177, 177, 177);
   background-color: rgba(28, 0, 88, 0.7);
@@ -189,7 +189,6 @@ p {
   border: 1px solid rgb(99, 99, 99);
 }
 .about-img-cont {
-  background-image: linear-gradient(45deg, cyan, purple, red, orange);
   max-width: 100px;
   padding: 4px;
 }
@@ -205,4 +204,84 @@ p {
 }
 .mainContent {
   z-index: 2 !important;
+}
+.loader {
+  position: relative;
+  width: 200px;
+  height: 200px;
+}
+
+.loader:before,
+.loader:after {
+  content: "";
+  border-radius: 50%;
+  position: absolute;
+  inset: 0;
+  box-shadow: 0 0 20px 6px rgba(0, 0, 0, 0.5) inset;
+}
+.loader:after {
+  box-shadow: 0 7px 0 rgb(79, 56, 255) inset;
+  animation: rotate 2s linear infinite;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loadingOnAction {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  z-index: 999 !important;
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(12px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+}
+.loadingOnAction p {
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 2px 15px;
+  border: 1px solid rgb(79, 56, 255);
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.7);
+  border-radius: 12px;
+}
+
+.slide-fwd-center {
+  -webkit-animation: slide-fwd-center 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+    both;
+  animation: slide-fwd-center 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+@-webkit-keyframes slide-fwd-center {
+  0% {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+  100% {
+    -webkit-transform: translateZ(160px);
+    transform: translateZ(160px);
+  }
+}
+@keyframes slide-fwd-center {
+  0% {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+  100% {
+    -webkit-transform: translateZ(160px);
+    transform: translateZ(160px);
+  }
+}
+.mainHome{
+  overflow-y: hidden !important;
 }

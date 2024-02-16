@@ -13,7 +13,7 @@ export const AuthProvider = ({ children }) => {
       const token = cookies.get("token"); // Correct token key
       console.log(token);
       try {
-        const response = await axios.get('/api/users/user');
+        const response = await axios.get("/api/users/user");
         if (response.data.user) {
           setUser(response.data.user);
         }

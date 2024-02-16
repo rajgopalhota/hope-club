@@ -4,11 +4,13 @@ import { FaTrashAlt } from "react-icons/fa";
 import axiosInstance from "../axiosInstance";
 import { toast } from "react-toastify";
 import { useAuth } from "../AuthContext";
+import Loading from "../pages/Loading";
 
 const Users = () => {
   const auth = useAuth();
   const [searchInput, setSearchInput] = useState("");
   const [filteredData, setFilteredData] = useState([]);
+  const [loading, setLoading] = useState(true);
   
   // Define columns for the table
   const columns = [
@@ -23,10 +25,12 @@ const Users = () => {
   // Fetch data from the API
   const fetchData = async () => {
     try {
+      setLoading(true);
       const response = await axiosInstance.get("api/users/all");
       const filteredUsers = response.data.filter(user => user.role !== "Admin");
       setData(filteredUsers);
       setFilteredData(filteredUsers);
+      setLoading(false);
     } catch (error) {
       console.error("Error fetching data:", error.message);
     }
@@ -57,9 +61,11 @@ const Users = () => {
       );
       if (shouldDelete) {
         try {
+          setLoading(true);
           await axiosInstance.delete(`api/users/del/${row.original._id}`);
           toast.info("User deleted");
           fetchData();
+          setLoading(false);
         } catch (error) {
           console.error("Error deleting user:", error.message);
         }
@@ -98,7 +104,7 @@ const Users = () => {
   return (
     <div className="container mx-auto">
       <h2 className="text-2xl font-bold mb-4 text-dark">Users Component</h2>
-
+      {loading && <Loading/>}
       {/* Search Bar */}
       <input
         type="text"

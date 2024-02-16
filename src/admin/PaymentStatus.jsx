@@ -3,6 +3,7 @@ import axios from "../axiosInstance";
 import { useTable, useSortBy } from "react-table";
 import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
 import Chart from "chart.js/auto";
+import Loading from "../pages/Loading";
 
 const fetchPayments = async () => {
   try {
@@ -21,6 +22,7 @@ const fetchPayments = async () => {
 };
 
 const PaymentStatus = () => {
+  const [loading, setLoading] = useState(true);
   const [payments, setPayments] = useState([]);
   const [searchInput, setSearchInput] = useState("");
   const [filteredPayments, setFilteredPayments] = useState([]);
@@ -29,10 +31,11 @@ const PaymentStatus = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       const paymentsData = await fetchPayments();
       setPayments(paymentsData);
       setFilteredPayments(paymentsData);
-
+      setLoading(false);
       // Calculate total collected and remaining amounts
       const collected = paymentsData
         .filter((payment) => payment.paymentVerified)
@@ -186,42 +189,26 @@ const PaymentStatus = () => {
         payment.paymentVerified ? "unverify" : "verify"
       } this payment?`
     );
-  
+
     if (shouldVerify) {
       try {
+        setLoading(true);
         // Make API call to verify/unverify payment
         await axios.put(`/pay/verify/${payment._id}`, {
           paymentVerified: !payment.paymentVerified,
         });
-  
+
         // Refetch data after verification
         const updatedPayments = await fetchPayments();
         setPayments(updatedPayments);
         setFilteredPayments(updatedPayments);
-  
-        // Recalculate total collected and remaining amounts
-        const collected = updatedPayments
-          .filter((payment) => payment.paymentVerified)
-          .reduce((acc, payment) => acc + payment.totalPrice, 0);
-        const remaining = updatedPayments
-          .filter((payment) => !payment.paymentVerified)
-          .reduce((acc, payment) => acc + payment.totalPrice, 0);
-        setTotalCollected(collected);
-        setTotalRemaining(remaining);
-  
-        // Update pie chart datasets with new values
-        const pieChart = document.getElementById("pie-chart").getContext("2d");
-        pieChart.data.datasets[0].data = [collected, remaining];
-        pieChart.update();
-  
-        // Update activity pie chart with new data
-        renderActivityPieChart(updatedPayments);
+
+        setLoading(false);
       } catch (error) {
         console.error("Error verifying/unverifying payment:", error.message);
       }
     }
   };
-  
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({ columns, data: filteredPayments }, useSortBy);
@@ -231,6 +218,7 @@ const PaymentStatus = () => {
       <h2 className="text-2xl font-bold mb-4 text-blue-500">
         Payment Status Component
       </h2>
+      {loading && <Loading />}
 
       {/* Search Bar */}
       <input
@@ -242,8 +230,8 @@ const PaymentStatus = () => {
       />
 
       {/* Pie Charts */}
-      <div className="flex justify-around mb-8">
-        <div>
+      <div className="flex flex-col md:flex-row justify-around mb-8">
+        <div className="mb-4 md:mb-0">
           <h3 className="text-lg font-semibold">Total Collection</h3>
           <canvas id="pie-chart" width="300" height="300"></canvas>
         </div>

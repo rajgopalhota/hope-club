@@ -55,11 +55,11 @@ const Home = () => {
     window.scrollTo(0, 0);
   }, []);
   return (
-    <div className="home flex flex-col lg:flex-row h-full w-screen overflow-hidden">
+    <div className="home flex flex-col lg:flex-row h-full w-screen">
       {/* First section with logo and quotes */}
       <div className="lg:w-1/2 text-white flex items-center justify-center">
-        <div className="text-center flex flex-col items-center justify-center">
-          <img src={logo} alt="logo" className="w-80" />
+        <div className="text-center flex flex-col items-center justify-center py-10 pb-10">
+          <img src={logo} alt="logo" className="w-80 my-10" />
           <h2 className="text-3xl font-bold mb-2">Welcome to HOPE Club</h2>
           <p className="text-lg">
             Bringing hope to the community through various initiatives.
@@ -74,7 +74,7 @@ const Home = () => {
             key={index}
             className="flex items-center cursor-pointer hover:bg-gray-300 p-4 rounded-md transition-transform scale-100 gap-10"
           >
-            {point.icon}
+            <i className="text-xl">{point.icon}</i>
             <div>
               <h3 className="w-full text-xl text-left font-bold mb-2">
                 {point.title}

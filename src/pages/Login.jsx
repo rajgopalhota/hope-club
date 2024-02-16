@@ -3,12 +3,14 @@ import { useAuth } from "../AuthContext";
 import { toast } from "react-toastify";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "./../axiosInstance";
+import Loading from "./Loading";
 
 const Login = () => {
   useEffect(() => {
     // Scroll to the top when the component mounts
     window.scrollTo(0, 0);
   }, []);
+  const [loading, setLoading] = useState(false);
   const auth = useAuth();
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -19,6 +21,7 @@ const Login = () => {
 
     try {
       // Make a POST request to your server's login endpoint
+      setLoading(true);
       const response = await axios.post(
         "/api/users/login",
         {
@@ -30,18 +33,21 @@ const Login = () => {
       const { token, user } = response.data;
       // Update the auth context with the token
       auth.login(token, user);
+      setLoading(false);
       toast.success("Login successful");
       setEmail("");
       setPassword("");
       navigate("/");
     } catch (error) {
       console.error("Login Error:", error.message);
+      setLoading(false);
       toast.error("Login failed. Please check your credentials.");
     }
   };
 
   return (
     <div>
+      {loading && <Loading />}
       <div className="loginForm m-2 py-6 flex flex-col justify-center sm:py-12">
         {auth.user ? (
           <>
