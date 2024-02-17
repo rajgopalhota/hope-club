@@ -10,15 +10,13 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const token = cookies.get("token"); // Correct token key
-      console.log(token);
+      const token = cookies.get("token");
       try {
         const response = await axios.get("/api/users/user");
         if (response.data.user) {
           setUser(response.data.user);
         }
       } catch (error) {
-        // Handle error, e.g., redirect to login page
         console.error("Error fetching user:", error.message);
       }
     };
@@ -26,19 +24,24 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const login = (token, user) => {
-    console.log(token, user);
     setUser(user);
     cookies.remove("token");
     cookies.set("token", token, {
       path: "/",
       expires: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000),
+      secure: window.location.protocol === "https:", // Ensures HTTPS
+      domain: window.location.hostname.includes("localhost")
+        ? "localhost"
+        : window.location.hostname,
     });
   };
 
   const logout = async () => {
     await cookies.remove("token", {
       path: "/",
-      domain: window.location.hostname,
+      domain: window.location.hostname.includes("localhost")
+        ? "localhost"
+        : window.location.hostname,
     });
     setUser(null);
   };

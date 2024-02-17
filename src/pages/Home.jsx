@@ -4,7 +4,7 @@ import { BiRun } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { FaBook, FaHeart, FaUsers } from "react-icons/fa";
 import { GiHealthNormal } from "react-icons/gi";
-import backVideoHome from "./../assets/backVideoHome.mp4";
+import backVideoHome from "./../assets/vids/backVideo1.mp4";
 import logo from "./../assets/logo.jpg";
 
 const Home = () => {
