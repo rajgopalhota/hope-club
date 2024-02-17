@@ -60,11 +60,11 @@ const Home = () => {
         loop
         muted
         className="absolute inset-0 w-full h-full object-cover z-[-1]"
-        src={backVideoHome} // Replace with your video source
+        src={"https://hope-club.netlify.app/main.mp4"} // Replace with your video source
       />
 
       {/* Logo section */}
-      <div className="lg:w-1/2 bg-zinc-600 bg-opacity-5 flex flex-col justify-center items-center p-10 lg:h-auto h-[200%]">
+      <div className="lg:w-1/2 bg-zinc-600 bg-opacity-5 flex flex-col justify-center items-center p-10 lg:h-auto">
         {/* Add your logo component here */}
         <img src={logo} alt="Logo" className="object-cover lg:w-[50%] w-[100%] mb-4" />
         <p className="text-gray-700 text-xl text-center max-w-md">
@@ -89,7 +89,7 @@ const Home = () => {
         {keyPoints.map((point, index) => (
           <div
             key={index}
-            className="cursor-pointer mb-6 p-4 rounded-lg hover:bg-gray-100 transition duration-300 shadow-md"
+            className="cursor-pointer mb-6 p-4 rounded-lg hover:bg-purple-100 transition duration-300 shadow-md"
           >
             <div className="flex items-center mb-2">
               <i className="text-lg">

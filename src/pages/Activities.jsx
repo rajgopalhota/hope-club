@@ -115,7 +115,7 @@ const Activities = () => {
     ) {
       setLoading(false); // Set loading to false when all API calls are completed
     }
-  }, [fetchDataComplete]);
+  }, [fetchDataComplete, auth.user]);
 
   return (
     <div className="activity container mx-auto p-8">
