@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import { useAuth } from "./../AuthContext";
 import axios from "./../axiosInstance";
-import { toast } from "react-toastify";
 import Loading from "./Loading";
 
 export default function Contact() {

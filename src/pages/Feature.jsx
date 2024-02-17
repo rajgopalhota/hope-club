@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import { FaFeatherPointed } from "react-icons/fa6";
 
 const featureData = [

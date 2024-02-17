@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
-  AiOutlineMail,
   AiOutlineLock,
-  AiOutlineUser,
+  AiOutlineMail,
   AiOutlinePhone,
+  AiOutlineUser,
 } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";

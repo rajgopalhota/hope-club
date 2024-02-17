@@ -1,15 +1,15 @@
-import React, { useState, useRef } from "react";
-import axios from "../axiosInstance";
-import { useAuth } from "../AuthContext";
-import { toast } from "react-toastify";
-import { IoMdAddCircle } from "react-icons/io";
+import React, { useRef, useState } from "react";
 import {
-  FaUser,
-  FaInfo,
-  FaImage,
-  FaDollarSign,
   FaCalendarAlt,
+  FaDollarSign,
+  FaImage,
+  FaInfo,
+  FaUser,
 } from "react-icons/fa";
+import { IoMdAddCircle } from "react-icons/io";
+import { toast } from "react-toastify";
+import { useAuth } from "../AuthContext";
+import axios from "../axiosInstance";
 import Loading from "./Loading";
 
 const AddActivityForm = (props) => {

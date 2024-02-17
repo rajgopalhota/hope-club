@@ -1,9 +1,9 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { useTable, useSortBy } from "react-table";
 import { FaTrashAlt } from "react-icons/fa";
-import axiosInstance from "../axiosInstance";
+import { useSortBy, useTable } from "react-table";
 import { toast } from "react-toastify";
 import { useAuth } from "../AuthContext";
+import axiosInstance from "../axiosInstance";
 import Loading from "../pages/Loading";
 
 const Users = () => {

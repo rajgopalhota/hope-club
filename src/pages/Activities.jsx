@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { BiBasket, BiPurchaseTag } from "react-icons/bi";
+import { BsCheckCircle, BsXCircle } from "react-icons/bs";
+import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 import { useAuth } from "../AuthContext";
 import axios from "../axiosInstance";
 import AddActivityForm from "./AddActivity";
-import { toast } from "react-toastify";
-import { Link } from "react-router-dom";
 import Loading from "./Loading";
-import { BiPurchaseTag, BiBasket } from "react-icons/bi";
-import { BsCheckCircle, BsXCircle } from "react-icons/bs";
 
 const Activities = () => {
   const auth = useAuth();
@@ -15,55 +15,71 @@ const Activities = () => {
   const [otherActivities, setOtherActivities] = useState([]);
   const [paymentHistory, setPaymentHistory] = useState([]);
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true); // Set initial loading state to true
+  const [fetchDataComplete, setFetchDataComplete] = useState({
+    userActivities: false,
+    otherActivities: false,
+    paymentHistory: false,
+  });
 
   const fetchActivitiesNonLogin = async () => {
     try {
-      setLoading(true);
       const response = await axios.get("/hope/get-all");
       setUserActivities(response.data.userActivities);
       setOtherActivities(response.data.otherActivities);
-      setLoading(false);
+      setFetchDataComplete((prev) => ({
+        ...prev,
+        userActivities: true,
+        otherActivities: true,
+      }));
     } catch (error) {
-      setLoading(false);
       console.error("Error fetching activities:", error);
+    } finally {
+      setLoading(false); // Set loading to false after API call completes
     }
   };
+
   const fetchActivities = async () => {
     try {
-      setLoading(true);
       const response = await axios.get("/hope/activities");
       setUserActivities(response.data.userActivities);
       setOtherActivities(response.data.otherActivities);
-      setLoading(false);
+      setFetchDataComplete((prev) => ({
+        ...prev,
+        userActivities: true,
+        otherActivities: true,
+      }));
     } catch (error) {
-      setLoading(false);
       console.error("Error fetching activities:", error);
     }
   };
+
   const fetchPayments = async () => {
     try {
-      setLoading(true);
       const response = await axios.get("/pay/history");
       setPaymentHistory(response.data.reverse());
-      setLoading(false);
+      setFetchDataComplete((prev) => ({
+        ...prev,
+        paymentHistory: true,
+      }));
     } catch (error) {
-      setLoading(false);
       console.error("Error fetching activities:", error);
     }
   };
+
   const handleAddition = async (aid) => {
     try {
       setLoading(true);
       const response = await axios.post(`/hope/activities/register/${aid}`);
       fetchActivities();
-      setLoading(false);
       toast.success(response.data.message);
+      setLoading(false);
     } catch (error) {
       setLoading(false);
       console.error("Error fetching activities:", error);
     }
   };
+
   const handleDeletion = async (aid) => {
     try {
       setLoading(true);
@@ -82,10 +98,24 @@ const Activities = () => {
   }, []);
 
   useEffect(() => {
-    fetchActivitiesNonLogin();
-    fetchActivities();
-    fetchPayments();
+    if (auth.user) {
+      fetchActivities();
+      fetchPayments();
+    } else {
+      fetchActivitiesNonLogin();
+    }
   }, [auth.user]);
+
+  useEffect(() => {
+    // Check if all API calls are completed
+    if (
+      fetchDataComplete.userActivities &&
+      fetchDataComplete.otherActivities &&
+      fetchDataComplete.paymentHistory
+    ) {
+      setLoading(false); // Set loading to false when all API calls are completed
+    }
+  }, [fetchDataComplete]);
 
   return (
     <div className="activity container mx-auto p-8">
@@ -94,13 +124,14 @@ const Activities = () => {
         <BiPurchaseTag className="mr-2 text-purple-600" />
         Club Activities
       </h2>
+      <hr className="border-t-2 border-blue-500 my-8" />
       <AddActivityForm fetchActivities={fetchActivities} />
       {paymentHistory.length !== 0 && (
         <>
           <div className="mb-8">
             <h3 className="text-2xl font-bold mb-2 flex items-center text-blue-500">
               <BsCheckCircle className="mr-2 text-green-600" />
-              Payment History
+              Payment Passes
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {paymentHistory.map((payment) => (
@@ -187,13 +218,6 @@ const Activities = () => {
                 </>
               )}
             </h3>
-            <Link
-              to="/pay-for-activities"
-              className="glow-border lg:w-1/4 flex items-center bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none mb-6 mt-4 mx-auto"
-            >
-              <BiBasket className="mr-2" />
-              <span className="text-center mx-auto">Checkout Items</span>
-            </Link>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {userActivities.map((activity) => (
                 <div
@@ -240,7 +264,13 @@ const Activities = () => {
               ))}
             </div>
           </div>
-
+          <Link
+            to="/pay-for-activities"
+            className="glow-border lg:w-1/4 flex items-center bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none mb-6 mt-4 mx-auto"
+          >
+            <BiBasket className="mr-2" />
+            <span className="text-center mx-auto">Checkout Items</span>
+          </Link>
           {/* Stylish HR */}
           <hr className="border-t-2 border-purple-500 my-8" />
         </>
@@ -267,8 +297,7 @@ const Activities = () => {
                 />
                 <div className="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center text-white text-center">
                   <h3 className="act-name text-xl font-bold">
-                    <span className="text-cyan-500">More</span>{" "}
-                    {activity.name}
+                    <span className="text-cyan-500">More</span> {activity.name}
                   </h3>
                 </div>
               </div>

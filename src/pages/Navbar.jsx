@@ -1,5 +1,5 @@
 import React from 'react';
-import { AiOutlineHome, AiOutlineBulb, AiOutlineSchedule, AiOutlineContacts, AiOutlineFileImage, AiOutlineInfoCircle } from 'react-icons/ai';
+import { AiOutlineBulb, AiOutlineContacts, AiOutlineFileImage, AiOutlineHome, AiOutlineInfoCircle, AiOutlineSchedule } from 'react-icons/ai';
 import { NavLink } from 'react-router-dom';
 
 const Navbar = () => {

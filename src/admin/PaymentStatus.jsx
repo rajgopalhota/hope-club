@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import axios from "../axiosInstance";
-import { useTable, useSortBy } from "react-table";
-import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
 import Chart from "chart.js/auto";
+import React, { useEffect, useState } from "react";
+import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
+import { useSortBy, useTable } from "react-table";
+import axios from "../axiosInstance";
 import Loading from "../pages/Loading";
 
 const fetchPayments = async () => {

@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
-import { FaUsers, FaBook, FaHeart, FaDumbbell } from "react-icons/fa";
-import { GiHealthNormal } from "react-icons/gi";
-import { BiRun } from "react-icons/bi";
 import { AiOutlineQuestion } from "react-icons/ai";
+import { BiRun } from "react-icons/bi";
+import { Link } from "react-router-dom";
+import { FaBook, FaHeart, FaUsers } from "react-icons/fa";
+import { GiHealthNormal } from "react-icons/gi";
+import backVideoHome from "./../assets/backVideoHome.mp4";
 import logo from "./../assets/logo.jpg";
-import video from "./../assets/bg.mp4";
 
 const Home = () => {
   useEffect(() => {
@@ -59,25 +60,25 @@ const Home = () => {
         loop
         muted
         className="absolute inset-0 w-full h-full object-cover z-[-1]"
-        src={video} // Replace with your video source
+        src={backVideoHome} // Replace with your video source
       />
 
       {/* Logo section */}
-<div className="lg:w-1/2 bg-zinc-600 bg-opacity-5 flex flex-col justify-center items-center p-8">
-  {/* Add your logo component here */}
-  <img src={logo} alt="Logo" className="object-cover w-[50%] mb-4" />
-  <p className="text-gray-700 text-center max-w-md">
-    Connect with us and explore our initiatives for a healthier lifestyle.
-  </p>
-  <div className="mt-4 flex space-x-4">
-    <button className="border border-blue-500 text-blue-500 bg-blue-100 bg-opacity-80 px-6 py-3 rounded-lg hover:bg-blue-500 hover:text-white transition duration-300 shadow-md flex items-center">
-      <FaBook className="w-6 h-6 mr-2" /> Learn More
-    </button>
-    <button className="border border-green-500 text-green-500 bg-green-100 bg-opacity-80 px-6 py-3 rounded-lg hover:bg-green-500 hover:text-white transition duration-300 shadow-md flex items-center">
-      <AiOutlineQuestion className="w-6 h-6 mr-2" /> Contact Us
-    </button>
-  </div>
-</div>
+      <div className="lg:w-1/2 bg-zinc-600 bg-opacity-5 flex flex-col justify-center items-center p-10 lg:h-auto h-[200%]">
+        {/* Add your logo component here */}
+        <img src={logo} alt="Logo" className="object-cover lg:w-[50%] w-[100%] mb-4" />
+        <p className="text-gray-700 text-xl text-center max-w-md">
+          Connect with us and explore our initiatives for a healthier lifestyle.
+        </p>
+        <div className="mt-4 flex space-x-4">
+          <Link to={'/mission-vision'} className="text-sm border border-blue-500 text-blue-500 bg-blue-100 bg-opacity-80 px-6 py-3 rounded-lg hover:bg-blue-500 hover:text-white transition duration-300 shadow-md flex items-center">
+            <FaBook className="w-4 h-4 mr-2" /> Learn More
+          </Link>
+          <Link to={'/contact'} className="text-sm border border-green-500 text-green-500 bg-green-100 bg-opacity-80 px-6 py-3 rounded-lg hover:bg-green-500 hover:text-white transition duration-300 shadow-md flex items-center">
+            <AiOutlineQuestion className="w-4 h-4 mr-2" /> Contact Us
+          </Link>
+        </div>
+      </div>
 
       {/* Key points section */}
       <div className="lg:w-1/2 bg-purple-50 bg-opacity-85 p-8 overflow-y-auto">
@@ -88,10 +89,12 @@ const Home = () => {
         {keyPoints.map((point, index) => (
           <div
             key={index}
-            className="mb-6 p-4 rounded-lg hover:bg-gray-100 transition duration-300 shadow-md"
+            className="cursor-pointer mb-6 p-4 rounded-lg hover:bg-gray-100 transition duration-300 shadow-md"
           >
             <div className="flex items-center mb-2">
+              <i className="text-lg">
               {point.icon}
+              </i>
               <div>
                 <h3 className="text-lg font-semibold">{point.title}</h3>
                 <p className="text-gray-600">{point.description}</p>

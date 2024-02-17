@@ -1,10 +1,10 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { useTable, useSortBy } from "react-table";
 import { FaTrashAlt } from "react-icons/fa";
-import axiosInstance from "../axiosInstance";
-import AddActivity from "../pages/AddActivity";
+import { useSortBy, useTable } from "react-table";
 import { toast } from "react-toastify";
 import { useAuth } from "../AuthContext";
+import axiosInstance from "../axiosInstance";
+import AddActivity from "../pages/AddActivity";
 import Loading from "../pages/Loading";
 
 const Activity = () => {

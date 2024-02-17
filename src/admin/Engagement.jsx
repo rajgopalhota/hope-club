@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { useTable, useSortBy } from "react-table";
 import { FaCheckCircle } from "react-icons/fa";
+import { useSortBy, useTable } from "react-table";
 import axiosInstance from "../axiosInstance";
 import Loading from "../pages/Loading";
 

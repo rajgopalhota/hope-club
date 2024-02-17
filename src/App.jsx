@@ -1,9 +1,13 @@
 import React from "react";
-import { FaSignOutAlt, FaUserShield, FaLock } from "react-icons/fa";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { FaLock, FaSignOutAlt, FaUserShield } from "react-icons/fa";
+import { Link, Route, Routes, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import LoadingBar from "react-top-loading-bar";
+import "slick-carousel/slick/slick-theme.css";
+import "slick-carousel/slick/slick.css";
 import { useAuth } from "./AuthContext";
+import Admin from "./admin/Admin";
 import About from "./pages/About";
 import Activities from "./pages/Activities";
 import Contact from "./pages/Contact";
@@ -14,9 +18,6 @@ import Navbar from "./pages/Navbar";
 import PayForActivity from "./pages/PayForActivity";
 import PhotoGallery from "./pages/PhotoGallery";
 import Register from "./pages/Register";
-import { Link } from "react-router-dom";
-import Admin from "./admin/Admin";
-import LoadingBar from "react-top-loading-bar";
 
 function App() {
   const auth = useAuth();
@@ -70,8 +71,8 @@ function App() {
           )}
       </div>
       {/* Your main content goes here */}
+      <ToastContainer />
       <section className="mainContent pb-10">
-        <ToastContainer />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/activities" element={<Activities />} />

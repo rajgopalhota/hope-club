@@ -1,6 +1,6 @@
 import React from "react";
-import panelImg from "../assets/panel.gif";
 import { useAuth } from "../AuthContext";
+import panelImg from "../assets/panel.gif";
 
 export default function AdminHome() {
   const auth = useAuth();
