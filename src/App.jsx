@@ -1,5 +1,5 @@
 import React from "react";
-import { FaSignOutAlt, FaUserShield,FaLock } from "react-icons/fa";
+import { FaSignOutAlt, FaUserShield, FaLock } from "react-icons/fa";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -24,8 +24,8 @@ function App() {
   const navigate = useNavigate();
   const handleClick = () => {
     if (auth.user) {
-      window.confirm("Are you sure you want to logout?") && auth.logout().then(window.location.reload());
-      ;
+      window.confirm("Are you sure you want to logout?") && auth.logout();
+      navigate("/");
     } else {
       navigate("/login");
     }

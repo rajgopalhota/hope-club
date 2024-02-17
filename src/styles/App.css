@@ -76,7 +76,7 @@ p {
 }
 .home img {
   transition: all ease-in 0.2s;
-  mix-blend-mode: multiply;
+  mix-blend-mode: color-burn;
 }
 .home img:hover {
   transition: all ease-in 0.2s;
