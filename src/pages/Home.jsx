@@ -4,7 +4,7 @@ import { BiRun } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { FaBook, FaHeart, FaUsers } from "react-icons/fa";
 import { GiHealthNormal } from "react-icons/gi";
-import backVideoHome from "./../assets/vids/backVideo1.mp4";
+import bgGif from "./../assets/vids/bg.gif";
 import logo from "./../assets/logo.jpg";
 
 const Home = () => {
@@ -55,18 +55,16 @@ const Home = () => {
   return (
     <div className="home flex flex-col lg:flex-row h-screen w-screen relative overflow-hidden">
       {/* Video background */}
-      <video
-        autoPlay
-        loop
-        muted
+
+      <img
         className="absolute inset-0 w-full h-full object-cover z-[-1]"
-        src={"https://hope-club.netlify.app/main.mp4"} // Replace with your video source
+        src={bgGif} // Replace with your video source
       />
 
       {/* Logo section */}
-      <div className="lg:w-1/2 bg-zinc-600 bg-opacity-5 flex flex-col justify-center items-center p-10 lg:h-auto">
+      <div className="lg:w-1/2 flex flex-col justify-center items-center p-10 lg:h-auto">
         {/* Add your logo component here */}
-        <img src={logo} alt="Logo" className="object-cover lg:w-[50%] w-[100%] mb-4" />
+        <img src={logo} alt="Logo" className="homeIco object-cover lg:w-[50%] w-[100%] mb-4" />
         <p className="text-gray-700 text-xl text-center max-w-md">
           Connect with us and explore our initiatives for a healthier lifestyle.
         </p>

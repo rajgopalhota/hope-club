@@ -74,7 +74,12 @@ h2 {
 p {
   color: gray;
 }
-.home img {
+img{
+  shape-rendering: crispEdges;
+  image-rendering: crisp-edges;
+  image-resolution: 1000px;
+}
+.home .homeIco {
   transition: all ease-in 0.2s;
   mix-blend-mode: color-burn;
 }
