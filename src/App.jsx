@@ -18,6 +18,7 @@ import Navbar from "./pages/Navbar";
 import PayForActivity from "./pages/PayForActivity";
 import PhotoGallery from "./pages/PhotoGallery";
 import Register from "./pages/Register";
+import PageNotFound from "./pages/PageNotFound";
 
 function App() {
   const auth = useAuth();
@@ -84,6 +85,7 @@ function App() {
           <Route path="/mission-vision" element={<Feature />} />
           <Route path="/pay-for-activities" element={<PayForActivity />} />
           <Route path="/admin/*" element={<Admin />} />
+          <Route path="/*" element={<PageNotFound />} />
         </Routes>
       </section>
       {/* Include the Navbar component at the bottom of the page */}

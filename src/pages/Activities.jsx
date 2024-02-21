@@ -73,9 +73,7 @@ const Activities = () => {
       const response = await axios.post(`/hope/activities/register/${aid}`);
       fetchActivities();
       toast.success(response.data.message);
-      setLoading(false);
     } catch (error) {
-      setLoading(false);
       console.error("Error fetching activities:", error);
     }
   };
@@ -85,10 +83,8 @@ const Activities = () => {
       setLoading(true);
       const response = await axios.post(`/hope/activities/unregister/${aid}`);
       fetchActivities();
-      setLoading(false);
       toast.success(response.data.message);
     } catch (error) {
-      setLoading(false);
       console.error("Error fetching activities:", error);
     }
   };
@@ -137,7 +133,7 @@ const Activities = () => {
               {paymentHistory.map((payment) => (
                 <div
                   key={payment._id}
-                  className={`max-w-[1/2] neumorphic-container bg-gradient-to-br from-blue-100 via-cyan-10 to-teal-100 p-4 rounded-md shadow-md transform hover:scale-105 transition-transform border-2`}
+                  className={`max-w-[1/2] neumorphic-container bg-gradient-to-br from-blue-100 via-cyan-10 to-teal-100 p-4 rounded-md shadow-md transform hover:scale-[1.02] transition-transform border-2`}
                 >
                   {/* Verification Icon */}
                   {payment.paymentVerified ? (
@@ -222,7 +218,7 @@ const Activities = () => {
               {userActivities.map((activity) => (
                 <div
                   key={activity._id}
-                  className="bg-gradient-to-br from-zinc-100 via-pink-50 to-blue-50 p-4 rounded-md shadow-md mb-4 transform hover:scale-105 transition-transform"
+                  className="bg-gradient-to-br from-zinc-100 via-pink-50 to-blue-50 p-4 rounded-md shadow-md mb-4 transform hover:scale-[1.02] transition-transform"
                 >
                   {/* Activity Image */}
                   <div className="relative mb-4">
@@ -286,7 +282,7 @@ const Activities = () => {
           {otherActivities.map((activity) => (
             <div
               key={activity._id}
-              className="bg-gradient-to-br from-blue-50 via-cyan-50 to-teal-50 p-4 rounded-md shadow-md transform hover:scale-105 transition-transform"
+              className="bg-gradient-to-br from-blue-50 via-cyan-50 to-teal-50 p-4 rounded-md shadow-md transform hover:scale-[1.02] transition-transform"
             >
               {/* Activity Image */}
               <div className="relative mb-4">

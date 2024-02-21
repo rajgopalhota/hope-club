@@ -4,8 +4,8 @@ import Cookies from "universal-cookie";
 const cookies = new Cookies();
 
 // Get the current base URL dynamically
-// const baseURL = "https://kl-hope.live/";
-const baseURL = window.location.origin;
+const baseURL = "https://kl-hope.live/";
+// const baseURL = window.location.origin;
 console.log("BASE", baseURL)
 
 const axiosInstance = axios.create({

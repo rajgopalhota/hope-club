@@ -1,5 +1,6 @@
 @import url(./App.css);
 @import url(./Contact.css);
+@import url(./Pagenotfound.css);
 
 @tailwind base;
 @tailwind components;

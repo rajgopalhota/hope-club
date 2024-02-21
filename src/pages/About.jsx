@@ -146,7 +146,7 @@ const About = () => {
           </h1>
         </div>
       </div>
-      <div className="w-full bg-blue-50 px-10 pt-10">
+      <div className="w-full bg-blue-50 bg-opacity-70 px-10 pt-10">
         <div className="container mx-auto">
           <div
             role="list"

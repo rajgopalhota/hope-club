@@ -6,10 +6,18 @@ import Loading from "./Loading";
 
 export default function Contact() {
   const [loading, setLoading] = useState(false);
+  const [lastMessageSentTime, setLastMessageSentTime] = useState(null);
+  const [disableSubmit, setDisableSubmit] = useState(false);
+  const [remainingTime, setRemainingTime] = useState(0);
+
   useEffect(() => {
-    // Scroll to the top when the component mounts
-    window.scrollTo(0, 0);
+    // Retrieve last message sent time from local storage
+    const lastTime = localStorage.getItem("lastMessageSentTime");
+    if (lastTime) {
+      setLastMessageSentTime(new Date(lastTime));
+    }
   }, []);
+
   const auth = useAuth();
   const [formData, setFormData] = useState({
     name: auth.user ? auth.user.name : "",
@@ -33,8 +41,13 @@ export default function Contact() {
       // Send a POST request to submit the message
       await axios.post("/api/messages/submit", formData);
 
+      // Update last message sent time in local storage
+      const currentTime = new Date();
+      localStorage.setItem("lastMessageSentTime", currentTime);
+      setLastMessageSentTime(currentTime);
+
       // Clear the form after successful submission
-      toast.success("Message Sent")
+      toast.success("Message Sent");
       setFormData({
         name: auth.user ? auth.user.name : "",
         email: auth.user ? auth.user.email : "",
@@ -46,14 +59,33 @@ export default function Contact() {
     } catch (error) {
       // Handle error, e.g., show an error message
       setLoading(false);
-      toast.error("Server error")
+      toast.error("Server error");
       console.error("Error submitting message:", error.message);
     }
   };
 
+  useEffect(() => {
+    // Check if 10 minutes have passed since the last message sent
+    const interval = setInterval(() => {
+      if (lastMessageSentTime) {
+        const currentTime = new Date();
+        const diff = (currentTime - lastMessageSentTime) / 1000; // difference in seconds
+        if (diff < 600) {
+          setDisableSubmit(true);
+          setRemainingTime(Math.ceil(600 - diff));
+        } else {
+          setDisableSubmit(false);
+          setRemainingTime(0);
+        }
+      }
+    }, 1000); // check every second
+
+    return () => clearInterval(interval);
+  }, [lastMessageSentTime]);
+
   return (
     <div className="contactUs">
-      {loading && <Loading/>}
+      {loading && <Loading />}
       <div className="flex justify-center items-center ">
         <svg
           className="hidden lg:inline-block"
@@ -828,6 +860,7 @@ export default function Contact() {
               className="w-full p-4 border rounded-lg"
               placeholder="Name"
               readOnly={auth.user !== null}
+              required
             />
           </div>
           <div className="mb-4 relative">
@@ -843,6 +876,7 @@ export default function Contact() {
               className="w-full p-4 border rounded-lg"
               placeholder="E-mail"
               readOnly={auth.user !== null}
+              required
             />
           </div>
           <div className="mb-4">
@@ -854,11 +888,17 @@ export default function Contact() {
               className="w-full h-50 p-4 border rounded-lg resize-none"
               rows="9"
               placeholder="Message"
+              required
             ></textarea>
           </div>
           <div className="text-center">
-            <button type="submit" className="btn btn-primary" tabIndex="-1">
-              Send message
+            <button
+              type="submit"
+              className="btn btn-primary"
+              tabIndex="-1"
+              disabled={disableSubmit}
+            >
+              {disableSubmit ? `Please wait ${Math.floor(remainingTime / 60)}:${remainingTime % 60} minutes` : "Send message"}
             </button>
           </div>
         </form>

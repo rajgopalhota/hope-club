@@ -17,6 +17,7 @@ import Contacts from "./Contacts";
 import Engagement from "./Engagement";
 import PaymentStatus from "./PaymentStatus";
 import Users from "./Users";
+import PageNotFound from "../pages/PageNotFound";
 const Admin = () => {
   const auth = useAuth();
   const [isSidebarOpen, setSidebarOpen] = useState(false);
@@ -109,14 +110,7 @@ const Admin = () => {
     );
   } else {
     return (
-      <>
-        <h1 className="admin-heading text-center mt-10">
-          Uh no! Page not found!
-        </h1>
-        <div className="empty flex w-screen justify-center">
-          <img src={empty} alt="empty" />
-        </div>
-      </>
+      <PageNotFound/>
     );
   }
 };
