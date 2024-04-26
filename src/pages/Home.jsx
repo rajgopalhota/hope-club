@@ -81,7 +81,8 @@ const Home = () => {
           className="homeIco object-cover lg:w-[50%] w-[100%] mb-4"
         />
         <p className="homeIcoText text-gray-100 text-xl text-center max-w-md">
-          Welcome to the official website of the Robotics Process Automation, KL Univeristy
+          Welcome to the official website of the Robotics Process Automation, KL
+          Univeristy
         </p>
         <div className="mt-4 flex space-x-4">
           <Link
@@ -106,7 +107,7 @@ const Home = () => {
             Our Initiatives{" "}
           </h2>
           &nbsp;
-          <FaRobot className="text-blue-500 w-8 h-8 mr-2" />
+          <img className="w-12" src="/rpa.png" />
         </div>
         <hr />
         {keyPoints.map((point, index) => (

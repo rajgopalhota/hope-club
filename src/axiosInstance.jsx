@@ -5,7 +5,7 @@ const cookies = new Cookies();
 
 // Get the current base URL dynamically
 // const baseURL = "http://localhost:5000";
-const baseURL = "window.location.origin";
+const baseURL = window.location.origin;
 console.log("BASE", baseURL);
 
 const axiosInstance = axios.create({
