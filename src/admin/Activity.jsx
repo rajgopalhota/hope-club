@@ -109,7 +109,7 @@ const Activity = () => {
   return (
     <div className="container mx-auto">
       {loading && <Loading/>}
-      <h2 className="text-2xl font-bold mb-4 text-dark">Activity Component</h2>
+      <h2 className="text-2xl font-bold mb-4 text-white">Activity Component</h2>
 
       {/* Button to toggle AddActivity component */}
       <button
@@ -123,7 +123,7 @@ const Activity = () => {
       <div
         className={`${
           showAddActivity ? "translate-x-0" : "translate-x-full"
-        } z-10 px-4 fixed right-0 top-0 bottom-0 bg-white w-100 shadow-lg transition-transform duration-300 ease-in-out overflow-y-auto`}
+        } z-10 px-4 fixed right-0 top-0 bottom-0 bg-cyan-900 w-100 shadow-lg transition-transform duration-300 ease-in-out overflow-y-auto`}
       >
         {/* Close button for small screens */}
         <button

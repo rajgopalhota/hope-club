@@ -86,14 +86,14 @@ const AddActivityForm = (props) => {
       {auth.user &&
         (auth.user.role == "Admin" || auth.user.role == "Manager") && (
           <div className="w-full mx-auto mt-8 mb-10 neumorphic-container">
-            <h2 className="text-2xl font-bold mb-4">
+            <h2 className="text-2xl text-zinc-100 font-bold mb-4">
               {auth.user.name} Space - Add Activity
             </h2>
             <form onSubmit={onSubmit}>
               <div className="mb-4 relative">
                 <label
                   htmlFor="name"
-                  className="block text-gray-700 text-sm font-bold mb-2"
+                  className="block text-gray-200 text-sm font-bold mb-2"
                 >
                   <FaUser className="inline-block mr-2" />
                   Activity Name
@@ -114,7 +114,7 @@ const AddActivityForm = (props) => {
               <div className="mb-4 relative">
                 <label
                   htmlFor="description"
-                  className="block text-gray-700 text-sm font-bold mb-2"
+                  className="block text-gray-200 text-sm font-bold mb-2"
                 >
                   <FaInfo className="inline-block mr-2" />
                   Description
@@ -135,7 +135,7 @@ const AddActivityForm = (props) => {
               <div className="mb-4 relative">
                 <label
                   htmlFor="image"
-                  className="block text-gray-700 text-sm font-bold mb-2"
+                  className="block text-gray-200 text-sm font-bold mb-2"
                 >
                   <FaImage className="inline-block mr-2" />
                   Image URL
@@ -156,7 +156,7 @@ const AddActivityForm = (props) => {
               <div className="mb-4 relative">
                 <label
                   htmlFor="price"
-                  className="block text-gray-700 text-sm font-bold mb-2"
+                  className="block text-gray-200 text-sm font-bold mb-2"
                 >
                   <FaDollarSign className="inline-block mr-2" />
                   Price
@@ -177,7 +177,7 @@ const AddActivityForm = (props) => {
               <div className="mb-4 relative">
                 <label
                   htmlFor="date"
-                  className="block text-gray-700 text-sm font-bold mb-2"
+                  className="block text-gray-200 text-sm font-bold mb-2"
                 >
                   <FaCalendarAlt className="inline-block mr-2" />
                   Date

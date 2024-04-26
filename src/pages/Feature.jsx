@@ -5,67 +5,42 @@ const featureData = [
   {
     title: "Vision",
     content:
-      "Fostering a supportive community where students thrive, our non-technical club envisions a campus environment free from the shadows of ragging and negative traumas. We aim to cultivate a culture of resilience, empowerment, and unity, providing a safe space for students to overcome past challenges and emerge stronger.",
+      "Empowering individuals through automation, our RPA club envisions a future where manual and repetitive tasks are automated, freeing up time for innovation and creativity. We aim to cultivate a culture of technological advancement and efficiency, where RPA solutions streamline processes and optimize performance.",
   },
   {
     title: "Mission",
     content:
-      "Our mission is to organize impactful events that not only entertain but also promote anti-ragging awareness and mental well-being. Through workshops, counseling sessions, and collaborative initiatives, we strive to empower students to break free from the chains of negative experiences, creating an atmosphere of camaraderie and personal growth. Together, we aim to build a resilient community that stands against ragging and supports one another in overcoming adversities.",
+      "Our mission is to educate and inspire students about the potential of Robotics Process Automation. Through workshops, projects, and industry collaborations, we aim to equip students with the skills and knowledge needed to leverage RPA tools and techniques effectively, driving digital transformation and innovation.",
   },
   {
     title: "Community Engagement",
     content:
-      "Connecting with the community through various events and outreach programs.",
+      "Connecting with the community, our RPA club seeks to raise awareness about the benefits of RPA in various sectors. We organize outreach programs, seminars, and guest lectures to engage with industry professionals and enthusiasts, fostering a supportive network for learning and collaboration.",
   },
   {
-    title: "Education Initiatives",
+    title: "Skill Development",
     content:
-      "Empowering individuals through educational programs, workshops, and skill development.",
+      "Empowering members with practical skills, our RPA club offers training programs and hands-on workshops focused on RPA tools and technologies. From basic concepts to advanced techniques, we provide opportunities for members to enhance their automation skills and stay updated with industry trends.",
   },
   {
-    title: "Wellness Programs",
+    title: "Project Implementation",
     content:
-      "Promoting well-being through fitness classes, mental health awareness, and health campaigns.",
+      "Encouraging innovation and creativity, our RPA club facilitates project-based learning experiences. Members collaborate on real-world projects, applying RPA solutions to solve business challenges and gain valuable experience in implementing automation processes.",
   },
   {
-    title: "Health Wellness Training",
+    title: "Networking and Career Opportunities",
     content:
-      "Offering training programs for a healthy and balanced lifestyle, including nutrition and fitness.",
+      "Creating avenues for growth and development, our RPA club organizes networking events, hackathons, and internships with industry partners. We provide members with access to career opportunities in the rapidly growing field of Robotics Process Automation, helping them build a successful career path.",
   },
   {
-    title: "Fitness Programs",
+    title: "Research and Development",
     content:
-      "Encouraging physical activity and well-being through various fitness programs and activities.",
+      "Driving innovation forward, our RPA club encourages research and development initiatives in the field of automation. We collaborate with academic institutions and industry experts to explore emerging technologies and advance the capabilities of Robotics Process Automation.",
   },
   {
     title: "Have Questions?",
     content:
-      "Feel free to reach out to HOPE Club. We're here to help and support our community!",
-  },
-  {
-    title: "Environmental Sustainability",
-    content:
-      "Promoting eco-friendly practices and organizing events for environmental conservation.",
-  },
-  {
-    title: "Cultural Exchange",
-    content:
-      "Fostering cultural diversity and understanding through exchange programs and events.",
-  },
-  {
-    title: "Career Development",
-    content:
-      "Facilitating career growth through mentorship programs, workshops, and networking events.",
-  },
-  {
-    title: "Youth Empowerment",
-    content:
-      "Empowering the youth with leadership training, skill-building, and educational support.",
-  },
-  {
-    title: "Art and Creativity",
-    content:
-      "Nurturing artistic talents and creativity through workshops, exhibitions, and events.",
+      "Feel free to reach out to our RPA club. We're here to support and guide you on your journey into the exciting world of Robotics Process Automation!",
   },
 ];
 
@@ -78,11 +53,11 @@ export const Feature = () => {
     <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
       <div className="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
         <div>
-          <p className="inline-block px-3 py-px mb-4 text-xs font-semibold tracking-wider text-teal-900 uppercase rounded-full bg-teal-accent-400">
+          <p className="inline-block px-3 py-px mb-4 text-xs font-semibold tracking-wider text-teal-100 uppercase rounded-full bg-teal-accent-400">
             Brand new
           </p>
         </div>
-        <h2 className="max-w-lg mb-6 font-sans text-3xl font-bold leading-none tracking-tight text-gray-900 sm:text-4xl md:mx-auto">
+        <h2 className="max-w-lg mb-6 font-sans text-3xl font-bold leading-none tracking-tight text-gray-100 sm:text-4xl md:mx-auto">
           <span className="relative inline-block">
             <svg
               viewBox="0 0 52 24"
@@ -108,30 +83,32 @@ export const Feature = () => {
             </svg>
             <span className="relative">The</span>
           </span>{" "}
-          HOPE Club Initiatives and Goals
+          RPA Club Initiatives and Goals
         </h2>
-        <p className="text-base text-gray-700 md:text-lg text-justify">
-          <FaFeatherPointed /> Welcome to HOPE , a non-technical club dedicated
-          to creating a campus environment free from the shadows of ragging and
-          negative traumas. Our mission is to empower students by fostering
-          resilience, offering support, and organizing impactful events that
-          promote anti-ragging awareness and mental well-being.
+        <p className="text-base text-gray-300 md:text-lg text-justify">
+          <FaFeatherPointed /> Welcome to the RPA Club at KL University, a
+          technical organization dedicated to advancing the field of Robotics
+          Process Automation (RPA). Our mission is to empower students by
+          providing them with the knowledge, skills, and opportunities to excel
+          in the exciting world of automation.
           <br />
-          <FaFeatherPointed /> At HOPE, we believe in cultivating a community
-          where individuals can triumph over challenges and emerge stronger.
-          Through workshops, counseling sessions, and collaborative initiatives,
-          we provide a safe space for students to overcome past experiences and
-          build a resilient foundation for personal growth.
+          <FaFeatherPointed /> At the RPA Club, we believe in fostering a
+          community where individuals can explore innovative solutions and drive
+          digital transformation. Through hands-on workshops, industry
+          collaborations, and project-based learning, we aim to equip students
+          with the expertise needed to thrive in the rapidly evolving field of
+          RPA.
           <br />
-          <FaFeatherPointed /> Join us in our journey to create a campus culture
-          rooted in solidarity, strength, and the pursuit of a positive future.
-          Together, we can make a difference and build a community where every
-          individual has the support they need to thrive.
+          <FaFeatherPointed /> Join us in our journey to revolutionize
+          automation technology and shape the future of industries. Together, we
+          can unleash the potential of Robotics Process Automation and create a
+          campus culture rooted in innovation, collaboration, and technical
+          excellence.
         </p>
       </div>
       <div className="grid max-w-screen-lg mx-auto gap-y-6 lg:grid-cols-2 lg:gap-x-8">
         {featureData.map((feature, index) => (
-          <div className="p-6 bg-white rounded-lg shadow-md" key={index}>
+          <div className="p-6 fcard rounded-lg shadow-md" key={index}>
             <div
               className={`flex items-center justify-center w-12 h-12 rounded-full bg-purple-200 mb-4`}
             >
@@ -150,10 +127,11 @@ export const Feature = () => {
               </svg>
             </div>
             <div>
-              <h6 className="mb-3 text-xl font-bold leading-5">
+              <h6 className="mb-3 text-xl font-bold leading-5 text-zinc-50">
                 {feature.title}
               </h6>
-              <p className="text-sm text-gray-900">{feature.content}</p>
+              <hr/>
+              <p className="text-sm text-gray-300">{feature.content}</p>
             </div>
           </div>
         ))}

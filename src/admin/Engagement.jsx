@@ -81,7 +81,7 @@ const Engagement = () => {
     <div className="container mx-auto">
       {loading && <Loading />}
 
-      <h2 className="text-2xl font-bold mb-4 text-dark">
+      <h2 className="text-2xl font-bold mb-4 text-white">
         Engagement Component
       </h2>
 

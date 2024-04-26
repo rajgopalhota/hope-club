@@ -233,11 +233,11 @@ const PaymentStatus = () => {
       {/* Pie Charts */}
       <div className="flex flex-col md:flex-row justify-around mb-8">
         <div className="mb-4 md:mb-0">
-          <h3 className="text-lg font-semibold">Total Collection</h3>
+          <h3 className="text-lg font-semibold text-white">Total Collection</h3>
           <canvas id="pie-chart" width="300" height="300"></canvas>
         </div>
         <div>
-          <h3 className="text-lg font-semibold">Activity Distribution</h3>
+          <h3 className="text-lg font-semibold text-white">Activity Distribution</h3>
           <canvas id="activity-pie-chart" width="300" height="300"></canvas>
         </div>
       </div>

@@ -116,33 +116,33 @@ const Activities = () => {
   return (
     <div className="activity container mx-auto p-8">
       {loading && <Loading />}
-      <h2 className="text-3xl font-bold mb-4 flex items-center">
-        <BiPurchaseTag className="mr-2 text-purple-600" />
+      <h2 className="text-3xl font-bold text-zinc-100 mb-4 flex items-center">
+        <BiPurchaseTag className="mr-2 text-purple-400" />
         Club Activities
       </h2>
-      <hr className="border-t-2 border-blue-500 my-8" />
+      <hr className="border-t-2 border-blue-300 my-8" />
       <AddActivityForm fetchActivities={fetchActivities} />
       {paymentHistory.length !== 0 && (
         <>
           <div className="mb-8">
-            <h3 className="text-2xl font-bold mb-2 flex items-center text-blue-500">
-              <BsCheckCircle className="mr-2 text-green-600" />
+            <h3 className="text-2xl font-bold mb-2 flex items-center text-blue-100">
+              <BsCheckCircle className="mr-2 text-green-200" />
               Payment Passes
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {paymentHistory.map((payment) => (
                 <div
                   key={payment._id}
-                  className={`max-w-[1/2] neumorphic-container bg-gradient-to-br from-blue-100 via-cyan-10 to-teal-100 p-4 rounded-md shadow-md transform hover:scale-[1.02] transition-transform border-2`}
+                  className={`max-w-[1/2] neumorphic-container bg-gradient-to-br from-blue-900 via-cyan-10 to-teal-900 p-4 rounded-md shadow-md transform hover:scale-[1.02] transition-transform border-2`}
                 >
                   {/* Verification Icon */}
                   {payment.paymentVerified ? (
-                    <div className="mb-2 text-green-500">
+                    <div className="mb-2 text-green-300">
                       <BsCheckCircle className="h-6 w-6 inline-block mr-2" />
                       Verified
                     </div>
                   ) : (
-                    <div className="mb-2 text-red-500">
+                    <div className="mb-2 text-red-300">
                       <BsXCircle className="h-6 w-6 inline-block mr-2" />
                       Unverified
                     </div>
@@ -150,7 +150,7 @@ const Activities = () => {
 
                   {/* Payment Details */}
                   <div className="mb-4">
-                    <p className="text-blue-900">
+                    <p className="text-blue-100">
                       <span className="font-bold">Activities:</span>{" "}
                       {payment.activities
                         .map((activity) => activity.name)
@@ -158,7 +158,7 @@ const Activities = () => {
                     </p>
                   </div>
                   <div className="mb-4">
-                    <p className="text-red-900">
+                    <p className="text-red-100">
                       <span className="font-bold">Prices:</span>{" "}
                       {payment.activities
                         .map((activity) => `₹${activity.price}`)
@@ -166,7 +166,7 @@ const Activities = () => {
                     </p>
                   </div>
                   <div className="mb-4">
-                    <p className="text-red-900">
+                    <p className="text-red-200">
                       <span className="font-bold">Verified By:</span>{" "}
                       {payment.paymentVerifiedBy
                         ? payment.paymentVerifiedBy.name
@@ -174,7 +174,7 @@ const Activities = () => {
                     </p>
                   </div>
                   <div className="mb-4">
-                    <p className="text-zinc-900">
+                    <p className="text-zinc-100">
                       <span className="font-bold">Timestamp:</span>{" "}
                       {new Date(payment.timestamp).toLocaleString()}
                     </p>
@@ -185,7 +185,7 @@ const Activities = () => {
           </div>
 
           {/* Total Price */}
-          <div className="text-xl font-bold mb-4">
+          <div className="text-xl text-zinc-50 font-bold mb-4">
             Total Price: &#8377;{" "}
             {paymentHistory.reduce(
               (total, payment) =>
@@ -199,14 +199,14 @@ const Activities = () => {
           </div>
 
           {/* Stylish HR */}
-          <hr className="border-t-2 border-blue-500 my-8" />
+          <hr className="border-t-2 border-blue-300 my-8" />
         </>
       )}
       {/* Registered Activities Section */}
       {userActivities.length !== 0 && (
         <>
           <div className="mb-8">
-            <h3 className="text-2xl font-bold mb-2 flex items-center text-purple-500">
+            <h3 className="text-2xl font-bold mb-2 flex items-center text-purple-200">
               {auth.user && (
                 <>
                   <BsCheckCircle className="mr-2 text-green-600" />
@@ -218,7 +218,7 @@ const Activities = () => {
               {userActivities.map((activity) => (
                 <div
                   key={activity._id}
-                  className="bg-gradient-to-br from-zinc-100 via-pink-50 to-blue-50 p-4 rounded-md shadow-md mb-4 transform hover:scale-[1.02] transition-transform"
+                  className="bg-gradient-to-br from-blue-900 via-cyan-900 to-blue-900 p-4 rounded-md shadow-md mb-4 transform hover:scale-[1.02] transition-transform"
                 >
                   {/* Activity Image */}
                   <div className="relative mb-4">
@@ -236,8 +236,8 @@ const Activities = () => {
                   </div>
 
                   {/* Activity Details */}
-                  <div className="mb-4 text-white">
-                    <p>{activity.description}</p>
+                  <div className="mb-4 ">
+                    <p className="text-white">{activity.description}</p>
                   </div>
 
                   <div className="mb-4 price pricetag">
@@ -274,15 +274,15 @@ const Activities = () => {
 
       {/* More Activities Section */}
       <div>
-        <h3 className="text-2xl font-bold mb-2 flex items-center text-teal-500">
-          <BiBasket className="mr-2 text-blue-600" />
+        <h3 className="text-2xl font-bold mb-2 flex items-center text-teal-100">
+          <BiBasket className="mr-2 text-blue-200" />
           More Activities
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {otherActivities.map((activity) => (
             <div
               key={activity._id}
-              className="bg-gradient-to-br from-blue-50 via-cyan-50 to-teal-50 p-4 rounded-md shadow-md transform hover:scale-[1.02] transition-transform"
+              className="bg-gradient-to-br from-teal-900 via-cyan-900 to-teal-900 p-4 rounded-md shadow-md transform hover:scale-[1.02] transition-transform"
             >
               {/* Activity Image */}
               <div className="relative mb-4">
@@ -299,8 +299,8 @@ const Activities = () => {
               </div>
 
               {/* Activity Details */}
-              <div className="mb-4 text-white">
-                <p>{activity.description}</p>
+              <div className="mb-4">
+                <p className="text-white">{activity.description}</p>
               </div>
               <div className="mb-4 price pricetag">
                 <p>&#8377; {activity.price}</p>

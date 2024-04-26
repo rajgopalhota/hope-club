@@ -82,7 +82,7 @@ const Contacts = () => {
   return (
     <div className="container mx-auto">
       {loading && <Loading/>}
-      <h2 className="text-2xl font-bold mb-4 text-dark">Messages Component</h2>
+      <h2 className="text-2xl font-bold mb-4 text-white">Messages Component</h2>
 
       {/* Table */}
       <table {...getTableProps()} className="min-w-full table-auto border">

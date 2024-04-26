@@ -1,5 +1,5 @@
-contactUs{
-    margin-top: 20px;
+contactUs {
+  margin-top: 20px;
 }
 .contactUs svg {
   height: 23rem;
@@ -71,7 +71,7 @@ contactUs{
 }
 .contactUs form .title {
   font-family: "Pacifico", cursive;
-  color: #212529;
+  color: #d0e8ff;
   font-size: 2.5rem;
 }
 .contactUs form .form-control {
@@ -85,7 +85,7 @@ contactUs{
   padding: 0.5rem 3.5rem;
 }
 .contactUs form .form-control:focus {
-  background-color: #f2f6f8;
+  background-color: #999999;
   border: none;
   box-shadow: 0px 7px 5px rgba(0, 0, 0, 0.11);
 }
@@ -106,6 +106,7 @@ contactUs{
   border-radius: 2rem;
   color: #212529;
   font-size: 1.1rem;
+  background-color: #e7f3ffcb;
 }
 .contactUs form .icon {
   color: #57565c;

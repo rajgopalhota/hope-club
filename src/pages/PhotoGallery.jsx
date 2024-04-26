@@ -1,18 +1,10 @@
 const imageData = [
   {
-    url: img1,
-    title: "Image 0",
-  },
-  {
     url: img2,
     title: "Image 0",
   },
   {
     url: img3,
-    title: "Image 0",
-  },
-  {
-    url: img4,
     title: "Image 0",
   },
   {
@@ -77,21 +69,17 @@ import React, { useState, useEffect } from "react";
 import Slider from "react-slick";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai"; // Import heart icons from react-icons
 import { FaCamera } from "react-icons/fa"; // Import camera icon from react-icons
-import img1 from "./../assets/galley/1.jpg";
 import img2 from "./../assets/galley/2.jpg";
 import img3 from "./../assets/galley/3.jpg";
-import img4 from "./../assets/galley/4.jpg";
 
 const PhotoGallery = () => {
   const [likedImages, setLikedImages] = useState([]);
 
   useEffect(() => {
-    // Scroll to the top when the component mounts
     window.scrollTo(0, 0);
   }, []);
 
-  const sliderImages = [img1, img2, img3, img4];
-
+  const sliderImages = [img2, img3];
   const sliderSettings = {
     dots: true,
     infinite: true,
@@ -114,7 +102,7 @@ const PhotoGallery = () => {
 
   return (
     <div className="container mx-auto p-8">
-      <h2 className="text-3xl font-bold mb-4 flex items-center">
+      <h2 className="text-3xl text-zinc-100 font-bold mb-4 flex items-center">
         <FaCamera className="mr-2 text-blue-500" size={32} /> Photo Gallery
       </h2>
       <hr className="border-t-2 border-blue-500 my-5" />

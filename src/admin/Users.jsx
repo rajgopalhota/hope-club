@@ -105,7 +105,7 @@ const Users = () => {
 
   return (
     <div className="container mx-auto">
-      <h2 className="text-2xl font-bold mb-4 text-dark">Users Component</h2>
+      <h2 className="text-2xl font-bold mb-4 text-white">Users Component</h2>
       {loading && <Loading/>}
       {/* Search Bar */}
       <input
