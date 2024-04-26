@@ -43,7 +43,6 @@ export default function Register() {
       setLoading(false);
       toast(response.data.message);
       navigate("/login");
-      
     } catch (error) {
       toast.error(error.response.data.message);
       setLoading(false);

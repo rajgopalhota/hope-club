@@ -4,9 +4,9 @@ import Cookies from "universal-cookie";
 const cookies = new Cookies();
 
 // Get the current base URL dynamically
-const baseURL = "http://localhost:5000";
-// const baseURL = "window.location.origin";
-console.log("BASE", baseURL)
+// const baseURL = "http://localhost:5000";
+const baseURL = "window.location.origin";
+console.log("BASE", baseURL);
 
 const axiosInstance = axios.create({
   baseURL: baseURL, // Replace with your actual API base URL
