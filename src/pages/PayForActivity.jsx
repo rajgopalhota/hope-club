@@ -84,8 +84,8 @@ const PayForActivity = () => {
       )}
       {userActivities.length !== 0 && (
         <>
-          <div className="container mx-auto md:w-1/2 mt-20 p-8 bg-gray-200 bg-opacity-45 rounded-md shadow-md mt-8">
-            <h3 className="text-2xl font-bold flex items-center mb-4 text-green-900">
+          <div className="container mx-auto md:w-1/2 mt-20 p-8 bg-gray-200 bg-opacity-25 rounded-md shadow-md mt-8">
+            <h3 className="text-2xl font-bold flex items-center mb-4 text-green-200">
               <FaCreditCard className="mr-2" />
               Checkout for payment
             </h3>
@@ -125,7 +125,7 @@ const PayForActivity = () => {
 
             {/* Total Price */}
             <div className="mb-4">
-              <p className="text-xl font-bold">
+              <p className="text-xl text-red-100 font-bold">
                 Total Price: &#8377;{" "}
                 {userActivities.reduce(
                   (total, activity) => total + activity.price,

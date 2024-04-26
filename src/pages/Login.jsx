@@ -61,7 +61,7 @@ const Login = () => {
             <div className="login relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20">
               <div className="max-w-md mx-auto">
                 <div>
-                  <h1 className="text-2xl font-bold">Log On To Hope!</h1>
+                  <h1 className="text-2xl font-bold">Log On To RPA Club!</h1>
                 </div>
                 <form onSubmit={handleSubmit}>
                   <div className="divide-y divide-gray-200">
