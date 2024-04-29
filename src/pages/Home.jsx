@@ -56,11 +56,6 @@ const Home = () => {
       description:
         "Participating in competitions and organizing events to showcase skills and innovations.",
     },
-    {
-      icon: <RiQuestionFill className="w-8 h-8 mr-4 text-gray-500" />,
-      title: "Have Questions?",
-      description: "Feel free to reach out. We're here to help!",
-    },
   ];
 
   return (
@@ -74,7 +69,7 @@ const Home = () => {
 
       {/* Logo section */}
       <div className="lg:w-1/2 logodiv flex flex-col justify-center items-center p-10 h-auto">
-        <p className="welcometxt">RPA CLUB - KL University</p>
+        <p className="welcometxt">Robotic Process Automation</p>
         <img
           src={logo}
           alt="KL University Logo"

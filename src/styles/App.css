@@ -80,7 +80,7 @@ img {
 }
 .home .homeIco {
   transition: all ease-in 0.2s;
-  transform: scale(1.5);
+  transform: scale(1.35);
 }
 .home .homeIcoText {
   transition: all ease-in 0.4s;
