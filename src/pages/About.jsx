@@ -4,6 +4,7 @@ import { AiOutlineMail } from "react-icons/ai";
 import { useEffect, useState } from "react";
 import { FcAbout } from "react-icons/fc";
 import team from "./TeamData";
+import { IoMdSearch } from "react-icons/io";
 
 const About = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -13,8 +14,10 @@ const About = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  const filteredTeam = team.filter((member) =>
-    member.name.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredTeam = team.filter(
+    (member) =>
+      member.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      member.role.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
@@ -32,14 +35,17 @@ const About = () => {
       </div>
       <div className="w-full bg-blue-50 bg-opacity-5 box-sha-card px-10 pt-10">
         <div className="container mx-auto">
-          <div className="flex justify-center mb-8">
+          <div className="flex relative justify-center mb-8">
             <input
               type="text"
-              placeholder="Search by name..."
+              placeholder="Search by name (or) role..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full px-4 py-2 rounded-md bg-gray-100 bg-opacity-10 text-gray-50 focus:outline-none focus:bg-white focus:bg-opacity-10 focus:ring-2 focus:ring-cyan-600"
+              className="w-full px-4 py-2 rounded-md bg-gray-100 bg-opacity-10 text-gray-50 focus:outline-none focus:bg-white focus:bg-opacity-10 focus:ring-2 focus:ring-cyan-600 pl-10 mb-10 lg:mb-0" // Added pl-10 for padding-left to accommodate the icon
             />
+
+            {/* Add this inside the input tag */}
+            <IoMdSearch className="sico absolute left-3 top-3 text-gray-300 pointer-events-none" />
           </div>
           <div
             role="list"

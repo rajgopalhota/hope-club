@@ -10,7 +10,8 @@ import {
 import { RiQuestionFill } from "react-icons/ri"; // New question icon
 import { Link } from "react-router-dom";
 import logo from "./../assets/1.svg"; // Replace with your KL University logo
-import bgImage from "./../assets/vids/home.jpg"; // Replace with your background image
+import TextAni from "./TextAni";
+import bgImage from "./../assets/vids/brain.gif"; // Replace with your background image
 
 const Home = () => {
   useEffect(() => {
@@ -33,12 +34,6 @@ const Home = () => {
         "Conducting coding workshops to enhance skills in programming for automation.",
     },
     {
-      icon: <FaHandsHelping className="w-8 h-8 mr-4 text-red-500" />,
-      title: "Community Engagement",
-      description:
-        "Engaging with the community to spread awareness and share knowledge about RPA.",
-    },
-    {
       icon: <FaChalkboardTeacher className="w-8 h-8 mr-4 text-yellow-500" />,
       title: "Practice Sessions",
       description:
@@ -59,17 +54,16 @@ const Home = () => {
   ];
 
   return (
-    <div className="home flex flex-col lg:flex-row h-[94vh] w-screen relative overflow-hidden">
-      {/* Background image */}
+    <div className="home flex flex-col lg:flex-row h-screen w-screen relative overflow-hidden">
       <img
-        className="absolute inset-0 w-full h-full object-cover z-[-1]"
+        className="brain absolute inset-0 w-full h-full object-cover z-[-1]"
         src={bgImage}
         alt="Background"
       />
-
-      {/* Logo section */}
-      <div className="lg:w-1/2 logodiv flex flex-col justify-center items-center p-10 h-auto">
-        <p className="welcometxt">Robotic Process Automation</p>
+      <div className="hcont relative lg:w-1/2 logodiv flex flex-col justify-center items-center p-10 h-auto">
+        <p className="welcometxt mb-5">
+          RPA <TextAni />
+        </p>
         <img
           src={logo}
           alt="KL University Logo"
@@ -96,10 +90,10 @@ const Home = () => {
       </div>
 
       {/* Key points section */}
-      <div className="lg:w-1/2 bg-purple-50 bg-opacity-35 backdrop-blur p-8 overflow-scroll">
+      <div className="lg:w-1/2 bg-zinc-900 bg-opacity-55 hcont p-8 overflow-scroll">
         <div className="flex items-center mb-4">
           <h2 className="text-2xl text-zinc-100 font-semibold">
-            Our Initiatives{" "}
+            Robotic Process Automation Club{" "}
           </h2>
           &nbsp;
           <img className="w-12" src="/rpa.png" />

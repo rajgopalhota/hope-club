@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 
 const Navbar = () => {
   return (
-    <nav className="fixed bottom-0 left-0 w-full bg-blue-100 bg-opacity-35 text-white text-center flex justify-around">
+    <nav className="fixed bottom-0 left-0 w-full bg-cyan-900 bg-opacity-45 text-white text-center flex justify-around">
       <NavLink to="/" className="flex flex-col items-center w-full p-1 lg:p-0">
         <AiOutlineHome className="text-2xl mb-1" />
         <p className="text-[10px] lg:text-sm text-zinc-200">Home</p>

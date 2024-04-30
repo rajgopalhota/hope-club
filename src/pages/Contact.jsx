@@ -84,7 +84,7 @@ export default function Contact() {
   }, [lastMessageSentTime]);
 
   return (
-    <div className="contactUs">
+    <div className="contactUs upzind">
       {loading && <Loading />}
       <div className="flex justify-center items-center ">
         <svg
@@ -845,7 +845,7 @@ export default function Contact() {
             </g>
           </g>
         </svg>
-        <form className="w-full max-w-lg" onSubmit={handleSubmit}>
+        <form className="z-5 w-full max-w-lg" onSubmit={handleSubmit}>
           <h1 className="text-center text-3xl mb-4 title">Talk to Us</h1>
           <div className="mb-4 relative">
             <label htmlFor="formName" className="block">
@@ -898,7 +898,11 @@ export default function Contact() {
               tabIndex="-1"
               disabled={disableSubmit}
             >
-              {disableSubmit ? `Please wait ${Math.floor(remainingTime / 60)}:${remainingTime % 60} minutes` : "Send message"}
+              {disableSubmit
+                ? `Please wait ${Math.floor(remainingTime / 60)}:${
+                    remainingTime % 60
+                  } minutes`
+                : "Send message"}
             </button>
           </div>
         </form>

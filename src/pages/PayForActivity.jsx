@@ -75,7 +75,7 @@ const PayForActivity = () => {
   };
 
   return (
-    <>
+    <div className="upzind">
       {loading && <Loading />}
       {userActivities.length === 0 && !loading && (
         <div className="empty flex w-screen justify-center mt-10">
@@ -160,7 +160,7 @@ const PayForActivity = () => {
           </div>
         </>
       )}
-    </>
+    </div>
   );
 };
 

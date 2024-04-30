@@ -1,76 +1,71 @@
-const imageData = [
-  {
-    url: img2,
-    title: "Image 0",
-  },
-  {
-    url: img3,
-    title: "Image 0",
-  },
-  {
-    url: "https://i.ytimg.com/vi/uptQQUWC01k/maxresdefault.jpg",
-    title: "Image 1",
-  },
-  {
-    url: "https://images.static-collegedunia.com/public/college_data/images/campusimage/1579070250KLU_13_2379.jpg",
-    title: "Image 2",
-  },
-  {
-    url: "https://th.bing.com/th/id/OIP.pm90l9iwViZkkHMMQKhz3wHaEH?w=900&h=500&rs=1&pid=ImgDetMain",
-    title: "Image 3",
-  },
-  {
-    url: "https://th.bing.com/th/id/OIP.IVxGW9qV-WWgI-kl1oSukQHaEK?rs=1&pid=ImgDetMain",
-    title: "Image 4",
-  },
-  {
-    url: "https://images.static-collegedunia.com/public/college_data/images/campusimage/1579070251VH_KLU2017_D2-390.jpg",
-    title: "Image 5",
-  },
-  {
-    url: "https://th.bing.com/th/id/OIP.KX1-PDDV9kHU5w26ceedXAHaE8?rs=1&pid=ImgDetMain",
-    title: "Image 6",
-  },
-  {
-    url: "https://th.bing.com/th/id/OIP.6L0c2DaJLQai_mgazbxJUwHaFj?rs=1&pid=ImgDetMain",
-    title: "Image 7",
-  },
-  {
-    url: "https://i.ytimg.com/vi/uptQQUWC01k/maxresdefault.jpg",
-    title: "Image 1",
-  },
-  {
-    url: "https://images.static-collegedunia.com/public/college_data/images/campusimage/1579070250KLU_13_2379.jpg",
-    title: "Image 2",
-  },
-  {
-    url: "https://th.bing.com/th/id/OIP.pm90l9iwViZkkHMMQKhz3wHaEH?w=900&h=500&rs=1&pid=ImgDetMain",
-    title: "Image 3",
-  },
-  {
-    url: "https://th.bing.com/th/id/OIP.IVxGW9qV-WWgI-kl1oSukQHaEK?rs=1&pid=ImgDetMain",
-    title: "Image 4",
-  },
-  {
-    url: "https://images.static-collegedunia.com/public/college_data/images/campusimage/1579070251VH_KLU2017_D2-390.jpg",
-    title: "Image 5",
-  },
-  {
-    url: "https://th.bing.com/th/id/OIP.KX1-PDDV9kHU5w26ceedXAHaE8?rs=1&pid=ImgDetMain",
-    title: "Image 6",
-  },
-  {
-    url: "https://th.bing.com/th/id/OIP.6L0c2DaJLQai_mgazbxJUwHaFj?rs=1&pid=ImgDetMain",
-    title: "Image 7",
-  },
-];
-
 import React, { useState, useEffect } from "react";
 import Slider from "react-slick";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai"; // Import heart icons from react-icons
 import { FaCamera } from "react-icons/fa"; // Import camera icon from react-icons
+import img1 from "./../assets/galley/1.jpg";
 import img2 from "./../assets/galley/2.jpg";
 import img3 from "./../assets/galley/3.jpg";
+// Import images from img4 to img11
+import img4 from "./../assets/galley/4.jpg";
+import img5 from "./../assets/galley/5.jpg";
+import img6 from "./../assets/galley/6.jpg";
+import img7 from "./../assets/galley/7.jpg";
+import img8 from "./../assets/galley/8.jpg";
+import img9 from "./../assets/galley/9.jpg";
+import img10 from "./../assets/galley/10.jpg";
+import img11 from "./../assets/galley/11.jpg";
+
+const imageData = [
+  {
+    url: img1,
+    title: "Image 1",
+  },
+  {
+    url: img2,
+    title: "Image 2",
+  },
+  {
+    url: img3,
+    title: "Image 3",
+  },
+  // Add more images to the imageData array
+  {
+    url: img4,
+    title: "Image 4",
+  },
+  {
+    url: img5,
+    title: "Image 5",
+  },
+  {
+    url: img6,
+    title: "Image 6",
+  },
+  {
+    url: img7,
+    title: "Image 7",
+  },
+  {
+    url: img8,
+    title: "Image 8",
+  },
+  {
+    url: img9,
+    title: "Image 9",
+  },
+  {
+    url: img10,
+    title: "Image 10",
+  },
+  {
+    url: img11,
+    title: "Image 11",
+  },
+  {
+    url: "https://images.hindustantimes.com/img/2021/02/10/550x309/KL_University_HT_1612961689616_1612961698572.jpg",
+    title: "Image 11",
+  },
+];
 
 const PhotoGallery = () => {
   const [likedImages, setLikedImages] = useState([]);

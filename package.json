@@ -12,7 +12,6 @@
   "dependencies": {
     "axios": "^1.6.7",
     "chart.js": "^4.4.1",
-    "framer-motion": "^11.0.3",
     "postcss-cli": "^11.0.0",
     "postcss-import": "^16.0.0",
     "postcss-preset-env": "^9.3.0",
