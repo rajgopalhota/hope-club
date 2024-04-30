@@ -3,9 +3,11 @@ contactUs {
 }
 .contactUs svg {
   height: 23rem;
-  margin-right: 4rem;
+  /* margin-right: 4rem; */
 }
-
+.social-handles img{
+  transform: scale(1.2);
+}
 #envelope {
   animation: float 2s ease-in-out infinite;
 }

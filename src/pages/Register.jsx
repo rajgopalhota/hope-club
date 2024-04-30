@@ -57,7 +57,7 @@ export default function Register() {
           <div className="lg:w-1/2 bg-white bg-opacity-65 rounded-lg shadow dark:border md:mt-0 xl:p-0 dark:border-gray-700">
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                RPA Club - On Boarding
+              <img className="w-12 logo inline-block mr-2" src="/rpa.png" /> RPA Club - On Boarding
               </h1>
               <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -194,7 +194,7 @@ export default function Register() {
                 >
                   Create an account
                 </button>
-                <p className="text-sm text-center font-light text-gray-500 dark:text-gray-400">
+                <p className="text-sm text-center font-light text-gray-800">
                   Already have an account?{" "}
                   <Link
                     to="/login"

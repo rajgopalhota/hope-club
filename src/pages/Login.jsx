@@ -22,13 +22,10 @@ const Login = () => {
     try {
       // Make a POST request to your server's login endpoint
       setLoading(true);
-      const response = await axios.post(
-        "/api/users/login",
-        {
-          email,
-          password,
-        }
-      );
+      const response = await axios.post("/api/users/login", {
+        email,
+        password,
+      });
       // Assuming your server returns a token upon successful login
       const { token, user } = response.data;
       // Update the auth context with the token
@@ -51,7 +48,10 @@ const Login = () => {
       <div className="loginForm m-2 py-6 flex flex-col justify-center sm:py-12">
         {auth.user ? (
           <>
-            <div className="loggegIn text-center text-lg text-bold" id="#envelope">
+            <div
+              className="loggegIn text-center text-lg text-bold"
+              id="#envelope"
+            >
               <h1>You are already Logged In!</h1>
             </div>
           </>
@@ -61,7 +61,7 @@ const Login = () => {
             <div className="login relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20">
               <div className="max-w-md mx-auto">
                 <div>
-                  <h1 className="text-2xl font-bold">Log On To RPA Club!</h1>
+                  <h1 className="text-2xl font-bold"><img className="w-12 logo inline-block mr-2" src="/rpa.png" />&nbsp;Log On To RPA Club!</h1>
                 </div>
                 <form onSubmit={handleSubmit}>
                   <div className="divide-y divide-gray-200">

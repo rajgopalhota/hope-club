@@ -82,8 +82,8 @@ img {
   image-resolution: 1000px;
 }
 .home .homeIco {
+  z-index: -1;
   transition: all ease-in 0.2s;
-  transform: scale(1.35);
 }
 .home .homeIcoText {
   transition: all ease-in 0.4s;
@@ -120,8 +120,11 @@ hr {
 }
 .logodiv:hover .homeIco {
   transition: all ease-in 0.2s;
-  transform: scale(1.37) translateY(-8%);
+  transform: scale(1.12) translateY(-4%);
   filter: saturate(1.1) brightness(1.1);
+}
+.logo{
+  filter: brightness(1) saturate(1) !important;
 }
 .brain {
   mix-blend-mode: hard-light;
@@ -282,6 +285,7 @@ hr {
 }
 .mainContent {
   z-index: 2 !important;
+  min-height: 100vh;
 }
 .loader {
   position: relative;

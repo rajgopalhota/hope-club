@@ -65,7 +65,7 @@ const Home = () => {
           RPA <TextAni />
         </p>
         <img
-          src={logo}
+          src="/rpa.png"
           alt="KL University Logo"
           className="homeIco object-cover lg:w-[50%] w-[100%] mb-4"
         />
