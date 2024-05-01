@@ -37,6 +37,7 @@ const Activity = () => {
     { Header: "Name", accessor: "name" },
     { Header: "Description", accessor: "description" },
     { Header: "Image", accessor: "image", Cell: ImageCell },
+    { Header: "Venue", accessor: "venue" },
     { Header: "Price", accessor: "price" },
     { Header: "Date", accessor: "date", Cell: DateCell },
     { Header: "Created By", accessor: "createdBy" },
@@ -100,15 +101,15 @@ const Activity = () => {
   const handleSearch = (e) => {
     const inputValue = e.target.value.toLowerCase();
     setSearchInput(inputValue);
-    const filteredResults = data.filter(
-      (activity) => activity.name.toLowerCase().includes(inputValue)
+    const filteredResults = data.filter((activity) =>
+      activity.name.toLowerCase().includes(inputValue)
     );
     setFilteredData(filteredResults);
   };
 
   return (
     <div className="container mx-auto">
-      {loading && <Loading/>}
+      {loading && <Loading />}
       <h2 className="text-2xl font-bold mb-4 text-white">Activity Component</h2>
 
       {/* Button to toggle AddActivity component */}
@@ -132,7 +133,7 @@ const Activity = () => {
         >
           Close
         </button>
-        <AddActivity fetchActivities = {fetchData} />
+        <AddActivity fetchActivities={fetchData} />
       </div>
 
       {/* Search Bar */}

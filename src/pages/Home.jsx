@@ -2,20 +2,17 @@ import React, { useEffect } from "react";
 import {
   FaRobot,
   FaCode,
-  FaHandsHelping,
   FaChalkboardTeacher,
   FaRegCalendarAlt,
   FaRunning,
 } from "react-icons/fa"; // Additional icons
 import { RiQuestionFill } from "react-icons/ri"; // New question icon
 import { Link } from "react-router-dom";
-import logo from "./../assets/1.svg"; // Replace with your KL University logo
 import TextAni from "./TextAni";
 import bgImage from "./../assets/vids/brain.gif"; // Replace with your background image
 
 const Home = () => {
   useEffect(() => {
-    // Scroll to the top when the component mounts
     window.scrollTo(0, 0);
   }, []);
 
@@ -54,7 +51,7 @@ const Home = () => {
   ];
 
   return (
-    <div className="home flex flex-col lg:flex-row h-screen w-screen relative overflow-hidden">
+    <div className="home flex flex-col lg:flex-row w-screen relative overflow-hidden">
       <img
         className="brain absolute inset-0 w-full h-full object-cover z-[-1]"
         src={bgImage}
@@ -90,7 +87,7 @@ const Home = () => {
       </div>
 
       {/* Key points section */}
-      <div className="lg:w-1/2 bg-zinc-900 bg-opacity-55 hcont p-8 overflow-scroll">
+      <div className="lg:w-1/2 bg-zinc-900 bg-opacity-55 hcont p-8">
         <div className="flex items-center mb-4">
           <h2 className="text-2xl text-zinc-100 font-semibold">
             Robotic Process Automation Club{" "}

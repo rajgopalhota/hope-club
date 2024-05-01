@@ -83,7 +83,6 @@ img {
   image-resolution: 1000px;
 }
 .home{
-  pointer-events: none !important;
   user-select: none !important;
 }
 .home .homeIco {
