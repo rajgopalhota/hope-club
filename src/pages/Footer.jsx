@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer class="flex flex-col space-y-2 justify-center m-10">
+    <footer class="w-full bg-zinc-950 bg-opacity-60 rounded-2xl flex flex-col space-y-2 justify-center p-4">
       <div class="flex justify-center space-x-5">
         <a
           href="https://t.me/rpatechclub"
@@ -25,7 +25,11 @@ const Footer = () => {
         >
           <img src="https://img.icons8.com/fluent/30/000000/instagram-new.png" />
         </a>
-        <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer">
+        <a
+          href="https://twitter.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <img src="https://img.icons8.com/fluent/30/000000/twitter.png" />
         </a>
       </div>

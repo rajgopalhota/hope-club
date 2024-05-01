@@ -30,6 +30,7 @@ nav {
   overflow: hidden;
   border-top: 1px solid rgba(255, 255, 255, 0.6);
   box-shadow: 0 0 16px rgb(0, 0, 0);
+  z-index: 999 !important;
 }
 nav a {
   transition: all ease-in 0.1s;
@@ -80,6 +81,10 @@ img {
   shape-rendering: crispEdges;
   image-rendering: crisp-edges;
   image-resolution: 1000px;
+}
+.home{
+  pointer-events: none !important;
+  user-select: none !important;
 }
 .home .homeIco {
   z-index: -1;
@@ -199,7 +204,7 @@ hr {
   border-radius: 12px;
 }
 .pricetag p {
-  color: red !important;
+  color: rgb(255, 71, 71) !important;
   font-weight: 600;
   /* text-shadow: 0 0 4px black; */
   background-color: rgba(0, 114, 159, 0.4);
@@ -210,6 +215,19 @@ hr {
 }
 .pricetag p::before {
   content: "Amount: ";
+}
+.venue p {
+  color: rgb(185, 221, 255) !important;
+  font-weight: 600;
+  /* text-shadow: 0 0 4px black; */
+  background-color: rgba(0, 159, 29, 0.4);
+  border-radius: 10px;
+  display: block;
+  width: fit-content !important;
+  padding: 5px 25px;
+}
+.venue p::before {
+  content: "Venue: ";
 }
 .empty img {
   mix-blend-mode: multiply;
@@ -499,4 +517,11 @@ hr {
   to {
     transform: rotate(360deg) scale(18) translateX(20px);
   }
+}
+footer{
+  z-index: -1 !important;
+}
+.actadd input, textarea{
+  color: whitesmoke;
+  background-color: #ffede12b;
 }

@@ -44,6 +44,7 @@ export const AuthProvider = ({ children }) => {
         : window.location.hostname,
     });
     setUser(null);
+    window.location.reload();
   };
 
   return (

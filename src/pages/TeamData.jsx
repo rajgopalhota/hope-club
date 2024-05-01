@@ -14,6 +14,7 @@ import yashwanth from "./../assets/team/yashwanth.jpg";
 import uday from "./../assets/team/uday.jpg";
 import charitha from "./../assets/team/charitha.jpg";
 import krteja from "./../assets/team/krteja.jpg";
+import raj from "./../assets/team/raj.jpg";
 import meghanadh from "./../assets/team/meghanadh.jpg";
 import shashank from "./../assets/team/jr/Neelashashank.jpeg";
 import kishan from "./../assets/team/jr/NIMMUKISHAN.jpg";
@@ -74,8 +75,7 @@ const team = [
     name: "RAJGOPAL HOTA",
     role: "Web Developer",
     bio: "Rajgopal has expertise in front-end development. He loves building user-friendly interfaces.",
-    image:
-      "https://th.bing.com/th/id/OIP.1bPdxuKbBVPJGJMpdLo3VAAAAA?rs=1&pid=ImgDetMain",
+    image: raj,
     social: {
       github: "https://github.com/rajgopalhota",
       linkedin: "https://www.linkedin.com/in/rajgopalhota/",

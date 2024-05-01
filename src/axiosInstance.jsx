@@ -4,8 +4,8 @@ import Cookies from "universal-cookie";
 const cookies = new Cookies();
 
 // Get the current base URL dynamically
-const baseURL = "https://rpa-club.vercel.app";
-// const baseURL = "http://localhost:5000";
+// const baseURL = "https://rpa-club.vercel.app";
+const baseURL = "http://localhost:5000";
 // const baseURL = window.location.origin;
 console.log("BASE", baseURL);
 

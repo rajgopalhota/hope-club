@@ -11,6 +11,7 @@ import { toast } from "react-toastify";
 import { useAuth } from "../AuthContext";
 import axios from "../axiosInstance";
 import Loading from "./Loading";
+import { FaMapLocationDot } from "react-icons/fa6";
 
 const AddActivityForm = (props) => {
   const auth = useAuth();
@@ -19,6 +20,7 @@ const AddActivityForm = (props) => {
     description: "",
     image: "",
     price: 0,
+    venue: "",
     date: "",
   });
   const [isLoading, setIsLoading] = useState(false);
@@ -66,6 +68,7 @@ const AddActivityForm = (props) => {
         description: "",
         image: "",
         price: 0,
+        venue: "",
         date: "",
       });
     } catch (error) {
@@ -85,7 +88,7 @@ const AddActivityForm = (props) => {
       {isLoading && <Loading />}
       {auth.user &&
         (auth.user.role == "Admin" || auth.user.role == "Manager") && (
-          <div className="w-full mx-auto mt-8 mb-10 neumorphic-container">
+          <div className="actadd w-full mx-auto mt-8 mb-10 neumorphic-container">
             <h2 className="text-2xl text-zinc-100 font-bold mb-4">
               {auth.user.name} Space - Add Activity
             </h2>
@@ -152,7 +155,26 @@ const AddActivityForm = (props) => {
                   <p className="text-red-500 text-sm">{errors.image}</p>
                 )}
               </div>
-
+              <div className="mb-4 relative">
+                <label
+                  htmlFor="venue"
+                  className="block text-gray-200 text-sm font-bold mb-2"
+                >
+                  <FaMapLocationDot className="inline-block mr-2" />
+                  Venue
+                </label>
+                <input
+                  type="text"
+                  id="venue"
+                  name="venue"
+                  value={activityData.venue}
+                  onChange={handleInputChange}
+                  className="w-full p-2 pl-4 border rounded-md"
+                />
+                {errors.venue && (
+                  <p className="text-red-500 text-sm">{errors.venue}</p>
+                )}
+              </div>
               <div className="mb-4 relative">
                 <label
                   htmlFor="price"

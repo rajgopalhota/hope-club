@@ -42,8 +42,8 @@ const Activities = () => {
   const fetchActivities = async () => {
     try {
       const response = await axios.get("/hope/activities");
-      setUserActivities(response.data.userActivities);
-      setOtherActivities(response.data.otherActivities);
+      setUserActivities(response.data.userActivities.reverse());
+      setOtherActivities(response.data.otherActivities,reverse());
       setFetchDataComplete((prev) => ({
         ...prev,
         userActivities: true,
@@ -58,6 +58,7 @@ const Activities = () => {
     try {
       const response = await axios.get("/pay/history");
       setPaymentHistory(response.data.reverse());
+      console.log(response.data.reverse());
       setFetchDataComplete((prev) => ({
         ...prev,
         paymentHistory: true,
@@ -117,7 +118,8 @@ const Activities = () => {
     <div className="activity container mx-auto p-8">
       {loading && <Loading />}
       <h2 className="text-3xl font-bold text-zinc-100 mb-4 flex items-center">
-        <img className="w-12 logo" src="/rpa.png" />&nbsp;Club Activities
+        <img className="w-12 logo" src="/rpa.png" />
+        &nbsp;Club Activities
       </h2>
       <hr className="border-t-2 border-blue-300 my-8" />
       <AddActivityForm fetchActivities={fetchActivities} />
@@ -152,17 +154,18 @@ const Activities = () => {
                     <p className="text-blue-100">
                       <span className="font-bold">Activities:</span>{" "}
                       {payment.activities
-                        .map((activity) => activity.name)
+                        .map((activity) => activity.name+" - "+activity.venue +" - "+new Date(activity.date).toLocaleDateString())
                         .join(", ")}
                     </p>
                   </div>
-                  <div className="mb-4">
-                    <p className="text-red-100">
-                      <span className="font-bold">Prices:</span>{" "}
-                      {payment.activities
-                        .map((activity) => `₹${activity.price}`)
-                        .join(", ")}
-                    </p>
+                  <div className="flex items-center mb-4 gap-2">
+                    <div className="price pricetag">
+                      <p>
+                        {payment.activities
+                          .map((activity) => `₹${activity.price}`)
+                          .join(", ")}
+                      </p>
+                    </div>
                   </div>
                   <div className="mb-4">
                     <p className="text-red-200">
@@ -239,8 +242,13 @@ const Activities = () => {
                     <p className="text-white">{activity.description}</p>
                   </div>
 
-                  <div className="mb-4 price pricetag">
-                    <p>&#8377; {activity.price}</p>
+                  <div className="flex items-center mb-4 gap-2">
+                    <div className="price pricetag">
+                      <p>&#8377; {activity.price}</p>
+                    </div>
+                    <div className="venue">
+                      <p>{activity.venue}</p>
+                    </div>
                   </div>
 
                   {/* Unregister Button */}
@@ -301,10 +309,14 @@ const Activities = () => {
               <div className="mb-4">
                 <p className="text-white">{activity.description}</p>
               </div>
-              <div className="mb-4 price pricetag">
-                <p>&#8377; {activity.price}</p>
+              <div className="flex items-center mb-4 gap-2">
+                <div className="price pricetag">
+                  <p>&#8377; {activity.price}</p>
+                </div>
+                <div className="venue">
+                  <p>{activity.venue}</p>
+                </div>
               </div>
-
               {/* Register and Not Interested Buttons */}
               {auth.user && (
                 <div className="flex justify-around">

@@ -2,7 +2,6 @@ import { FaGithub, FaTwitter, FaLinkedin } from "react-icons/fa";
 import { TiSocialFacebookCircular } from "react-icons/ti";
 import { AiOutlineMail } from "react-icons/ai";
 import { useEffect, useState } from "react";
-import { FcAbout } from "react-icons/fc";
 import team from "./TeamData";
 import { IoMdSearch } from "react-icons/io";
 
