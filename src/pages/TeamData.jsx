@@ -42,6 +42,7 @@ import LakshmiAlekyaMaddi from "./../assets/team/jr/LakshmiAlekyaMaddi.jpg";
 import DAIWIKMAJETY from "./../assets/team/jr/DAIWIKMAJETY.jpg";
 import Daivalokesh from "./../assets/team/jr/Daivalokesh.jpg";
 import leethika from "./../assets/team/jr/leethika.jpg";
+import thanuja from "./../assets/team/jr/thanuja.jpg";
 
 const team = [
   {
@@ -265,6 +266,19 @@ const team = [
       email: "meghanadh@example.com",
       twitter: "https://twitter.com/meghanadh",
       facebook: "https://www.facebook.com/meghanadh",
+    },
+  },
+  {
+    name: "M.Thanuja",
+    role: "Junior Core",
+    bio: "M.Thanuja is a motivated junior core team member, eager to learn and contribute to our projects.",
+    image: thanuja,
+    social: {
+      github: "https://github.com/thanuja",
+      linkedin: "https://www.linkedin.com/in/thanuja/",
+      email: "thanuja@example.com",
+      twitter: "https://twitter.com/thanuja",
+      facebook: "https://www.facebook.com/thanuja",
     },
   },
   {

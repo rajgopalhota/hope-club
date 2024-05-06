@@ -74,7 +74,7 @@ const PhotoGallery = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  const sliderImages = [img2, img3];
+  const sliderImages = [img1, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11];
   const sliderSettings = {
     dots: true,
     infinite: true,

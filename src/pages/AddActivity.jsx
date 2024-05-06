@@ -128,7 +128,7 @@ const AddActivityForm = (props) => {
                   value={activityData.description}
                   onChange={handleInputChange}
                   rows="7"
-                  className="w-full p-2 pl-4 border rounded-md"
+                  className="w-full text-white p-2 pl-4 border rounded-md"
                 />
                 {errors.description && (
                   <p className="text-red-500 text-sm">{errors.description}</p>

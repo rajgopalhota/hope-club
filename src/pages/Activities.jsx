@@ -14,57 +14,27 @@ const Activities = () => {
   const [userActivities, setUserActivities] = useState([]);
   const [otherActivities, setOtherActivities] = useState([]);
   const [paymentHistory, setPaymentHistory] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const [loading, setLoading] = useState(true); // Set initial loading state to true
-  const [fetchDataComplete, setFetchDataComplete] = useState({
-    userActivities: false,
-    otherActivities: false,
-    paymentHistory: false,
-  });
-
-  const fetchActivitiesNonLogin = async () => {
+  const fetchData = async () => {
+    setLoading(true); // Set loading state to true before making API calls
     try {
-      const response = await axios.get("/hope/get-all");
-      setUserActivities(response.data.userActivities);
-      setOtherActivities(response.data.otherActivities);
-      setFetchDataComplete((prev) => ({
-        ...prev,
-        userActivities: true,
-        otherActivities: true,
-      }));
-    } catch (error) {
-      console.error("Error fetching activities:", error);
-    } finally {
-      setLoading(false); // Set loading to false after API call completes
-    }
-  };
+      if (auth.user) {
+        const activitiesResponse = await axios.get("/hope/activities");
+        setUserActivities(activitiesResponse.data.userActivities.reverse());
+        setOtherActivities(activitiesResponse.data.otherActivities.reverse());
 
-  const fetchActivities = async () => {
-    try {
-      const response = await axios.get("/hope/activities");
-      setUserActivities(response.data.userActivities.reverse());
-      setOtherActivities(response.data.otherActivities,reverse());
-      setFetchDataComplete((prev) => ({
-        ...prev,
-        userActivities: true,
-        otherActivities: true,
-      }));
+        const paymentsResponse = await axios.get("/pay/history");
+        setPaymentHistory(paymentsResponse.data.reverse());
+      } else {
+        const allActivitiesResponse = await axios.get("/hope/get-all");
+        setUserActivities(allActivitiesResponse.data.userActivities);
+        setOtherActivities(allActivitiesResponse.data.otherActivities);
+      }
+      setLoading(false); // Set loading state to false after all API calls are completed
     } catch (error) {
-      console.error("Error fetching activities:", error);
-    }
-  };
-
-  const fetchPayments = async () => {
-    try {
-      const response = await axios.get("/pay/history");
-      setPaymentHistory(response.data.reverse());
-      console.log(response.data.reverse());
-      setFetchDataComplete((prev) => ({
-        ...prev,
-        paymentHistory: true,
-      }));
-    } catch (error) {
-      console.error("Error fetching activities:", error);
+      console.error("Error fetching data:", error);
+      setLoading(false); // Ensure loading state is set to false even if an error occurs
     }
   };
 
@@ -72,10 +42,11 @@ const Activities = () => {
     try {
       setLoading(true);
       const response = await axios.post(`/hope/activities/register/${aid}`);
-      fetchActivities();
+      await fetchData(); // Fetch all data after addition
       toast.success(response.data.message);
     } catch (error) {
-      console.error("Error fetching activities:", error);
+      console.error("Error handling addition:", error);
+      setLoading(false);
     }
   };
 
@@ -83,10 +54,11 @@ const Activities = () => {
     try {
       setLoading(true);
       const response = await axios.post(`/hope/activities/unregister/${aid}`);
-      fetchActivities();
+      await fetchData(); // Fetch all data after deletion
       toast.success(response.data.message);
     } catch (error) {
-      console.error("Error fetching activities:", error);
+      console.error("Error handling deletion:", error);
+      setLoading(false);
     }
   };
 
@@ -95,24 +67,8 @@ const Activities = () => {
   }, []);
 
   useEffect(() => {
-    if (auth.user) {
-      fetchActivities();
-      fetchPayments();
-    } else {
-      fetchActivitiesNonLogin();
-    }
+    fetchData(); // Fetch data whenever auth.user changes
   }, [auth.user]);
-
-  useEffect(() => {
-    // Check if all API calls are completed
-    if (
-      fetchDataComplete.userActivities &&
-      fetchDataComplete.otherActivities &&
-      fetchDataComplete.paymentHistory
-    ) {
-      setLoading(false); // Set loading to false when all API calls are completed
-    }
-  }, [fetchDataComplete, auth.user]);
 
   return (
     <div className="activity container mx-auto p-8">
@@ -122,7 +78,7 @@ const Activities = () => {
         &nbsp;Club Activities
       </h2>
       <hr className="border-t-2 border-blue-300 my-8" />
-      <AddActivityForm fetchActivities={fetchActivities} />
+      <AddActivityForm fetchActivities={fetchData} />
       {paymentHistory.length !== 0 && (
         <>
           <div className="mb-8">
@@ -154,7 +110,14 @@ const Activities = () => {
                     <p className="text-blue-100">
                       <span className="font-bold">Activities:</span>{" "}
                       {payment.activities
-                        .map((activity) => activity.name+" - "+activity.venue +" - "+new Date(activity.date).toLocaleDateString())
+                        .map(
+                          (activity) =>
+                            activity.name +
+                            " - " +
+                            activity.venue +
+                            " - " +
+                            new Date(activity.date).toLocaleDateString()
+                        )
                         .join(", ")}
                     </p>
                   </div>

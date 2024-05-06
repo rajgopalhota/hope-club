@@ -51,9 +51,9 @@ const Home = () => {
   ];
 
   return (
-    <div className="home flex flex-col lg:flex-row w-screen relative overflow-hidden">
+    <div className="home flex flex-col lg:flex-row min-h-screen w-screen relative overflow-hidden">
       <img
-        className="brain absolute inset-0 w-full h-full object-cover z-[-1]"
+        className="brain absolute inset-0 w-full h-full object-cover z-[-1] opacity-50"
         src={bgImage}
         alt="Background"
       />
@@ -73,15 +73,15 @@ const Home = () => {
         <div className="mt-4 flex space-x-4">
           <Link
             to={"/mission-vision"}
-            className="text-sm border border-blue-500 text-blue-500 bg-blue-100 bg-opacity-80 px-6 py-3 rounded-lg hover:bg-blue-500 hover:bg-opacity-90 hover:text-white transition duration-300 shadow-md flex items-center"
+            className="text-lg border border-blue-500 text-blue-500 bg-blue-100 bg-opacity-80 px-6 py-3 rounded-lg hover:bg-blue-500 hover:bg-opacity-90 hover:text-white transition duration-300 shadow-md flex items-center"
           >
-            <FaCode className="w-4 h-4 mr-2" /> Learn More
+            <FaCode className="w-4 h-4 mr-1" /> Learn More
           </Link>
           <Link
             to={"/contact"}
-            className="text-sm border border-green-500 text-green-500 bg-green-100 bg-opacity-80 px-6 py-3 rounded-lg hover:bg-green-500 hover:text-white transition duration-300 shadow-md flex items-center"
+            className="text-lg border border-green-500 text-green-700 bg-green-100 bg-opacity-80 px-6 py-3 rounded-lg hover:bg-green-500 hover:text-white transition duration-300 shadow-md flex items-center"
           >
-            <RiQuestionFill className="w-4 h-4 mr-2" /> Contact Us
+            <RiQuestionFill className="w-4 h-4 mr-1" /> Contact Us
           </Link>
         </div>
       </div>
