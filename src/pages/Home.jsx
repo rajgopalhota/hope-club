@@ -19,7 +19,7 @@ const Home = () => {
   // Define key points for the RPA club
   const keyPoints = [
     {
-      icon: <FaRobot className="w-8 h-8 mr-4 text-blue-900" />,
+      icon: <FaRobot className="w-8 h-8 mr-4 text-blue-300" />,
       title: "Robotics Automation",
       description:
         "Exploring the world of robotics and automation through hands-on projects.",

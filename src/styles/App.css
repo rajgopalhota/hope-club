@@ -193,7 +193,9 @@ hr {
   border-radius: 12px;
 }
 .activity img {
-  filter: brightness(0.6) saturate(0.6);
+  pointer-events: none;
+  user-select: none;
+  filter: brightness(0.95) saturate(1.2);
 }
 .act-name {
   text-shadow: 0 10px 30px rgb(0, 0, 0);
@@ -216,10 +218,10 @@ hr {
   content: "Amount: ";
 }
 .venue p {
-  color: rgb(185, 221, 255) !important;
+  color: rgb(224, 240, 255) !important;
   font-weight: 600;
   /* text-shadow: 0 0 4px black; */
-  background-color: rgba(0, 159, 29, 0.4);
+  background-color: rgba(0, 98, 159, 0.8);
   border-radius: 10px;
   display: block;
   width: fit-content !important;

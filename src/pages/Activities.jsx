@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { BiBasket, BiPurchaseTag } from "react-icons/bi";
+import { BiBasket } from "react-icons/bi";
 import { BsCheckCircle, BsXCircle } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -21,15 +21,25 @@ const Activities = () => {
     try {
       if (auth.user) {
         const activitiesResponse = await axios.get("/hope/activities");
-        setUserActivities(activitiesResponse.data.userActivities.reverse());
-        setOtherActivities(activitiesResponse.data.otherActivities.reverse());
-
+        const reversedUserActivities = activitiesResponse.data.userActivities.reverse();
+        const sortedUserActivities = reversedUserActivities.sort((a, b) => new Date(b.date) - new Date(a.date));
+        setUserActivities(sortedUserActivities);
+  
+        const reversedOtherActivities = activitiesResponse.data.otherActivities.reverse();
+        const sortedOtherActivities = reversedOtherActivities.sort((a, b) => new Date(b.date) - new Date(a.date));
+        setOtherActivities(sortedOtherActivities);
+  
         const paymentsResponse = await axios.get("/pay/history");
-        setPaymentHistory(paymentsResponse.data.reverse());
+        const reversedPaymentHistory = paymentsResponse.data.reverse();
+        const sortedPaymentHistory = reversedPaymentHistory.sort((a, b) => new Date(b.date) - new Date(a.date));
+        setPaymentHistory(sortedPaymentHistory);
       } else {
         const allActivitiesResponse = await axios.get("/hope/get-all");
-        setUserActivities(allActivitiesResponse.data.userActivities);
-        setOtherActivities(allActivitiesResponse.data.otherActivities);
+        const sortedUserActivities = allActivitiesResponse.data.userActivities.sort((a, b) => new Date(b.date) - new Date(a.date));
+        setUserActivities(sortedUserActivities);
+        
+        const sortedOtherActivities = allActivitiesResponse.data.otherActivities.sort((a, b) => new Date(b.date) - new Date(a.date));
+        setOtherActivities(sortedOtherActivities);
       }
       setLoading(false); // Set loading state to false after all API calls are completed
     } catch (error) {
@@ -37,7 +47,7 @@ const Activities = () => {
       setLoading(false); // Ensure loading state is set to false even if an error occurs
     }
   };
-
+  
   const handleAddition = async (aid) => {
     try {
       setLoading(true);
@@ -183,48 +193,49 @@ const Activities = () => {
               {userActivities.map((activity) => (
                 <div
                   key={activity._id}
-                  className="bg-gradient-to-br from-blue-900 via-cyan-900 to-blue-900 p-4 rounded-md shadow-md mb-4 transform hover:scale-[1.02] transition-transform"
+                  className="neumorphic-container bg-gradient-to-br from-blue-900 via-cyan-900 to-blue-900 p-4 rounded-md shadow-md mb-4 transform hover:scale-[1.02] transition-transform flex items-center"
                 >
-                  {/* Activity Image */}
-                  <div className="relative mb-4">
-                    <img
-                      src={activity.image}
-                      alt={activity.name}
-                      className="w-full h-40 object-cover rounded-md"
-                    />
-                    <div className="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center text-white text-center">
-                      <h3 className="act-name text-xl font-bold">
-                        <span className="text-pink-500">Registered</span>{" "}
-                        {activity.name}
-                      </h3>
+                  <div>
+                    {/* Activity Image */}
+                    <div className="relative mb-4">
+                      <img
+                        src={activity.image}
+                        alt={activity.name}
+                        className="w-full object-cover rounded-md"
+                      />
+                      <div className="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center text-white text-center">
+                        <h3 className="act-name text-xl font-bold">
+                          <span className="text-pink-500">Registered</span>
+                        </h3>
+                      </div>
                     </div>
-                  </div>
 
-                  {/* Activity Details */}
-                  <div className="mb-4 ">
-                    <p className="text-white">{activity.description}</p>
-                  </div>
-
-                  <div className="flex items-center mb-4 gap-2">
-                    <div className="price pricetag">
-                      <p>&#8377; {activity.price}</p>
+                    {/* Activity Details */}
+                    <div className="mb-4 ">
+                      <p className="text-white">{activity.description}</p>
                     </div>
-                    <div className="venue">
-                      <p>{activity.venue}</p>
-                    </div>
-                  </div>
 
-                  {/* Unregister Button */}
-                  <div className="flex justify-center">
-                    <button
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handleDeletion(activity._id);
-                      }}
-                      className="border border-red-500 text-red-500 py-2 px-4 rounded-md hover:bg-red-100 focus:outline-none"
-                    >
-                      Unregister
-                    </button>
+                    <div className="flex items-center justify-around mb-4 gap-2">
+                      <div className="price pricetag">
+                        <p>&#8377; {activity.price}</p>
+                      </div>
+                      <div className="venue">
+                        <p>{activity.venue}</p>
+                      </div>
+                    </div>
+
+                    {/* Unregister Button */}
+                    <div className="flex justify-center">
+                      <button
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleDeletion(activity._id);
+                        }}
+                        className="border border-red-400 text-red-400 py-2 px-4 rounded-md hover:bg-red-100 focus:outline-none"
+                      >
+                        Unregister
+                      </button>
+                    </div>
                   </div>
                 </div>
               ))}
@@ -252,51 +263,48 @@ const Activities = () => {
           {otherActivities.map((activity) => (
             <div
               key={activity._id}
-              className="bg-gradient-to-br from-teal-900 via-cyan-900 to-teal-900 p-4 rounded-md shadow-md transform hover:scale-[1.02] transition-transform"
+              className="neumorphic-container bg-gradient-to-br from-teal-900 via-cyan-900 to-teal-900 p-4 rounded-md shadow-md transform hover:scale-[1.02] transition-transform flex items-center"
             >
-              {/* Activity Image */}
-              <div className="relative mb-4">
-                <img
-                  src={activity.image}
-                  alt={activity.name}
-                  className="w-full h-40 object-cover rounded-md"
-                />
-                <div className="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center text-white text-center">
-                  <h3 className="act-name text-xl font-bold">
-                    <span className="text-cyan-500">More</span> {activity.name}
-                  </h3>
+              <div>
+                {/* Activity Image */}
+                <div className="relative mb-4">
+                  <img
+                    src={activity.image}
+                    alt={activity.name}
+                    className="w-full object-cover rounded-md"
+                  />
                 </div>
-              </div>
 
-              {/* Activity Details */}
-              <div className="mb-4">
-                <p className="text-white">{activity.description}</p>
+                {/* Activity Details */}
+                <div className="mb-4">
+                  <p className="text-white">{activity.description}</p>
+                </div>
+                <div className="flex items-center justify-around mb-4 gap-2">
+                  <div className="price pricetag">
+                    <p>&#8377; {activity.price}</p>
+                  </div>
+                  <div className="venue">
+                    <p>{activity.venue}</p>
+                  </div>
+                </div>
+                {/* Register and Not Interested Buttons */}
+                {auth.user && (
+                  <div className="flex justify-around">
+                    <button className="border border-red-400 text-red-400 py-2 px-4 rounded-md hover:bg-red-100 focus:outline-none">
+                      Not Interested
+                    </button>
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleAddition(activity._id);
+                      }}
+                      className="bg-green-500 text-white py-2 px-8 rounded-md hover:bg-green-600 focus:outline-none"
+                    >
+                      Register
+                    </button>
+                  </div>
+                )}
               </div>
-              <div className="flex items-center mb-4 gap-2">
-                <div className="price pricetag">
-                  <p>&#8377; {activity.price}</p>
-                </div>
-                <div className="venue">
-                  <p>{activity.venue}</p>
-                </div>
-              </div>
-              {/* Register and Not Interested Buttons */}
-              {auth.user && (
-                <div className="flex justify-around">
-                  <button className="border border-red-500 text-red-500 py-2 px-4 rounded-md hover:bg-red-100 focus:outline-none">
-                    Not Interested
-                  </button>
-                  <button
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleAddition(activity._id);
-                    }}
-                    className="bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 focus:outline-none"
-                  >
-                    Register
-                  </button>
-                </div>
-              )}
             </div>
           ))}
         </div>
