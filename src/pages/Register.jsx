@@ -182,6 +182,7 @@ export default function Register() {
                     <option value="ECE">
                       Electronics and Communication Engineering (ECE)
                     </option>
+                    <option value="AI&DS">AI & DS (AI&DS)</option>
                     <option value="ME">Mechanical Engineering (ME)</option>
                     <option value="CE">Civil Engineering (CE)</option>
                     <option value="EE">Electrical Engineering (EE)</option>
