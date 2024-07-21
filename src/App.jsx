@@ -35,10 +35,8 @@ function App() {
   };
   return (
     <div>
-      <div className="anima" />
       <LoadingBar ref={loadingBarRef} color="#3498db" />
-      {/* Login/Logout Button */}
-      <div className="activityButtons z-10 fixed top-4 right-4 flex flex-col gap-1 items-center justify-center">
+      <div className="activityButtons z-10 fixed bottom-4 left-4 flex flex-col gap-1 items-center justify-center">
         <div
           onClick={handleClick}
           title={auth.user ? "Logout" : "Login"}
@@ -75,8 +73,9 @@ function App() {
       </div>
       {/* Your main content goes here */}
       <ToastContainer />
-      <section className="mainContent pb-10">
-        <section className="min-h-screen">
+      <Navbar />
+      <section className="mainContent">
+        <section className="min-h-screen pt-14">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/activities" element={<Activities />} />
@@ -93,8 +92,6 @@ function App() {
         </section>
         <Footer />
       </section>
-      {/* Include the Navbar component at the bottom of the page */}
-      <Navbar />
     </div>
   );
 }

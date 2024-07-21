@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { FaFeatherPointed } from "react-icons/fa6";
+import { AiTwotoneThunderbolt } from "react-icons/ai";
 
 const featureData = [
   {
@@ -52,7 +53,6 @@ export const Feature = () => {
   return (
     <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
       <div className="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-5xl md:mb-12">
-        
         <h2 className="max-w-lg mb-6 font-sans text-3xl flex font-bold leading-none tracking-tight text-gray-100 sm:text-4xl md:mx-auto">
           <span className="relative inline-block">
             <svg
@@ -79,7 +79,8 @@ export const Feature = () => {
             </svg>
             <span className="relative"></span>
           </span>{" "}
-          <img className="w-14 h-14" src="/rpa.png" /> RPA Club Initiatives and Goals
+          <img className="w-14 h-14" src="/rpa.png" /> RPA Club Initiatives and
+          Goals
         </h2>
         <p className="text-base text-gray-300 md:text-lg text-justify">
           <FaFeatherPointed /> Welcome to the RPA Club at KL University, a
@@ -102,32 +103,22 @@ export const Feature = () => {
           excellence.
         </p>
       </div>
-      <div className="grid max-w-screen-lg mx-auto gap-y-6 lg:grid-cols-2 lg:gap-x-8">
+      <div className="grid mx-auto gap-y-6 lg:grid-cols-2 lg:gap-x-8">
         {featureData.map((feature, index) => (
           <div className="p-6 fcard rounded-lg shadow-md" key={index}>
-            <div
-              className={`flex items-center justify-center w-12 h-12 rounded-full bg-purple-200 mb-4`}
-            >
-              <svg
-                className="w-8 h-8 text-deep-purple-accent-400"
-                stroke="currentColor"
-                viewBox="0 0 52 52"
-              >
-                <polygon
-                  strokeWidth="3"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  fill="none"
-                  points="29 13 14 29 25 29 23 39 38 23 27 23"
-                />
-              </svg>
-            </div>
             <div>
-              <h6 className="mb-3 text-xl font-bold leading-5 text-zinc-50">
-                {feature.title}
-              </h6>
-              <hr/>
-              <p className="text-sm text-gray-300">{feature.content}</p>
+              <div className="flex items-center gap-4">
+                <div
+                  className={`flex items-center justify-center w-12 h-12 rounded-full bg-purple-200 mb-4`}
+                >
+                  <AiTwotoneThunderbolt className="w-6 h-6" />
+                </div>
+                <h6 className="mb-3 text-xl font-bold leading-5 text-zinc-50">
+                  {feature.title}
+                </h6>
+              </div>
+              <hr className="opacity-40 mb-2" />
+              <p className="text-gray-300">{feature.content}</p>
             </div>
           </div>
         ))}

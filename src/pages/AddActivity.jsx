@@ -219,7 +219,7 @@ const AddActivityForm = (props) => {
 
               <button
                 type="submit"
-                className={`neumorphic-button bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 focus:outline-none flex items-center justify-center ${
+                className={`neumorphic-button border-green-300 text-green-300 px-6 py-3 rounded-lg hover:bg-green-300 hover:bg-opacity-20 hover:text-white focus:outline-none flex items-center justify-center ${
                   isLoading ? "cursor-not-allowed opacity-50" : ""
                 }`}
                 disabled={isLoading}

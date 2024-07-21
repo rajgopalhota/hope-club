@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer class="w-full bg-zinc-950 bg-opacity-70 flex flex-col space-y-2 justify-center p-4">
+    <footer class="w-full flex flex-col space-y-2 justify-center p-4">
       <div class="flex justify-center space-x-5">
         <a
           href="https://t.me/rpatechclub"

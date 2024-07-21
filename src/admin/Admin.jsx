@@ -33,7 +33,7 @@ const Admin = () => {
       <div className="relative flex h-screen">
         {/* Toggle Button for Small Screens */}
         <button
-          className="lg:hidden fixed z-10 top-6 left-6 text-orange-500"
+          className="lg:hidden fixed z-10 top-16 left-6 text-orange-500"
           onClick={toggleSidebar}
         >
           {sidebarIcon}
@@ -53,7 +53,7 @@ const Admin = () => {
 
         {/* Sidebar */}
         <div
-          className={`bg-gray-800 text-white w-64 py-6 fixed z-999 h-full overflow-hidden ${
+          className={`bg-slate-900 text-white w-full lg:w-1/6 py-6 fixed z-999 h-full overflow-hidden ${
             isSidebarOpen ? "translate-x-0" : "-translate-x-full"
           } transition-transform lg:translate-x-0`}
         >

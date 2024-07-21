@@ -61,7 +61,7 @@ const Login = () => {
         ) : (
           <div className="login w-full relative py-3 sm:max-w-xl sm:mx-auto">
             <div className="login absolute inset-0 bg-gradient-to-r from-blue-300 to-blue-600 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl"></div>
-            <div className="login relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20">
+            <div className="login relative px-4 py-10 bg-slate-100 shadow-lg sm:rounded-3xl sm:p-20">
               <div className="max-w-md mx-auto">
                 <div>
                   <h1 className="text-2xl font-bold">
@@ -83,7 +83,7 @@ const Login = () => {
                           type="text"
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
-                          className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:border-rose-600"
+                          className="peer placeholder-transparent h-10 w-full border-b-2 bg-slate-100 border-gray-300 text-gray-900 focus:outline-none focus:border-rose-600"
                           placeholder="Email address"
                         />
                         <label
@@ -101,7 +101,7 @@ const Login = () => {
                           type="password"
                           value={password}
                           onChange={(e) => setPassword(e.target.value)}
-                          className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:border-rose-600"
+                          className="peer placeholder-transparent h-10 w-full border-b-2 bg-slate-100 border-gray-300 text-gray-900 focus:outline-none focus:border-rose-600"
                           placeholder="Password"
                         />
                         <label
@@ -114,7 +114,7 @@ const Login = () => {
                       <div className="relative">
                         <button
                           type="submit"
-                          className="bg-blue-500 text-white rounded-md px-2 py-1"
+                          className="bg-blue-500 text-white rounded-md px-3 py-1"
                         >
                           Submit
                         </button>
@@ -123,7 +123,7 @@ const Login = () => {
                   </div>
                 </form>
                 <p className="text-center text-sm font-light text-gray-500 dark:text-gray-400">
-                  Already have an account?{" "}
+                  New to RPA club?{" "}
                   <Link
                     to="/reg"
                     className="font-medium text-primary-600 hover:underline dark:text-primary-500"

@@ -8,8 +8,8 @@ export default function AdminHome() {
     <div className="flex items-center justify-center m-10">
       <div className="text-center">
         <img className="mx-auto w-[50%] mb-8" src={panelImg} alt="Full Screen Image" />
-        <p className="text-4xl font-bold mb-4">Welcome {auth.user.name}!</p>
-        <p className="text-lg">
+        <p className="text-4xl font-bold mb-4 text-white">Welcome {auth.user.name}!</p>
+        <p className="text-lg text-slate-200">
           "Your {auth.user.role} panel is ready to be used, Dive into it with sidebar"
         </p>
       </div>

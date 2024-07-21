@@ -86,7 +86,7 @@ export default function Contact() {
   return (
     <div className="contactUs upzind">
       {loading && <Loading />}
-      <div className="flex gap-8 justify-center items-center flex-wrap-reverse">
+      <div className="flex gap-8 justify-center items-center flex-wrap-reverse h-[80vh]">
         <div className="social-handles hidden lg:inline-block space-y-5 text-center">
           <svg
             className="inline-block"

@@ -16,11 +16,17 @@ export default function Loading() {
   };
 
   return (
-    <div className="loadingOnAction">
-      <span className="loader slide-fwd-center"></span>
-      <p className="text-white slide-fwd-center" onClick={refreshPage}>
-        {!showRefreshButton ? <>We are processing your request!</> : <>Click here to reload</>}
-      </p>
+    <div className="loadcont">
+      <div className="loadingOnAction">
+        <span className="loader slide-fwd-center"></span>
+        <p className="text-white slide-fwd-center" onClick={refreshPage}>
+          {!showRefreshButton ? (
+            <>We are processing your request!</>
+          ) : (
+            <>Click here to reload</>
+          )}
+        </p>
+      </div>
     </div>
   );
 }

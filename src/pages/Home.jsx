@@ -5,21 +5,19 @@ import {
   FaChalkboardTeacher,
   FaRegCalendarAlt,
   FaRunning,
-} from "react-icons/fa"; // Additional icons
-import { RiQuestionFill } from "react-icons/ri"; // New question icon
+} from "react-icons/fa";
+import { RiQuestionFill } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import TextAni from "./TextAni";
-import bgImage from "./../assets/vids/brain.gif"; // Replace with your background image
 
 const Home = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  // Define key points for the RPA club
   const keyPoints = [
     {
-      icon: <FaRobot className="w-8 h-8 mr-4 text-blue-300" />,
+      icon: <FaRobot className="w-8 h-8 mr-4 text-blue-500" />,
       title: "Robotics Automation",
       description:
         "Exploring the world of robotics and automation through hands-on projects.",
@@ -51,65 +49,50 @@ const Home = () => {
   ];
 
   return (
-    <div className="home flex flex-col lg:flex-row min-h-screen w-screen relative overflow-hidden">
-      <img
-        className="brain absolute inset-0 w-full h-full object-cover z-[-1] opacity-50"
-        src={bgImage}
-        alt="Background"
-      />
-      <div className="hcont relative lg:w-1/2 logodiv flex flex-col justify-center items-center p-10 h-auto">
-        <p className="welcometxt mb-5">
+    <div className="home flex flex-col min-h-screen w-full text-gray-100">
+      <div className="header flex flex-col items-center justify-center mb-12 p-8">
+        <p className="text-4xl font-bold text-center mb-5">
           RPA <TextAni />
         </p>
-        <img
-          src="/rpa.png"
-          alt="KL University Logo"
-          className="homeIco object-cover lg:w-[50%] w-[100%] mb-4"
-        />
-        <p className="homeIcoText text-gray-100 text-xl text-center max-w-md">
+        <img src="/rpa.png" alt="KL University Logo" className="w-48 mb-4" />
+        <p className="text-lg text-center max-w-2xl text-gray-300">
           Welcome to the official website of the Robotics Process Automation, KL
-          Univeristy
+          University
         </p>
-        <div className="mt-4 flex space-x-4">
+        <div className="mt-6 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
           <Link
             to={"/mission-vision"}
-            className="text-lg border border-blue-500 text-blue-500 bg-blue-100 bg-opacity-80 px-6 py-3 rounded-lg hover:bg-blue-500 hover:bg-opacity-90 hover:text-white transition duration-300 shadow-md flex items-center"
+            className="text-lg border border-blue-500 text-blue-500 px-6 py-3 rounded-lg hover:bg-blue-500 hover:bg-opacity-20 hover:text-white transition duration-300 shadow-md flex items-center justify-center gap-1"
           >
-            <FaCode className="w-4 h-4 mr-1" /> Learn More
+            <FaCode className="w-7 h-7 mr-1" /> Learn More
           </Link>
           <Link
             to={"/contact"}
-            className="text-lg border border-green-500 text-green-700 bg-green-100 bg-opacity-80 px-6 py-3 rounded-lg hover:bg-green-500 hover:text-white transition duration-300 shadow-md flex items-center"
+            className="text-lg border border-green-600 text-green-600 px-6 py-3 rounded-lg hover:bg-green-600 hover:bg-opacity-20 hover:text-white transition duration-300 shadow-md flex items-center justify-center gap-1"
           >
-            <RiQuestionFill className="w-4 h-4 mr-1" /> Contact Us
+            <RiQuestionFill className="w-7 h-7 mr-1" /> Contact Us
           </Link>
         </div>
       </div>
 
-      {/* Key points section */}
-      <div className="lg:w-1/2 bg-zinc-900 bg-opacity-55 hcont p-8">
-        <div className="flex items-center mb-4">
-          <h2 className="text-2xl text-zinc-100 font-semibold">
-            Robotic Process Automation Club{" "}
-          </h2>
-          &nbsp;
-          <img className="w-12" src="/rpa.png" />
-        </div>
-        <hr />
-        {keyPoints.map((point, index) => (
-          <div
-            key={index}
-            className="homeliitem cursor-pointer mb-6 p-4 rounded-lg hover:bg-purple-100 hover:bg-opacity-70 transition duration-300 shadow-md"
-          >
-            <div className="flex items-center mb-2">
-              {point.icon}
-              <div className="info">
-                <h3 className="text-lg font-semibold">{point.title}</h3>
-                <p className="">{point.description}</p>
+      <div className="key-points flex flex-col items-center bg-slate-900 bg-opacity-60 shadow-md rounded-lg p-8">
+        <h2 className="text-3xl font-semibold mb-6">
+          Robotic Process Automation Club
+        </h2>
+        <div className="w-full max-w-4xl">
+          {keyPoints.map((point, index) => (
+            <div
+              key={index}
+              className="mb-6 p-6 bg-slate-800 rounded-lg shadow-md transition duration-300 hover:shadow-lg"
+            >
+              <div className="flex items-center mb-2">
+                {point.icon}
+                <h3 className="text-xl font-semibold">{point.title}</h3>
               </div>
+              <p className="text-gray-300">{point.description}</p>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );
