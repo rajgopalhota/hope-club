@@ -3,21 +3,22 @@ import {
   FaAddressBook,
   FaBars,
   FaChartLine,
+  FaGlobe,
   FaMoneyCheckAlt,
   FaTimes,
   FaUserFriends,
   FaUsers,
 } from "react-icons/fa";
+
 import { NavLink, Route, Routes } from "react-router-dom";
 import { useAuth } from "../AuthContext";
-import empty from "./../assets/empty.gif";
+import PageNotFound from "../pages/PageNotFound";
 import Activity from "./Activity";
 import AdminHome from "./AdminHome";
 import Contacts from "./Contacts";
 import Engagement from "./Engagement";
 import PaymentStatus from "./PaymentStatus";
 import Users from "./Users";
-import PageNotFound from "../pages/PageNotFound";
 const Admin = () => {
   const auth = useAuth();
   const [isSidebarOpen, setSidebarOpen] = useState(false);
@@ -36,7 +37,7 @@ const Admin = () => {
       <div className="relative flex h-screen">
         {/* Toggle Button for Small Screens */}
         <button
-          className="lg:hidden fixed z-10 top-16 left-6 text-orange-500"
+          className="lg:hidden text-3xl fixed z-10 top-6 right-6 text-blue-200"
           onClick={toggleSidebar}
         >
           {sidebarIcon}
@@ -56,7 +57,7 @@ const Admin = () => {
 
         {/* Sidebar */}
         <div
-          className={`bg-slate-900 bg-opacity-60 backdrop-blur text-white w-full lg:w-1/6 py-6 fixed z-999 h-full overflow-hidden ${
+          className={`bg-slate-900 bg-opacity-80 backdrop-blur-xl text-white w-full lg:w-1/6 py-6 fixed z-999 h-full overflow-hidden ${
             isSidebarOpen ? "translate-x-0" : "-translate-x-full"
           } transition-transform lg:translate-x-0`}
         >
@@ -107,6 +108,15 @@ const Admin = () => {
               >
                 <FaUsers className="mr-2" />
                 Users
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/"
+                className="flex items-center py-2 px-4 hover:bg-gray-700 w-full"
+              >
+                <FaGlobe className="mr-2" />
+                Visit site
               </NavLink>
             </li>
           </ul>

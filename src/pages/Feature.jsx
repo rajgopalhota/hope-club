@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { FaFeatherPointed } from "react-icons/fa6";
 import { AiTwotoneThunderbolt } from "react-icons/ai";
+import TechStack from "./TechStack";
 
 const featureData = [
   {
@@ -51,11 +52,11 @@ export const Feature = () => {
     window.scrollTo(0, 0);
   }, []);
   return (
-    <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
-      <div className="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-5xl md:mb-12">
-        <h2 className="max-w-lg mb-6 font-sans text-3xl flex font-bold leading-none tracking-tight text-gray-100 sm:text-4xl md:mx-auto">
-          RPA Club Initiatives and
-          Goals
+    <div className="px-4 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
+      <TechStack />
+      <div className="my-10 mx-auto text-left md:mb-12">
+        <h2 className="my-6 font-sans text-3xl flex font-bold leading-none tracking-tight text-sky-300 sm:text-4xl md:mx-auto">
+          RPA Club Initiatives and Goals
         </h2>
         <p className="text-base text-gray-300 md:text-lg text-justify">
           <FaFeatherPointed /> Welcome to the RPA Club at KL University, a

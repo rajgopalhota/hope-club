@@ -17,7 +17,7 @@ const Activities = () => {
   const [loading, setLoading] = useState(true);
 
   const fetchData = async () => {
-    setLoading(true); // Set loading state to true before making API calls
+    setLoading(true);
     try {
       if (auth.user) {
         const activitiesResponse = await axios.get("/hope/activities");
@@ -96,7 +96,7 @@ const Activities = () => {
 
   return (
     <div className="activity container mx-auto p-8">
-      <h2 className="text-3xl font-bold text-zinc-100 mb-4 flex items-center">
+      <h2 className="text-3xl font-bold text-sky-300 mb-4 flex items-center">
         Club Activities
       </h2>
       <hr className="border-t-2 border-blue-300 my-6 opacity-20" />
@@ -197,7 +197,7 @@ const Activities = () => {
           {userActivities.length !== 0 && (
             <>
               <div className="my-4">
-                <h3 className="text-2xl font-bold mb-2 flex items-center text-purple-200">
+                <h3 className="text-2xl font-bold mb-2 flex items-center text-sky-300">
                   {auth.user && (
                     <>
                       <BsCheckCircle className="mr-2 text-green-600" />
@@ -271,7 +271,7 @@ const Activities = () => {
 
           {/* More Activities Section */}
           <div>
-            <h3 className="text-2xl font-bold mb-2 flex items-center text-teal-100">
+            <h3 className="text-2xl font-bold mb-2 flex items-center text-sky-300">
               <BiBasket className="mr-2 text-blue-200" />
               More Activities
             </h3>

@@ -19,10 +19,10 @@ const Contacts = () => {
   // Fetch data from the API
   const fetchData = async () => {
     try {
-      setLoading(true)
+      setLoading(true);
       const response = await axiosInstance.get("/api/messages/all");
       setMessages(response.data);
-      setLoading(false)
+      setLoading(false);
     } catch (error) {
       setLoading(false);
       console.error("Error fetching data:", error.message);
@@ -81,46 +81,51 @@ const Contacts = () => {
 
   return (
     <div className="container mx-auto">
-      {loading && <Loading/>}
       <h2 className="text-2xl font-bold mb-4 text-white">Messages Component</h2>
-
-      {/* Table */}
-      <table {...getTableProps()} className="min-w-full table-auto border">
-        <thead className="bg-zinc-900 text-white">
-          {headerGroups.map((headerGroup) => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map((column) => (
-                <th
-                  {...column.getHeaderProps(column.getSortByToggleProps())}
-                  className={"p-4 text-left border-b"}
-                >
-                  {column.render("Header")}
-                  {column.isSorted ? (column.isSortedDesc ? " 🔽" : " 🔼") : ""}
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
-          {rows.map((row, rowIndex) => {
-            prepareRow(row);
-            return (
-              <tr
-                {...row.getRowProps()}
-                className={`${
-                  rowIndex % 2 === 0 ? "bg-gray-200" : "bg-gray-100"
-                } border-b`}
-              >
-                {row.cells.map((cell) => (
-                  <td {...cell.getCellProps()} className="p-4">
-                    {cell.render("Cell")}
-                  </td>
+      {loading ? (
+        <Loading />
+      ) : (
+        <table {...getTableProps()} className="min-w-full table-auto border">
+          <thead className="bg-zinc-900 text-white">
+            {headerGroups.map((headerGroup) => (
+              <tr {...headerGroup.getHeaderGroupProps()}>
+                {headerGroup.headers.map((column) => (
+                  <th
+                    {...column.getHeaderProps(column.getSortByToggleProps())}
+                    className={"p-4 text-left border-b"}
+                  >
+                    {column.render("Header")}
+                    {column.isSorted
+                      ? column.isSortedDesc
+                        ? " 🔽"
+                        : " 🔼"
+                      : ""}
+                  </th>
                 ))}
               </tr>
-            );
-          })}
-        </tbody>
-      </table>
+            ))}
+          </thead>
+          <tbody {...getTableBodyProps()}>
+            {rows.map((row, rowIndex) => {
+              prepareRow(row);
+              return (
+                <tr
+                  {...row.getRowProps()}
+                  className={`${
+                    rowIndex % 2 === 0 ? "bg-gray-200" : "bg-gray-100"
+                  } border-b`}
+                >
+                  {row.cells.map((cell) => (
+                    <td {...cell.getCellProps()} className="p-4">
+                      {cell.render("Cell")}
+                    </td>
+                  ))}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      )}
     </div>
   );
 };

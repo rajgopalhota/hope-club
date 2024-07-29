@@ -97,7 +97,7 @@ const PhotoGallery = () => {
 
   return (
     <div className="container mx-auto p-8">
-      <h2 className="text-3xl text-zinc-100 font-bold mb-4 flex items-center">
+      <h2 className="text-3xl text-sky-300 font-bold mb-4 flex items-center">
       <FaCamera className="mr-2 text-blue-500" size={32} /> Photo Gallery &nbsp;
       </h2>
       {/* Image Slider */}

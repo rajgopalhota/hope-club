@@ -1,47 +1,105 @@
-nav {
-  border-radius: 0px 0px 8px 8px;
-  backdrop-filter: blur(52px) !important;
-  overflow: hidden;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 0 16px rgb(0, 41, 61);
-  z-index: 999 !important;
-}
-nav a {
-  transition: all ease-in 0.1s;
-  border: 1px solid transparent;
-  border-right: 1px solid rgba(255, 255, 255, 0.3);
-  border-left: 1px solid rgba(255, 255, 255, 0.3);
-}
+import React, { useEffect } from "react";
+import {
+  FaRobot,
+  FaCode,
+  FaChalkboardTeacher,
+  FaRegCalendarAlt,
+  FaRunning,
+} from "react-icons/fa";
+import { RiQuestionFill } from "react-icons/ri";
+import { Link } from "react-router-dom";
+import TextAni from "./TextAni";
 
-nav a:hover,
-.active {
-  transition: all ease-in 0.1s;
-  /* border: 1px solid rgb(255, 253, 243); */
-  border-right: 1px solid rgba(54, 28, 0, 0.3);
-  border-left: 1px solid rgba(54, 28, 0, 0.3);
-  /* transform: translateY(-14%); */
-  background-color: rgba(0, 60, 90, 0.629);
-  /* border-radius: 10px; */
-  color: lavender;
-}
-.active {
-  box-shadow: 0 5px 10px rgba(185, 185, 245, 0.8);
-}
-.adminroute .active svg {
-  transition: all ease-in-out 0.2s;
-  margin-left: 20px;
-}
-.adminroute .active {
-  transition: all ease-in-out 0.2s;
-  outline: 2px solid rgb(177, 177, 177);
-  background-color: rgba(28, 0, 88, 0.7);
-  border-radius: 10px;
-}
-nav a:hover p,
-.active p {
-  color: white !important;
-}
-.active svg {
-  color: rgb(255, 213, 195);
-  transform: scale(1.15);
-}
+const Home = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  const keyPoints = [
+    {
+      icon: <FaRobot className="w-8 h-8 mr-4 text-blue-500" />,
+      title: "Robotics Automation",
+      description:
+        "Exploring the world of robotics and automation through hands-on projects.",
+    },
+    {
+      icon: <FaCode className="w-8 h-8 mr-4 text-green-500" />,
+      title: "Coding Workshops",
+      description:
+        "Conducting coding workshops to enhance skills in programming for automation.",
+    },
+    {
+      icon: <FaChalkboardTeacher className="w-8 h-8 mr-4 text-yellow-500" />,
+      title: "Practice Sessions",
+      description:
+        "Organizing practice sessions to reinforce learning and skills development.",
+    },
+    {
+      icon: <FaRegCalendarAlt className="w-8 h-8 mr-4 text-purple-500" />,
+      title: "Training Events",
+      description:
+        "Hosting training events to provide in-depth knowledge and hands-on experience.",
+    },
+    {
+      icon: <FaRunning className="w-8 h-8 mr-4 text-orange-500" />,
+      title: "Competitions & Events",
+      description:
+        "Participating in competitions and organizing events to showcase skills and innovations.",
+    },
+  ];
+
+  return (
+    <div className="home flex flex-col min-h-screen w-full text-gray-100">
+      <div className="header flex flex-col items-center justify-center mb-12 p-8">
+        <p className="text-4xl font-bold text-center mb-5">
+          RPA <TextAni />
+        </p>
+        <img src="/rpa.png" alt="KL University Logo" className="w-48 mb-4" />
+        <p className="text-lg text-center max-w-2xl text-gray-300">
+          Welcome to the official website of the Robotics Process Automation, KL
+          University
+        </p>
+        <div className="mt-6 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+          <Link
+            to={"/mission-vision"}
+            className="text-lg border border-blue-500 text-blue-500 px-6 py-3 rounded-lg hover:bg-blue-500 hover:bg-opacity-20 hover:text-white transition duration-300 shadow-md flex items-center justify-center gap-1"
+          >
+            <FaCode className="w-7 h-7 mr-1" /> Learn More
+          </Link>
+          <Link
+            to={"/contact"}
+            className="text-lg border border-green-600 text-green-600 px-6 py-3 rounded-lg hover:bg-green-600 hover:bg-opacity-20 hover:text-white transition duration-300 shadow-md flex items-center justify-center gap-1"
+          >
+            <RiQuestionFill className="w-7 h-7 mr-1" /> Contact Us
+          </Link>
+        </div>
+      </div>
+
+      <div className="key-points flex flex-col items-center rounded-s-lg shadow-md rounded-lg p-8">
+        <h2 className="text-3xl font-semibold mb-6">
+          Robotic Process Automation Club
+        </h2>
+        <div className="w-full max-w-4xl">
+          {keyPoints.map((point, index) => (
+            <div
+              key={index}
+              className="mb-6 p-6 bg-slate-800 rounded-lg shadow-md transition duration-300 hover:shadow-lg"
+            >
+              <div className="flex items-center mb-2">
+                {point.icon}
+                <h3 className="text-xl font-semibold">{point.title}</h3>
+              </div>
+              <p className="text-gray-300">{point.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Home;
+
+
+
+1e293b

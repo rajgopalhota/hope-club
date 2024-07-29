@@ -25,7 +25,7 @@ const About = () => {
       <div className="container flex justify-center mx-auto pt-16">
         <div>
           <p className="text-gray-100 text-lg text-center font-normal pb-3">
-            <FcCollaboration className="w-8 h-8 inline-block mr-2"/>
+            <FcCollaboration className="w-8 h-8 inline-block mr-2" />
             &nbsp; BUILDING TEAM
           </p>
           <h1 className="xl:text-4xl text-3xl text-center text-gray-200 font-extrabold pb-6 sm:w-4/6 w-5/6 mx-auto">

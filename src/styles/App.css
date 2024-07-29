@@ -16,8 +16,13 @@
 :root {
   font-family: "Noto Sans", sans-serif;
 }
+img {
+  shape-rendering: crispEdges !important;
+  image-rendering: crisp-edges !important;
+}
 html,
 body {
+  /* background-color: #00191f; */
   background-color: rgb(3, 0, 36);
   margin: 0;
   padding: 0;
@@ -34,7 +39,6 @@ body {
 
 nav {
   position: relative;
-  backdrop-filter: blur(52px);
   z-index: 49 !important;
 }
 
@@ -58,7 +62,9 @@ nav ul li:hover::before {
   width: 100%;
   left: 0;
 }
-
+a{
+  text-decoration: none !important;
+}
 .active li::before {
   content: "";
   position: absolute;
@@ -73,11 +79,7 @@ nav ul li:hover::before {
 .active {
   color: rgb(198, 242, 255) !important;
 }
-img {
-  shape-rendering: crispEdges;
-  image-rendering: crisp-edges;
-  image-resolution: 1000px;
-}
+
 .home {
   user-select: none !important;
 }
@@ -181,6 +183,22 @@ hr {
   100% {
     box-shadow: 0 0 10px 2px #086d87;
   }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.floating {
+  animation: float 3s ease-in-out infinite;
 }
 .loginForm {
   margin-top: 100px !important;

@@ -219,7 +219,6 @@ const PaymentStatus = () => {
       <h2 className="text-2xl font-bold mb-4 text-blue-500">
         Payment Status Component
       </h2>
-      {loading && <Loading />}
 
       {/* Search Bar */}
       <input
@@ -237,50 +236,58 @@ const PaymentStatus = () => {
           <canvas id="pie-chart" width="300" height="300"></canvas>
         </div>
         <div>
-          <h3 className="text-lg font-semibold text-white">Activity Distribution</h3>
+          <h3 className="text-lg font-semibold text-white">
+            Activity Distribution
+          </h3>
           <canvas id="activity-pie-chart" width="300" height="300"></canvas>
         </div>
       </div>
 
-      {/* Table */}
-      <table {...getTableProps()} className="min-w-full table-auto border">
-        {/* Table Header */}
-        <thead className="bg-blue-900 text-white">
-          {headerGroups.map((headerGroup) => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map((column) => (
-                <th
-                  {...column.getHeaderProps(column.getSortByToggleProps())}
-                  className="p-4 text-left border-b"
-                >
-                  {column.render("Header")}
-                  {column.isSorted ? (column.isSortedDesc ? " 🔽" : " 🔼") : ""}
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        {/* Table Body */}
-        <tbody {...getTableBodyProps()}>
-          {rows.map((row, rowIndex) => {
-            prepareRow(row);
-            return (
-              <tr
-                {...row.getRowProps()}
-                className={`${
-                  rowIndex % 2 === 0 ? "bg-gray-200" : "bg-gray-100"
-                } border-b`}
-              >
-                {row.cells.map((cell) => (
-                  <td {...cell.getCellProps()} className="p-4">
-                    {cell.render("Cell")}
-                  </td>
+      {loading ? (
+        <Loading />
+      ) : (
+        <table {...getTableProps()} className="min-w-full table-auto border">
+          <thead className="bg-blue-900 text-white">
+            {headerGroups.map((headerGroup) => (
+              <tr {...headerGroup.getHeaderGroupProps()}>
+                {headerGroup.headers.map((column) => (
+                  <th
+                    {...column.getHeaderProps(column.getSortByToggleProps())}
+                    className="p-4 text-left border-b"
+                  >
+                    {column.render("Header")}
+                    {column.isSorted
+                      ? column.isSortedDesc
+                        ? " 🔽"
+                        : " 🔼"
+                      : ""}
+                  </th>
                 ))}
               </tr>
-            );
-          })}
-        </tbody>
-      </table>
+            ))}
+          </thead>
+          {/* Table Body */}
+          <tbody {...getTableBodyProps()}>
+            {rows.map((row, rowIndex) => {
+              prepareRow(row);
+              return (
+                <tr
+                  {...row.getRowProps()}
+                  className={`${
+                    rowIndex % 2 === 0 ? "bg-gray-200" : "bg-gray-100"
+                  } border-b`}
+                >
+                  {row.cells.map((cell) => (
+                    <td {...cell.getCellProps()} className="p-4">
+                      {cell.render("Cell")}
+                    </td>
+                  ))}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      )}
     </div>
   );
 };

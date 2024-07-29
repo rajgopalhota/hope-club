@@ -1,6 +1,6 @@
 .pagenf-body {
   box-sizing: border-box;
-  height: calc(100vh - 3rem);
+  height: 100vh;
   background-color: #000000;
   background-image: radial-gradient(#11581e, #041607),
     url("https://media.giphy.com/media/oEI9uBYSzLpBK/giphy.gif");

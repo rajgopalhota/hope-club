@@ -109,7 +109,6 @@ const Activity = () => {
 
   return (
     <div className="container mx-auto">
-      {loading && <Loading />}
       <h2 className="text-2xl font-bold mb-4 text-white">Activity Component</h2>
 
       {/* Button to toggle AddActivity component */}
@@ -145,54 +144,58 @@ const Activity = () => {
         className="ml-5 p-2 mb-4 border rounded-md"
       />
 
-      <div className="overflow-x-auto">
-        <table {...getTableProps()} className="min-w-full table-auto border">
-          <thead className="bg-zinc-900 text-white">
-            {headerGroups.map((headerGroup) => (
-              <tr {...headerGroup.getHeaderGroupProps()}>
-                {headerGroup.headers.map((column, index) => (
-                  <th
-                    {...column.getHeaderProps(column.getSortByToggleProps())}
-                    className="p-4 text-left border-b"
-                    key={index}
-                  >
-                    {column.render("Header")}
-                    {column.isSorted
-                      ? column.isSortedDesc
-                        ? " 🔽"
-                        : " 🔼"
-                      : ""}
-                  </th>
-                ))}
-              </tr>
-            ))}
-          </thead>
-          <tbody {...getTableBodyProps()}>
-            {rows.map((row, rowIndex) => {
-              prepareRow(row);
-              return (
-                <tr
-                  {...row.getRowProps()}
-                  className={`${
-                    rowIndex % 2 === 0 ? "bg-gray-200" : "bg-gray-100"
-                  } border-b`}
-                  key={rowIndex}
-                >
-                  {row.cells.map((cell, cellIndex) => (
-                    <td
-                      {...cell.getCellProps()}
-                      className="p-4"
-                      key={cellIndex}
+      {loading ? (
+        <Loading />
+      ) : (
+        <div className="overflow-x-auto">
+          <table {...getTableProps()} className="min-w-full table-auto border">
+            <thead className="bg-zinc-900 text-white">
+              {headerGroups.map((headerGroup) => (
+                <tr {...headerGroup.getHeaderGroupProps()}>
+                  {headerGroup.headers.map((column, index) => (
+                    <th
+                      {...column.getHeaderProps(column.getSortByToggleProps())}
+                      className="p-4 text-left border-b"
+                      key={index}
                     >
-                      {cell.render("Cell")}
-                    </td>
+                      {column.render("Header")}
+                      {column.isSorted
+                        ? column.isSortedDesc
+                          ? " 🔽"
+                          : " 🔼"
+                        : ""}
+                    </th>
                   ))}
                 </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
+              ))}
+            </thead>
+            <tbody {...getTableBodyProps()}>
+              {rows.map((row, rowIndex) => {
+                prepareRow(row);
+                return (
+                  <tr
+                    {...row.getRowProps()}
+                    className={`${
+                      rowIndex % 2 === 0 ? "bg-gray-200" : "bg-gray-100"
+                    } border-b`}
+                    key={rowIndex}
+                  >
+                    {row.cells.map((cell, cellIndex) => (
+                      <td
+                        {...cell.getCellProps()}
+                        className="p-4"
+                        key={cellIndex}
+                      >
+                        {cell.render("Cell")}
+                      </td>
+                    ))}
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 };
