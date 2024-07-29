@@ -97,8 +97,7 @@ const Activities = () => {
   return (
     <div className="activity container mx-auto p-8">
       <h2 className="text-3xl font-bold text-zinc-100 mb-4 flex items-center">
-        <img className="w-12 logo" src="/rpa.png" />
-        &nbsp;Club Activities
+        Club Activities
       </h2>
       <hr className="border-t-2 border-blue-300 my-6 opacity-20" />
       {loading ? (

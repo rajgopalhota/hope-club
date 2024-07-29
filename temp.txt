@@ -1,0 +1,47 @@
+nav {
+  border-radius: 0px 0px 8px 8px;
+  backdrop-filter: blur(52px) !important;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 16px rgb(0, 41, 61);
+  z-index: 999 !important;
+}
+nav a {
+  transition: all ease-in 0.1s;
+  border: 1px solid transparent;
+  border-right: 1px solid rgba(255, 255, 255, 0.3);
+  border-left: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+nav a:hover,
+.active {
+  transition: all ease-in 0.1s;
+  /* border: 1px solid rgb(255, 253, 243); */
+  border-right: 1px solid rgba(54, 28, 0, 0.3);
+  border-left: 1px solid rgba(54, 28, 0, 0.3);
+  /* transform: translateY(-14%); */
+  background-color: rgba(0, 60, 90, 0.629);
+  /* border-radius: 10px; */
+  color: lavender;
+}
+.active {
+  box-shadow: 0 5px 10px rgba(185, 185, 245, 0.8);
+}
+.adminroute .active svg {
+  transition: all ease-in-out 0.2s;
+  margin-left: 20px;
+}
+.adminroute .active {
+  transition: all ease-in-out 0.2s;
+  outline: 2px solid rgb(177, 177, 177);
+  background-color: rgba(28, 0, 88, 0.7);
+  border-radius: 10px;
+}
+nav a:hover p,
+.active p {
+  color: white !important;
+}
+.active svg {
+  color: rgb(255, 213, 195);
+  transform: scale(1.15);
+}

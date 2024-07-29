@@ -28,7 +28,10 @@ const Admin = () => {
 
   const sidebarIcon = isSidebarOpen ? <FaTimes /> : <FaBars />;
 
-  if (auth.user && (auth.user.role === "Admin" || auth.user.role === "Manager")) {
+  if (
+    auth.user &&
+    (auth.user.role === "Admin" || auth.user.role === "Manager")
+  ) {
     return (
       <div className="relative flex h-screen">
         {/* Toggle Button for Small Screens */}
@@ -53,11 +56,13 @@ const Admin = () => {
 
         {/* Sidebar */}
         <div
-          className={`bg-slate-900 text-white w-full lg:w-1/6 py-6 fixed z-999 h-full overflow-hidden ${
+          className={`bg-slate-900 bg-opacity-60 backdrop-blur text-white w-full lg:w-1/6 py-6 fixed z-999 h-full overflow-hidden ${
             isSidebarOpen ? "translate-x-0" : "-translate-x-full"
           } transition-transform lg:translate-x-0`}
         >
-          <div className="text-2xl font-bold mb-6 text-center">{auth.user.role} Panel</div>
+          <div className="text-2xl font-bold mb-6 text-center">
+            {auth.user.role} Panel
+          </div>
           <ul className="adminroute flex flex-col items-stretch space-y-2">
             <li>
               <NavLink
@@ -109,9 +114,7 @@ const Admin = () => {
       </div>
     );
   } else {
-    return (
-      <PageNotFound/>
-    );
+    return <PageNotFound />;
   }
 };
 

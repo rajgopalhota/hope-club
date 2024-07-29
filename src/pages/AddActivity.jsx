@@ -88,7 +88,7 @@ const AddActivityForm = (props) => {
       {isLoading && <Loading />}
       {auth.user &&
         (auth.user.role == "Admin" || auth.user.role == "Manager") && (
-          <div className="actadd w-full mx-auto mt-8 mb-10 neumorphic-container">
+          <div className="actadd w-full mx-auto mt-8 mb-10 neumorphic-container backdrop-blur-lg">
             <h2 className="text-2xl text-zinc-100 font-bold mb-4">
               {auth.user.name} Space - Add Activity
             </h2>

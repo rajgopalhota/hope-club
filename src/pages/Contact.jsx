@@ -880,8 +880,7 @@ export default function Contact() {
         </div>
         <form className="z-5 w-full max-w-lg" onSubmit={handleSubmit}>
           <h1 className="flex items-center justify-center text-center text-3xl mb-4 title">
-            <img className="w-12 logo" src="/rpa.png" />
-            &nbsp;Talk to Us
+            Talk to Us
           </h1>
           <div className="mb-4 relative">
             <label htmlFor="formName" className="block">

@@ -1,6 +1,6 @@
 import React from "react";
-import { FaLock, FaSignOutAlt, FaUserShield } from "react-icons/fa";
-import { Link, Route, Routes, useNavigate } from "react-router-dom";
+import { FaUserShield } from "react-icons/fa";
+import { Link, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoadingBar from "react-top-loading-bar";
@@ -12,50 +12,23 @@ import About from "./pages/About";
 import Activities from "./pages/Activities";
 import Contact from "./pages/Contact";
 import { Feature } from "./pages/Feature";
+import Footer from "./pages/Footer";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Navbar from "./pages/Navbar";
+import PageNotFound from "./pages/PageNotFound";
 import PayForActivity from "./pages/PayForActivity";
 import PhotoGallery from "./pages/PhotoGallery";
 import Register from "./pages/Register";
-import PageNotFound from "./pages/PageNotFound";
-import Footer from "./pages/Footer";
 
 function App() {
   const auth = useAuth();
   const loadingBarRef = React.useRef(null);
-  const navigate = useNavigate();
-  const handleClick = () => {
-    if (auth.user) {
-      window.confirm("Are you sure you want to logout?") && auth.logout();
-      navigate("/");
-    } else {
-      navigate("/login");
-    }
-  };
+
   return (
     <div>
       <LoadingBar ref={loadingBarRef} color="#3498db" />
       <div className="activityButtons z-10 fixed bottom-4 left-4 flex flex-col gap-1 items-center justify-center">
-        <div
-          onClick={handleClick}
-          title={auth.user ? "Logout" : "Login"}
-          className={`bg-white border flex ${
-            auth.user
-              ? "border-red-500 text-red-500"
-              : "border-blue-500 text-blue-500"
-          } rounded-full p-3 shadow-md hover:shadow-lg focus:outline-none cursor-pointer`}
-          style={{
-            textDecoration: "none", // Remove default link underline
-            transition: "color 0.3s, background-color 0.3s", // Smooth transition on hover
-          }}
-        >
-          {auth.user ? (
-            <FaSignOutAlt className="text-xl" />
-          ) : (
-            <FaLock className="text-xl" />
-          )}
-        </div>
         {auth.user &&
           (auth.user.role == "Admin" || auth.user.role == "Manager") && (
             <Link
@@ -74,8 +47,7 @@ function App() {
       {/* Your main content goes here */}
       <ToastContainer />
       <Navbar />
-      <section className="mainContent">
-        <section className="min-h-screen pt-14">
+      <section className="min-h-screen">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/activities" element={<Activities />} />
@@ -89,9 +61,8 @@ function App() {
           <Route path="/admin/*" element={<Admin />} />
           <Route path="/*" element={<PageNotFound />} />
         </Routes>
-        </section>
-        <Footer />
       </section>
+      <Footer />
     </div>
   );
 }

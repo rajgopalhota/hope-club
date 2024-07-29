@@ -75,7 +75,7 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="key-points flex flex-col items-center bg-slate-900 bg-opacity-60 shadow-md rounded-lg p-8">
+      <div className="key-points flex flex-col items-center rounded-s-lg shadow-md rounded-lg p-8">
         <h2 className="text-3xl font-semibold mb-6">
           Robotic Process Automation Club
         </h2>

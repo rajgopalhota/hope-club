@@ -124,7 +124,7 @@ const Activity = () => {
       <div
         className={`${
           showAddActivity ? "translate-x-0" : "translate-x-full"
-        } z-10 px-4 fixed right-0 top-0 bottom-0 bg-cyan-900 w-100 shadow-lg transition-transform duration-300 ease-in-out overflow-y-auto`}
+        } z-50 px-4 fixed right-0 top-0 bottom-0 bg-slate-900 bg-opacity-75 backdrop-blur-md w-100 shadow-lg transition-transform duration-300 ease-in-out overflow-y-auto`}
       >
         {/* Close button for small screens */}
         <button

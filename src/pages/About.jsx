@@ -4,6 +4,7 @@ import { AiOutlineMail } from "react-icons/ai";
 import { useEffect, useState } from "react";
 import team from "./TeamData";
 import { IoMdSearch } from "react-icons/io";
+import { FcCollaboration } from "react-icons/fc";
 
 const About = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -24,7 +25,7 @@ const About = () => {
       <div className="container flex justify-center mx-auto pt-16">
         <div>
           <p className="text-gray-100 text-lg text-center font-normal pb-3">
-            <img className="w-10 logo inline-block mr-2" src="/rpa.png" />
+            <FcCollaboration className="w-8 h-8 inline-block mr-2"/>
             &nbsp; BUILDING TEAM
           </p>
           <h1 className="xl:text-4xl text-3xl text-center text-gray-200 font-extrabold pb-6 sm:w-4/6 w-5/6 mx-auto">
@@ -32,7 +33,7 @@ const About = () => {
           </h1>
         </div>
       </div>
-      <div className="w-full bg-blue-50 bg-opacity-5 box-sha-card px-10 pt-10">
+      <div className="w-full bg-blue-50 bg-opacity-5 backdrop-blur-sm box-sha-card px-10 pt-10">
         <div className="container mx-auto">
           <div className="flex relative justify-center mb-8">
             <input
