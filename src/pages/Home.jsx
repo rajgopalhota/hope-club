@@ -89,7 +89,10 @@ const Home = () => {
     <>
       <div className="text-gray-100">
         <div className="container px-3 mx-auto flex flex-wrap flex-col md:flex-row items-center">
-          <div className="flex flex-col w-full md:w-2/5 justify-center items-start text-center md:text-left">
+          <div
+            data-aos="zoom-in"
+            className="flex flex-col w-full md:w-1/2 justify-center items-start text-center md:text-left"
+          >
             <p className="uppercase text-lg tracking-loose w-full text-sky-50">
               Welcome to RPA - KLEF
             </p>
@@ -108,9 +111,10 @@ const Home = () => {
               See Activities
             </Link>
           </div>
-          <div className="w-full md:w-1/3 py-6 text-center">
+          <div className="w-full md:w-1/2 py-6 text-center">
             <img
-              className="w-full z-50 floating"
+              data-aos="zoom-in"
+              className="z-50 floating"
               src="hero.png"
               alt="RPA Club"
             />
@@ -124,14 +128,17 @@ const Home = () => {
 
       <section className="bg-slate-900 border-b py-8">
         <div className="container max-w-5xl mx-auto m-8">
-          <h2 className="w-full my-2 text-5xl font-bold leading-tight text-center text-sky-300">
+          <h2
+            data-aos="fade-up"
+            className="w-full my-2 text-5xl font-bold leading-tight text-center text-sky-300"
+          >
             ROBOTIC PROCESS AUTOMATION
           </h2>
           <div className="w-full mb-4">
             <div className="h-1 mx-auto bg-gradient-to-r from-sky-400 to-blue-500 w-64 opacity-25 my-0 py-0 rounded-t"></div>
           </div>
           <div className="flex flex-wrap">
-            <div className="w-5/6 sm:w-1/2 p-6">
+            <div data-aos="fade-up" className="w-5/6 sm:w-1/2 p-6">
               <h3 className="text-3xl text-sky-300 font-bold leading-none mb-3">
                 Technical Club in KL University
               </h3>
@@ -145,11 +152,14 @@ const Home = () => {
                 successful learning platform of this RPA club.
               </p>
             </div>
-            <div className="w-full sm:w-1/2 p-6">
+            <div data-aos="fade-up" className="w-full sm:w-1/2 p-6">
               <img src={h1img} className="floating" alt="RPA Club" />
             </div>
           </div>
-          <div className="flex flex-wrap flex-col-reverse sm:flex-row">
+          <div
+            data-aos="fade-up"
+            className="flex flex-wrap flex-col-reverse sm:flex-row"
+          >
             <div className="w-full sm:w-1/2 p-6 mt-6">
               <img
                 className="w-full sm:h-64 mx-auto floating"
@@ -181,7 +191,10 @@ const Home = () => {
 
       <section className="bg-slate-900 border-b py-8">
         <div className="container mx-auto flex flex-wrap pt-4 pb-12">
-          <h2 className="w-full my-2 text-5xl font-bold leading-tight text-center text-sky-300">
+          <h2
+            data-aos="fade-up"
+            className="w-full my-2 text-5xl font-bold leading-tight text-center text-sky-300"
+          >
             Our Activities
           </h2>
           <div className="w-full mb-4">
@@ -189,6 +202,7 @@ const Home = () => {
           </div>
           {keyPoints.map((point, index) => (
             <div
+              data-aos="fade-up"
               key={index}
               className="w-full md:w-1/3 p-6 flex flex-col flex-grow flex-shrink"
             >
@@ -207,7 +221,10 @@ const Home = () => {
               </div>
               <div className="flex-none mt-auto bg-slate-700 bg-opacity-30 rounded-b rounded-t-none overflow-hidden shadow p-1">
                 <div className="flex items-end justify-end">
-                  <button className="mx-auto lg:mx-0 bg-gradient-to-r from-sky-500 to-blue-500 text-white font-bold rounded-full my-2 py-2 px-5 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-x-105 duration-300 ease-in-out">
+                  <button
+                    data-aos="zoom-in"
+                    className="mx-auto lg:mx-0 bg-gradient-to-r from-sky-500 to-blue-500 text-white font-bold rounded-full my-2 py-2 px-5 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-x-105 duration-300 ease-in-out"
+                  >
                     Know more
                   </button>
                 </div>

@@ -28,7 +28,7 @@ const About = () => {
             <FcCollaboration className="w-8 h-8 inline-block mr-2" />
             &nbsp; BUILDING TEAM
           </p>
-          <h1 className="xl:text-4xl text-3xl text-center text-gray-200 font-extrabold pb-6 sm:w-4/6 w-5/6 mx-auto">
+          <h1 data-aos="fade-up" className="xl:text-4xl text-3xl text-center text-gray-200 font-extrabold pb-6 sm:w-4/6 w-5/6 mx-auto">
             People Behind the Scenes of the Organization
           </h1>
         </div>
@@ -37,6 +37,7 @@ const About = () => {
         <div className="container mx-auto">
           <div className="flex relative justify-center mb-8">
             <input
+            data-aos="zoom-in"
               type="text"
               placeholder="Search by name (or) role..."
               value={searchQuery}
@@ -56,6 +57,7 @@ const About = () => {
             {filteredTeam.map((member, index) => (
               <div
                 key={index}
+                data-aos="fade-up"
                 className="box-sha-card xl:w-1/3 lg:mx-3 sm:w-3/4 md:w-2/5 relative mt-16 mb-32 sm:mb-24 xl:max-w-sm lg:w-2/5"
               >
                 <div className="rounded-2xl overflow-hidden shadow-md bg-purple-50 bg-opacity-10">

@@ -55,10 +55,10 @@ export const Feature = () => {
     <div className="px-4 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
       <TechStack />
       <div className="my-10 mx-auto text-left md:mb-12">
-        <h2 className="my-6 font-sans text-3xl flex font-bold leading-none tracking-tight text-sky-300 sm:text-4xl md:mx-auto">
+        <h2 data-aos="fade-up" className="my-6 font-sans text-3xl flex font-bold leading-none tracking-tight text-sky-300 sm:text-4xl md:mx-auto">
           RPA Club Initiatives and Goals
         </h2>
-        <p className="text-base text-gray-300 md:text-lg text-justify">
+        <p data-aos="fade-up" className="text-base text-gray-300 md:text-lg text-justify">
           <FaFeatherPointed /> Welcome to the RPA Club at KL University, a
           technical organization dedicated to advancing the field of Robotics
           Process Automation (RPA). Our mission is to empower students by
@@ -81,7 +81,7 @@ export const Feature = () => {
       </div>
       <div className="grid mx-auto gap-y-6 lg:grid-cols-2 lg:gap-x-8">
         {featureData.map((feature, index) => (
-          <div className="p-6 fcard rounded-lg shadow-md" key={index}>
+          <div data-aos="fade-up" className="p-6 fcard rounded-lg shadow-md" key={index}>
             <div>
               <div className="flex items-center gap-4">
                 <div

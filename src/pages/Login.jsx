@@ -50,7 +50,7 @@ const Login = () => {
       {loading ? (
         <Loading />
       ) : (
-        <div className="loginForm m-2 py-6 flex flex-col justify-center sm:py-12">
+        <div data-aos="zoom-in" className="loginForm m-2 py-6 flex flex-col justify-center sm:py-12">
           {auth.user ? (
             <>
               <div

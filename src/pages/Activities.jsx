@@ -108,13 +108,17 @@ const Activities = () => {
           {paymentHistory.length !== 0 && (
             <>
               <div className="mb-8">
-                <h3 className="text-2xl font-bold mb-2 flex items-center text-blue-100">
+                <h3
+                  data-aos="zoom-in"
+                  className="text-2xl font-bold mb-2 flex items-center text-blue-100"
+                >
                   <BsCheckCircle className="mr-2 text-green-200" />
                   Payment Passes
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                   {paymentHistory.map((payment) => (
                     <div
+                      data-aos="zoom-in"
                       key={payment._id}
                       className={`max-w-[1/2] neumorphic-container bg-gradient-to-br from-blue-900 via-cyan-10 to-slate-900 p-4 rounded-md shadow-md transform hover:scale-[1.02] transition-transform border-2`}
                     >
@@ -197,7 +201,10 @@ const Activities = () => {
           {userActivities.length !== 0 && (
             <>
               <div className="my-4">
-                <h3 className="text-2xl font-bold mb-2 flex items-center text-sky-300">
+                <h3
+                  data-aos="fade-up"
+                  className="text-2xl font-bold mb-2 flex items-center text-sky-300"
+                >
                   {auth.user && (
                     <>
                       <BsCheckCircle className="mr-2 text-green-600" />
@@ -208,6 +215,7 @@ const Activities = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                   {userActivities.map((activity) => (
                     <div
+                      data-aos="fade-up"
                       key={activity._id}
                       className="neumorphic-container bg-gradient-to-br from-blue-900 via-cyan-900 to-blue-900 p-4 rounded-md shadow-md mb-4 transform hover:scale-[1.02] transition-transform flex items-center"
                     >
@@ -271,7 +279,10 @@ const Activities = () => {
 
           {/* More Activities Section */}
           <div>
-            <h3 className="text-2xl font-bold mb-2 flex items-center text-sky-300">
+            <h3
+              data-aos="fade-up"
+              className="text-2xl font-bold mb-2 flex items-center text-sky-300"
+            >
               <BiBasket className="mr-2 text-blue-200" />
               More Activities
             </h3>

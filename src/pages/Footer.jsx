@@ -2,8 +2,8 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer class="backdrop-blur-md bg-slate-900 bg-opacity-85 w-full flex flex-col space-y-2 justify-center p-4">
-      <div class="flex justify-center space-x-5">
+    <footer className="backdrop-blur-md bg-slate-900 bg-opacity-85 w-full flex flex-col space-y-2 justify-center p-4">
+      <div className="flex justify-center space-x-5">
         <a
           href="mailto:rpa.techclub@kluniversity.in"
           target="_blank"
@@ -41,7 +41,7 @@ const Footer = () => {
         </a>
       </div>
       <br />
-      <p class="text-center text-gray-400 font-medium">
+      <p className="text-center text-gray-400 font-medium">
         &copy; 2024 RPA Club. All rights reservered.
       </p>
     </footer>

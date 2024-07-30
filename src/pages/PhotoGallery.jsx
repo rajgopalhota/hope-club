@@ -97,11 +97,11 @@ const PhotoGallery = () => {
 
   return (
     <div className="container mx-auto p-8">
-      <h2 className="text-3xl text-sky-300 font-bold mb-4 flex items-center">
+      <h2 data-aos="zoom-in" className="text-3xl text-sky-300 font-bold mb-4 flex items-center">
       <FaCamera className="mr-2 text-blue-500" size={32} /> Photo Gallery &nbsp;
       </h2>
       {/* Image Slider */}
-      <Slider {...sliderSettings} className="mb-8">
+      <Slider data-aos="zoom-in" {...sliderSettings} className="mb-8">
         {sliderImages.map((image, index) => (
           <div className="caraousel" key={index}>
             <img
@@ -115,6 +115,7 @@ const PhotoGallery = () => {
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
         {imageData.map((image, index) => (
           <div
+          data-aos="fade-up"
             key={index}
             className="aspect-w-1 aspect-h-1 relative overflow-hidden rounded-lg"
           >

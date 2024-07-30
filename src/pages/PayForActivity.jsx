@@ -5,8 +5,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAuth } from "../AuthContext";
 import axios from "../axiosInstance";
-import empty from "./../assets/empty.gif";
+import empty from "./../assets/empty.json";
 import Loading from "./Loading";
+import Lottie from "lottie-react";
 
 const PayForActivity = () => {
   useEffect(() => {
@@ -81,8 +82,11 @@ const PayForActivity = () => {
       ) : (
         <>
           {userActivities.length === 0 && !loading && (
-            <div className="empty flex w-screen justify-center mt-10">
-              <img src={empty} alt="empty" />
+            <div className="empty flex w-screen justify-center items-center mt-10 flex-col">
+              <Lottie animationData={empty} autoplay loop />
+              <p className="text-sky-200">
+                Nothing to pay for, Head to the activity section :(
+              </p>
             </div>
           )}
           {userActivities.length !== 0 && (

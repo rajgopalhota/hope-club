@@ -848,7 +848,7 @@ export default function Contact() {
                 </g>
               </g>
             </svg>
-            <div class="flex justify-center space-x-8 bg-slate-100 bg-opacity-10 rounded-full p-2">
+            <div className="flex justify-center space-x-8 bg-slate-100 bg-opacity-10 rounded-full p-2">
               <a
                 href="https://t.me/rpatechclub"
                 target="_blank"
