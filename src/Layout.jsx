@@ -29,7 +29,6 @@ export default function Layout() {
             <Link
               title={auth.user.role}
               to="/admin"
-              data-aos="zoom-in"
               className={`bg-white flex border border-purple-500 text-purple-500 rounded-full p-3 shadow-md hover:shadow-lg focus:outline-none cursor-pointer`}
               style={{
                 textDecoration: "none",

@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="backdrop-blur-md bg-slate-900 bg-opacity-85 w-full flex flex-col space-y-2 justify-center p-4">
+    <footer className="mt-8 backdrop-blur-md bg-slate-900 bg-opacity-85 w-full flex flex-col space-y-2 justify-center p-4">
       <div className="flex justify-center space-x-5">
         <a
           href="mailto:rpa.techclub@kluniversity.in"
