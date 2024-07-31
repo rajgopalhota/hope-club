@@ -16,6 +16,8 @@ import {
   FaTools,
   FaUsers,
 } from "react-icons/fa";
+import animation from "../assets/load.json";
+import Lottie from "lottie-react";
 
 const Home = () => {
   useEffect(() => {

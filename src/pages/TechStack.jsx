@@ -31,7 +31,7 @@ const TechStack = () => {
   return (
     <div className="container mx-auto">
       <h2 data-aos="fade-up" className="text-3xl sm:text-4xl font-bold text-left text-sky-300 mb-4">
-        RPA Tools
+        Tools used by RPA Club
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
         {tools.map((tool, index) => (

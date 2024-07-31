@@ -51,7 +51,7 @@ const team = [
     bio: "Passionate about guiding students in exploring the latest advancements in robotics and automation.",
     image: asheshSir,
     social: {
-      linkedin: "https://github.com/asheshkinjarapu",
+      linkedin: "https://www.linkedin.com/in/imasheshk/",
     },
   },
   {
@@ -60,7 +60,8 @@ const team = [
     bio: "Leads efforts in promoting robotics process automation within the university community.",
     image: thanmai,
     social: {
-      linkedin: "https://github.com/thanmai",
+      linkedin:
+        "https://www.linkedin.com/in/sri-santhoshi-thanmai-kora-348b60225/",
     },
   },
   {
