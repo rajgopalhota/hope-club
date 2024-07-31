@@ -9,7 +9,7 @@
 ::selection {
   background-color: rgba(248, 203, 219, 0.4);
 }
-#root {
+*{
   margin: 0;
   padding: 0;
 }
@@ -20,20 +20,26 @@ img {
   shape-rendering: crispEdges !important;
   image-rendering: crisp-edges !important;
 }
-html,
-body {
-  /* background-color: #00191f; */
-  background-color: rgb(3, 0, 36);
-  margin: 0;
-  padding: 0;
+
+html::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-image: url(../assets/bg.jpg);
+  background-size: cover;
+  background-position: left;
+  background-repeat: no-repeat;
+  z-index: -2;
 }
+
 body {
   overflow-x: hidden;
   min-height: 100vh;
   scroll-behavior: smooth;
   font-family: "Poppins", sans-serif;
-  background: url(../assets/bg.jpg) no-repeat center center fixed;
-  background-size: cover;
   transition: all ease-in-out 0.3s !important;
 }
 .lottie {
