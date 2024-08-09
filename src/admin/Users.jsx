@@ -1,16 +1,16 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { FaTrashAlt } from "react-icons/fa";
 import { useSortBy, useTable } from "react-table";
-import { toast } from "react-toastify";
 import { useAuth } from "../AuthContext";
 import axiosInstance from "../axiosInstance";
 import Loading from "../pages/Loading";
+import RoleModal from "./RoleModal";
 
 const Users = () => {
   const auth = useAuth();
   const [searchInput, setSearchInput] = useState("");
   const [filteredData, setFilteredData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedUser, setSelectedUser] = useState(null); // Track selected user for modal
 
   // Define columns for the table
   const columns = [
@@ -27,11 +27,8 @@ const Users = () => {
     try {
       setLoading(true);
       const response = await axiosInstance.get("api/users/all");
-      const filteredUsers = response.data.filter(
-        (user) => user.role !== "Admin"
-      );
-      setData(filteredUsers);
-      setFilteredData(filteredUsers);
+      setData(response.data);
+      setFilteredData(response.data);
       setLoading(false);
     } catch (error) {
       setLoading(false);
@@ -45,7 +42,14 @@ const Users = () => {
   if (auth.user && auth.user.role === "Admin") {
     columns.push({
       Header: "Actions",
-      Cell: DeleteButton,
+      Cell: ({ row }) => (
+        <button
+          onClick={() => setSelectedUser(row.original)} // Open modal with selected user
+          className="bg-blue-500 rounded p-2 text-white"
+        >
+          Manage
+        </button>
+      ),
     });
   }
 
@@ -55,35 +59,6 @@ const Users = () => {
   // Use react-table hooks to create the table instance
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({ columns: memoizedColumns, data: filteredData }, useSortBy);
-
-  // Delete button cell renderer
-  function DeleteButton({ row }) {
-    const handleDelete = async () => {
-      const shouldDelete = window.confirm(
-        "Are you sure you want to delete this user?"
-      );
-      if (shouldDelete) {
-        try {
-          setLoading(true);
-          await axiosInstance.delete(`api/users/del/${row.original._id}`);
-          toast.info("User deleted");
-          fetchData();
-          setLoading(false);
-        } catch (error) {
-          setLoading(false);
-          console.error("Error deleting user:", error.message);
-        }
-      }
-    };
-
-    return (
-      auth.user.role === "Admin" && (
-        <button onClick={handleDelete} className="text-red-500">
-          <FaTrashAlt />
-        </button>
-      )
-    );
-  }
 
   // Date cell renderer
   function DateCell({ value }) {
@@ -160,6 +135,17 @@ const Users = () => {
             })}
           </tbody>
         </table>
+      )}
+
+      {/* Render the modal if a user is selected */}
+      {selectedUser && (
+        <RoleModal
+          userId={selectedUser._id}
+          role={selectedUser.role}
+          name={selectedUser.name}
+          onClose={() => setSelectedUser(null)}
+          fetchData={fetchData}
+        />
       )}
     </div>
   );
